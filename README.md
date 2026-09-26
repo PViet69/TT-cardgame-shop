@@ -62,3 +62,6 @@ diagram/
 - [ ] Đã **mention** đầy đủ link 3 mức sơ đồ vào đúng mục chức năng trong `dacta.md`.
 - [ ] Đã trả lời đủ câu hỏi phân tích ở mục 3.1 trong `dacta.md`.
 - [ ] Preview file `dacta.md` ảnh hiển thị rõ ràng, không bị lỗi gãy ảnh.
+ ksdjfkasbdjkf
+ sbfjasdjkfas
+ bsdajfsadnkj
