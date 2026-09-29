@@ -59,13 +59,13 @@ Câu hỏi:
 Trả lời:
 
 #### Mô hình mức ngữ cảnh (Context Level)
-
+![Mô hình mức ngữ cảnh](diagram/NhapHang_context.png)
 
 #### Mô hình mức đỉnh (Level 1)
-
+![Mô hình mức đỉnh](diagram/NhapHang_level1.png)
 
 #### Mô hình mức dưới đỉnh (Level 2)
-
+![Mô hình mức dưới đỉnh](diagram/NhapHang_level2.png)
 
 
 ### Chức năng: Bán Hàng
