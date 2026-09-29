@@ -99,3 +99,46 @@ Trả lời:
 #### Mô hình mức dưới đỉnh (Level 2)
 
 ---
+
+Chức năng: Bán Hàng
+3.1. Phân tích chi tiết mô hình DFD qua các cấp
+1. Mô hình mức ngữ cảnh (Context Level)
+ Câu hỏi 1: Hệ thống Bán hàng tương tác với các thực thể bên ngoài nào?
+Trả lời: Hệ thống tương tác trực tiếp với 4 thực thể bên ngoài bao gồm: Khách hàng, Thu ngân, Nhân viên xử lý đơn trực tuyến và Đơn vị vận chuyển.
+ Câu hỏi 2: Các luồng dữ liệu chính ra và vào hệ thống ở mức ngữ cảnh là gì?
+Trả lời:Luồng dữ liệu đầu vào: Khách hàng gửi Yêu cầu mua hàng (Thông tin đặt hàng) và Yêu cầu đổi trả; Thu ngân gửi Thông tin bán tại quầy; Nhân viên xử lý đơn trực tuyến gửi Thông tin xử lý đơn trực tuyến; Đơn vị vận chuyển gửi Trạng thái giao hàng.
+        Luồng dữ liệu đầu ra: Hệ thống phản hồi Xác nhận đơn hàng / Hóa đơn hoặc Kết quả đổi trả cho Khách hàng; gửi Thông tin sản phẩm & Kết quả thanh toán cho Thu ngân; gửi Thông tin đơn hàng cho Nhân viên xử lý đơn; chuyển Phiếu gửi hàng & Thông tin giao hàng cho Đơn vị vận chuyển.
+2. Mô hình mức đỉnh (Level 1)
+  Câu hỏi 1: Hệ thống Bán hàng ở mức đỉnh được phân rã thành những tiến trình chính nào?
+Trả lời: Hệ thống gồm 5 tiến trình chính:
+1.0 Tiếp nhận đơn hàng
+2.0 Kiểm tra hàng và tính tiền
+3.0 Xử lý thanh toán
+4.0 Xuất hàng và giao hàng
+5.0 Xử lý đổi trả
+   Câu hỏi 2: Các kho dữ liệu nào được sử dụng trong sơ đồ mức đỉnh?
+Trả lời: Hệ thống khai thác 4 kho dữ liệu bao gồm: D1: Sản phẩm & Tồn kho   D2: Khách hàng & Thành viên   D3: Đơn hàng   D4: Hóa đơn & Doanh thu
+  Câu hỏi 3: Quy trình luân chuyển dữ liệu tổng thể giữa các tiến trình diễn ra như thế nào?
+Trả lời:Khi phát sinh giao dịch, tiến trình 1.0 tiếp nhận đơn từ khách hàng/thu ngân/nhân viên và lưu thông tin vào kho D3.  Tiến trình 2.0 đọc đơn hàng từ kho D3, truy vấn kho D1 để xác minh số lượng tồn kho khả dụng, đồng thời tra cứu kho D2 để áp dụng điểm tích lũy/ưu đãi thành viên và tính tổng tiền kèm phí vận chuyển. Thông tin tổng tiền được gửi sang tiến trình 3.0 để thực hiện giao dịch thanh toán và cập nhật doanh thu vào kho D4.  Tiến trình 4.0 tiếp nhận đơn hàng đã thanh toán, thực hiện cập nhật giảm số lượng tồn kho trong D1 và chuyển thông tin giao nhận cho Đơn vị vận chuyển. Đối với sự cố đổi trả, tiến trình 5.0 tiếp nhận yêu cầu từ khách hàng, kiểm tra hóa đơn hợp lệ từ kho D4, cập nhật nhập hoàn trả kho D1 và điều chỉnh lại doanh thu ở kho D4.
+3. Mô hình mức dưới đỉnh (Level 2 - Tiến trình 2.0: Kiểm tra hàng và tính tiền)
+  Câu hỏi 1: Tiến trình 2.0 được chi tiết hóa thành các tiến trình con nào?
+Trả lời: Tiến trình 2.0 gồm 4 tiến trình thành phần:
+2.1 Kiểm tra sản phẩm
+2.2 Kiểm tra tồn kho
+2.3 Áp dụng ưu đãi & tích điểm  
+2.4 Tính tổng tiền
+  Câu hỏi 2: Chi tiết luồng dữ liệu và quy trình xử lý bên trong Tiến trình 2.0 diễn ra ra sao?
+Trả lời:
+Bước 1 (Kiểm tra sản phẩm - 2.1): Đọc thông tin đơn hàng từ kho D3, gửi mã sản phẩm sang kho D1 để đối chiếu thông tin tên hàng và đơn giá.
+Bước 2 (Kiểm tra tồn kho - 2.2): Tiếp nhận danh sách sản phẩm cần kiểm tra từ 2.1, truy vấn kho D1 để xác minh số lượng tồn kho hiện tại xem có đủ đáp ứng hay không.
+Bước 3 (Áp dụng ưu đãi & tích điểm - 2.3): Nhận danh sách sản phẩm hợp lệ từ 2.2, truy xuất thông tin khách hàng từ kho D2 để tra cứu điểm tích lũy, mã giảm giá và tính toán chiết khấu.
+Bước 4 (Tính tổng tiền - 2.4): Nhận giá sau ưu đãi từ 2.3, thực hiện cộng thêm phí vận chuyển (đối với đơn từ xa) để ra tổng tiền thanh toán cuối cùng, sau đó gửi dữ liệu sang tiến trình 3.0 Xử lý thanh toán
+
+1. Mô hình mức ngữ cảnh (Context Level):
+  <img width="732" height="422" alt="BanHang_context" src="https://github.com/user-attachments/assets/4c94b3b7-02f8-4db5-befd-a2f9333cebed" />
+2. Mô hình mức đỉnh (Level 1):
+<img width="1319" height="612" alt="BanHang_level1" src="https://github.com/user-attachments/assets/27dc30cd-4a79-4dc8-9ce2-c052c2af6ed5" />
+3. mô hình mức dưới đỉnh (Level 2):
+<img width="652" height="562" alt="BanHang_level2" src="https://github.com/user-attachments/assets/290ab0a5-9689-4ff2-a4ea-b175d7d3fcc7" />
+
+
