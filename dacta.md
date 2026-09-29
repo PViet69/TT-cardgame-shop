@@ -92,6 +92,7 @@ D2: Khách hàng và thành viên
 D3: Đơn hàng
 D4: Hóa đơn và doanh thu
 3. Mô hình mức dưới đỉnh (Level 2)
+
 Câu hỏi 6: Phân hệ 1.0 Tiếp nhận đơn hàng (Level 2.1) được chi tiết hóa như thế nào?
   Trả lời: Gồm 3 tiến trình con:
 1.1 Tiếp nhận thông tin đặt hàng (từ Khách hàng / Thu ngân / Nhân viên xử lý đơn).
