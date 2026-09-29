@@ -106,8 +106,8 @@ Trả lời: Hệ thống tự động tổng kết bảng xếp hạng chung cu
 ![DFD Mức 1 - Giải đấu và Tài trợ](./images/DFD_muc1.png)
 
 #### Mô hình mức dưới đỉnh (Level 2)
-![DFD Mức 2 - Quản lí Đăng kí & Điểm danh](./images/DFD_muc2_1.png)
-![DFD Mức 2 - Quản lí Tài trợ sự kiện](./images/DFD_muc2_2.png)
-![DFD Mức 2 - Xếp lịch & Vận hành thi đấu](./images/DFD_muc2_3.png)
-![DFD Mức 2 - Tổng kết và trao thưởng](./images/DFD_muc2_4.png)
+![DFD Mức 2 - Quản lí Đăng kí & Điểm danh](./images/DFD_muc2_DangKy_DiemDanh.png)
+![DFD Mức 2 - Quản lí Tài trợ sự kiện](./images/DFD_muc2_TaiTroSK.png)
+![DFD Mức 2 - Xếp lịch & Vận hành thi đấu](./images/DFD_muc2_XepLich_VanHanh.png)
+![DFD Mức 2 - Tổng kết và trao thưởng](./images/DFD_muc2_TongKet_TraoThuong.png)
 ---
