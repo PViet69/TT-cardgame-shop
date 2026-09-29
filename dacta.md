@@ -71,16 +71,73 @@ Trả lời:
 ### Chức năng: Bán Hàng
 
 ####  Bảng danh sách câu hỏi và trả lời
-Câu hỏi:
-Trả lời:
+Câu hỏi 1: Hệ thống Bán hàng tương tác với những thực thể bên ngoài nào?
+  Trả lời: Gồm 4 thực thể ngoài: Khách hàng, Thu ngân, Nhân viên xử lý đơn trực tuyến, và Đơn vị vận chuyển.
+Câu hỏi 2: Các luồng dữ liệu đầu vào gửi đến hệ thống bao gồm những gì?
+  Trả lời: Thông tin đặt hàng (từ Khách hàng), Thông tin bán hàng tại quầy (từ Thu ngân), Thông tin xử lý đơn trực tuyến (từ Nhân viên xử lý đơn), và Trạng thái giao hàng (từ Đơn vị vận chuyển).
+Câu hỏi 3: Hệ thống Bán hàng gửi trả lại những dữ liệu đầu ra nào cho các thực thể ngoài?
+  Trả lời: Xác nhận đơn hàng / Hóa đơn (cho Khách hàng), Thông tin sản phẩm / Kết quả thanh toán (cho Thu ngân), Thông tin đơn hàng (cho Nhân viên xử lý đơn), và Phiếu gửi hàng / Thông tin giao hàng (cho Đơn vị vận chuyển).
+2. Mô hình mức đỉnh (Level 1)
+Câu hỏi 4: Chức năng Bán hàng ở mức đỉnh bao gồm các tiến trình chính nào?
+  Trả lời: Gồm 5 tiến trình chính:
+1.0 Tiếp nhận đơn hàng
+2.0 Kiểm tra hàng và tính tiền
+3.0 Xử lý thanh toán
+4.0 Xuất hàng và giao hàng
+5.0 Xử lý đổi trả
+Câu hỏi 5: Các kho dữ liệu nào tham gia vào mô hình mức đỉnh của chức năng Bán hàng?
+  Trả lời: Gồm 4 kho dữ liệu:
+D1: Sản phẩm và tồn kho
+D2: Khách hàng và thành viên
+D3: Đơn hàng
+D4: Hóa đơn và doanh thu
+3. Mô hình mức dưới đỉnh (Level 2)
+Câu hỏi 6: Phân hệ 1.0 Tiếp nhận đơn hàng (Level 2.1) được chi tiết hóa như thế nào?
+  Trả lời: Gồm 3 tiến trình con:
+1.1 Tiếp nhận thông tin đặt hàng (từ Khách hàng / Thu ngân / Nhân viên xử lý đơn).
+1.2 Ghi nhận đơn hàng (lưu thông tin đơn vào kho D3 Đơn hàng).
+1.3 Gửi xác nhận đơn hàng (đọc từ D3 để gửi xác nhận cho Khách hàng / Thu ngân / Nhân viên xử lý đơn).
+Câu hỏi 7: Phân hệ 2.0 Kiểm tra hàng và tính tiền (Level 2.2) hoạt động ra sao?
+  Trả lời: Gồm 4 tiến trình con:
+2.1 Kiểm tra sản phẩm (đọc thông tin sản phẩm từ kho D1 Sản phẩm và Tồn kho).
+2.2 Kiểm tra tồn kho (kiểm tra số lượng tồn hiện có trong kho D1).
+2.3 Áp dụng ưu đãi và tích điểm (đọc thông tin thành viên / điểm tích lũy từ kho D2 Khách hàng & Thành viên).
+2.4 Tính tổng tiền và phí vận chuyển (chuyển tổng tiền sang 3.0 Xử lý thanh toán và lưu thông tin đơn vào kho D3 Đơn hàng).
+Câu hỏi 8: Phân hệ 3.0 Xử lý thanh toán (Level 2.3) gồm những bước xử lý nào?
+  Trả lời: Gồm 4 tiến trình con:
+3.1 Nhận yêu cầu thanh toán (từ Khách hàng / Thu ngân).
+   3.2 Xác nhận thanh toán (tiền mặt, QR, thẻ, COD).
+   3.3 Lập hóa đơn và ghi nhận doanh thu (đọc từ kho D3, ghi nhận vào kho D4 Hóa đơn và doanh thu, gửi Hóa đơn cho Khách hàng).
+   3.4 Cập nhật điểm tích lũy và chuyển đơn (cập nhật điểm vào kho D2, chuyển thông tin đơn hàng đã thanh toán sang 4.0 Xuất hàng và giao hàng).
+Câu hỏi 9: Phân hệ 4.0 Xuất hàng và giao hàng (Level 2.4) được thực hiện như thế nào?
+  Trả lời: Gồm 3 tiến trình con:
+4.1 Lập phiếu xuất kho (nhận đơn đã thanh toán từ 3.0, đọc kho D3, cập nhật giảm tồn ở kho D1).
+4.2 Đóng gói và lập phiếu gửi hàng (gửi phiếu gửi hàng cho Đơn vị vận chuyển).
+4.3 Cập nhật trạng thái giao hàng (nhận trạng thái từ Đơn vị vận chuyển, cập nhật vào kho D3 Đơn hàng).
+Câu hỏi 10: Phân hệ 5.0 Xử lý đổi trả (Level 2.5) xử lý quy trình trả hàng như thế nào?
+  Trả lời: Gồm 4 tiến trình con:
+5.1 Tiếp nhận yêu cầu đổi trả (từ Khách hàng).
+5.2 Kiểm tra hóa đơn và điều kiện đổi trả (đối chiếu với kho D4 Hóa đơn và doanh thu).
+5.3 Xử lý đổi trả và hoàn tiền (trả kết quả đổi trả cho Khách hàng).
+5.4 Cập nhật tồn kho hàng đổi trả (cập nhật tăng tồn vào kho D1 Sản phẩm và tồn kho và cập nhật lại doanh thu ở kho D4 Hóa đơn và doanh thu).
 
 #### Mô hình mức ngữ cảnh (Context Level)
+<img width="732" height="422" alt="BanHang_context" src="https://github.com/user-attachments/assets/45bb9b4e-8d44-4e0e-8457-b0fd6a987270" />
 
 
 #### Mô hình mức đỉnh (Level 1)
+<img width="1492" height="942" alt="BanHang_level1" src="https://github.com/user-attachments/assets/7b2a96b8-18f6-4c83-b317-5289fab384e9" />
 
 
 #### Mô hình mức dưới đỉnh (Level 2)
+<img width="967" height="352" alt="BanHang_level2 1" src="https://github.com/user-attachments/assets/b88db771-2ab8-47b9-aa82-7f159d19edcf" />
+<img width="1162" height="321" alt="BanHang_level2 2" src="https://github.com/user-attachments/assets/b5c76a11-1577-4a73-a366-29cccd455bf0" />
+<img width="1172" height="492" alt="BanHang_level2 3" src="https://github.com/user-attachments/assets/8b342959-1810-45f4-877a-fe58fb0eb99d" />
+<img width="1062" height="422" alt="BanHang_level2 4" src="https://github.com/user-attachments/assets/ab7d20f0-663e-446e-bdef-adddaab23998" />
+<img width="1202" height="295" alt="BanHang_level2 5" src="https://github.com/user-attachments/assets/9762cd27-c493-4f86-b9fd-4783d26bd9dc" />
+
+
+
 
 
 
