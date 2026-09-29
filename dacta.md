@@ -87,15 +87,27 @@ Trả lời:
 ### Chức năng: Tổ Chức Giải Đấu & Tài Trợ Sự Kiện
 
 ####  Bảng danh sách câu hỏi và trả lời
-Câu hỏi:
-Trả lời:
+Câu hỏi 1: Xác định các tác nhân ngoài tương tác trực tiếp với chức năng "Tổ Chức Giải Đấu & Tài Trợ Sự Kiện"?
+Trả lời:Các tác nhân ngoài bao gồm: Người tham gia (đăng ký, nộp lệ phí, thi đấu), Nhà tài trợ (cung cấp kinh phí, hiện vật tài trợ), và Trọng tài sự kiện (cập nhật tỷ số, kết quả thi đấu). Quản lý giải đấu là người vận hành bên trong hệ thống.
+
+Câu hỏi 2: Kho lưu trữ dữ liệu chính nào được sử dụng trong quá trình xử lý giải đấu và tài trợ?
+Trả lời: Các kho dữ liệu chính gồm: Kho thông tin sự kiện/giải đấu, Kho dữ liệu người tham gia & đăng ký, Kho tài trợ, và liên kết với Kho hàng/Tồn kho (khi xuất vật phẩm trao thưởng).
+
+Câu hỏi 3: Luồng dữ liệu chính đi từ người tham gia vào hệ thống trong quy trình này là gì?
+Trả lời: Thông tin đăng ký tham gia giải đấu, thông tin xác nhận nộp lệ phí (hoặc thanh toán lệ phí).
+
+Câu hỏi 4: Nhiệm vụ của tiến trình xử lý kết quả và trao thưởng trong mô hình mức đỉnh là gì?
+Trả lời: Hệ thống tự động tổng kết bảng xếp hạng chung cuộc dựa trên tỷ số do trọng tài cập nhật, đồng thời tạo phiếu xuất kho các phần quà tài trợ và vật phẩm của cửa hàng để trao thưởng cho đấu thủ chiến thắng.
 
 #### Mô hình mức ngữ cảnh (Context Level)
-
+![DFD Mức ngữ cảnh - Giải đấu và Tài trợ](./images/DFD_muc0.png)
 
 #### Mô hình mức đỉnh (Level 1)
-
+![DFD Mức 1 - Giải đấu và Tài trợ](./images/DFD_muc1.png)
 
 #### Mô hình mức dưới đỉnh (Level 2)
-
+![DFD Mức 2 - Quản lí Đăng kí & Điểm danh](./images/DFD_muc2_1.png)
+![DFD Mức 2 - Quản lí Tài trợ sự kiện](./images/DFD_muc2_2.png)
+![DFD Mức 2 - Xếp lịch & Vận hành thi đấu](./images/DFD_muc2_3.png)
+![DFD Mức 2 - Tổng kết và trao thưởng](./images/DFD_muc2_4.png)
 ---
