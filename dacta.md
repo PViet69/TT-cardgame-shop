@@ -56,7 +56,18 @@ place holder
 
 ####  Bảng danh sách câu hỏi và trả lời
 Câu hỏi:
+1: Trong quy trình Nhập hàng, ai là đối tượng bên ngoài hệ thống mà cửa hàng phải trao đổi dữ liệu để hoàn tất việc mua hàng?
 Trả lời:
+Đó là Nhà Cung Cấp — bên nhận đơn đặt hàng từ cửa hàng, bàn giao hàng hóa kèm hóa đơn chứng từ, và là nơi nhận lại biên bản sự cố khi hàng không đạt chuẩn để yêu cầu đổi trả. Quản lý cửa hàng và Nhân viên mua/nhập hàng là người xử lý bên trong hệ thống nên không được xem là đối tượng bên ngoài.
+2: Những dữ liệu nào cần được lưu trữ lại để phục vụ cho việc kiểm soát và truy vết trong quy trình nhập hàng?
+Trả lời: 
+Cần lưu trữ: số lượng tồn kho hiện tại (để phát hiện khi chạm mức tối thiểu và cập nhật lại sau khi nhập hàng), đơn đặt hàng đã lập gửi nhà cung cấp, phiếu nhập kho cùng công nợ phát sinh khi lô hàng đạt chuẩn, và biên bản sự cố khi phát hiện hàng không đạt chuẩn hoặc thiếu hụt số lượng.
+3: Khi nhà cung cấp bàn giao hàng, thông tin gì được truyền vào hệ thống để phục vụ bước kiểm tra tiếp theo?
+Trả lời: 
+Hàng hóa thực tế kèm hóa đơn chứng từ (phiếu giao hàng) từ nhà cung cấp được truyền vào, làm căn cứ để nhân viên kho cùng quản lý đối chiếu với đơn đặt hàng và kiểm tra số lượng, chất lượng bao bì, tính toàn vẹn của từng sản phẩm.
+4: Bước xử lý đối chiếu, kiểm tra hàng nhận đóng vai trò gì trong toàn bộ quy trình nhập hàng?
+Trả lời: 
+Đây là bước quyết định hướng xử lý tiếp theo của cả quy trình: nếu hàng hóa đạt chuẩn về số lượng, chất lượng và tính toàn vẹn thì chuyển sang lập phiếu nhập kho, ghi nhận công nợ và cập nhật tồn kho; ngược lại, nếu phát hiện không đạt chuẩn hoặc thiếu hụt số lượng thì chuyển sang lập biên bản sự cố để từ chối nhận hàng hoặc yêu cầu nhà cung cấp đổi trả.
 
 #### Mô hình mức ngữ cảnh (Context Level)
 ![Mô hình mức ngữ cảnh](diagram/NhapHang_context.png)
