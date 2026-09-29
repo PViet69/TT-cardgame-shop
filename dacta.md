@@ -77,7 +77,7 @@ Câu hỏi 2: Các luồng dữ liệu đầu vào gửi đến hệ thống bao
   Trả lời: Thông tin đặt hàng (từ Khách hàng), Thông tin bán hàng tại quầy (từ Thu ngân), Thông tin xử lý đơn trực tuyến (từ Nhân viên xử lý đơn), và Trạng thái giao hàng (từ Đơn vị vận chuyển).
 Câu hỏi 3: Hệ thống Bán hàng gửi trả lại những dữ liệu đầu ra nào cho các thực thể ngoài?
   Trả lời: Xác nhận đơn hàng / Hóa đơn (cho Khách hàng), Thông tin sản phẩm / Kết quả thanh toán (cho Thu ngân), Thông tin đơn hàng (cho Nhân viên xử lý đơn), và Phiếu gửi hàng / Thông tin giao hàng (cho Đơn vị vận chuyển).
-2. Mô hình mức đỉnh (Level 1)
+
 Câu hỏi 4: Chức năng Bán hàng ở mức đỉnh bao gồm các tiến trình chính nào?
   Trả lời: Gồm 5 tiến trình chính:
 1.0 Tiếp nhận đơn hàng
@@ -91,8 +91,8 @@ D1: Sản phẩm và tồn kho
 D2: Khách hàng và thành viên
 D3: Đơn hàng
 D4: Hóa đơn và doanh thu
-3. Mô hình mức dưới đỉnh (Level 2)
-Câu hỏi 6: Phân hệ 1.0 Tiếp nhận đơn hàng (Level 2.1) được chi tiết hóa như thế nào?
+
+  Câu hỏi 6: Phân hệ 1.0 Tiếp nhận đơn hàng (Level 2.1) được chi tiết hóa như thế nào?
   Trả lời: Gồm 3 tiến trình con:
 1.1 Tiếp nhận thông tin đặt hàng (từ Khách hàng / Thu ngân / Nhân viên xử lý đơn).
 1.2 Ghi nhận đơn hàng (lưu thông tin đơn vào kho D3 Đơn hàng).
@@ -120,6 +120,8 @@ Câu hỏi 10: Phân hệ 5.0 Xử lý đổi trả (Level 2.5) xử lý quy tr�
 5.2 Kiểm tra hóa đơn và điều kiện đổi trả (đối chiếu với kho D4 Hóa đơn và doanh thu).
 5.3 Xử lý đổi trả và hoàn tiền (trả kết quả đổi trả cho Khách hàng).
 5.4 Cập nhật tồn kho hàng đổi trả (cập nhật tăng tồn vào kho D1 Sản phẩm và tồn kho và cập nhật lại doanh thu ở kho D4 Hóa đơn và doanh thu).
+
+
 
 #### Mô hình mức ngữ cảnh (Context Level)
 <img width="732" height="422" alt="BanHang_context" src="https://github.com/user-attachments/assets/45bb9b4e-8d44-4e0e-8457-b0fd6a987270" />
