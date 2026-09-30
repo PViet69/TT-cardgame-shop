@@ -77,16 +77,88 @@ place holder
 ### Chức năng: Nhập Hàng
 
 ####  Bảng danh sách câu hỏi và trả lời
-Câu hỏi:
-Trả lời:
+
+##### **a. Danh sách câu hỏi và trả lời liên quan đến các ô xử lý (Process)**
+
+1. **Mức 1 được phân rã thành bao nhiêu tiến trình?**
+   Có 5 tiến trình: 1.1 Lập đơn đặt hàng; 1.2 Kiểm nhận hàng; 1.3 Lập phiếu nhập, cập nhật tồn kho và công nợ; 1.4 Xử lý sự cố, đổi trả; 1.5 Thanh toán nhà cung cấp.
+2. **Tiến trình 1.1 được phân rã thành những tiến trình nào?**
+   1.1.1 Kiểm tra tồn kho, xác định nhu cầu nhập; 1.1.2 Lập thông tin đơn đặt hàng; 1.1.3 Lưu và gửi đơn đặt hàng.
+3. **Tiến trình 1.2 được phân rã thành những tiến trình nào?**
+   1.2.1 Tiếp nhận thông tin hàng và chứng từ; 1.2.2 Đối chiếu đơn, kiểm đếm số lượng; 1.2.3 Đánh giá chất lượng, tổng hợp kiểm nhận.
+4. **Tiến trình 1.3 được phân rã thành những tiến trình nào?**
+   1.3.1 Lập phiếu nhập kho; 1.3.2 Cập nhật số lượng tồn kho; 1.3.3 Ghi nhận công nợ, trạng thái đơn nhập.
+5. **Tiến trình 1.4 được phân rã thành những tiến trình nào?**
+   1.4.1 Lập biên bản sự cố; 1.4.2 Lập và gửi yêu cầu đổi trả; 1.4.3 Ghi nhận kết quả xử lý đổi trả.
+6. **Tiến trình 1.5 được phân rã thành những tiến trình nào?**
+   1.5.1 Đối chiếu công nợ cần thanh toán; 1.5.2 Lập thông tin thanh toán nhà cung cấp; 1.5.3 Xác nhận, ghi giao dịch và cập nhật công nợ.
+7. **Nếu lô hàng chỉ có một phần đạt yêu cầu thì xử lý thế nào?**
+   1.2.3 chuyển phần đạt sang 1.3 để nhập kho; phần lỗi hoặc thiếu hụt chuyển sang 1.4 để lập biên bản và yêu cầu xử lý.
+8. **Nếu chứng từ không khớp đơn đặt hàng hoặc chưa xác định được đơn thì xử lý ở đâu?**
+   1.2.2 đối chiếu và yêu cầu làm rõ trước khi ghi nhận nhập kho. Trường hợp thiếu thông tin đơn hoặc chứng từ chưa có nhánh xử lý riêng trên sơ đồ.
+
+##### **b. Danh sách câu hỏi và trả lời liên quan đến các dòng dữ liệu (Data Flow)**
+
+1. **Nhà cung cấp gửi và nhận những dữ liệu gì?**
+   Nhà cung cấp nhận đơn đặt hàng, biên bản/yêu cầu đổi trả và thông tin thanh toán; gửi thông tin hàng/chứng từ, kết quả xử lý đổi trả và xác nhận thanh toán.
+2. **Luồng 1.2 → 1.3 mang dữ liệu gì?**
+   Thông tin hàng nhập đã kiểm nhận đạt, gồm hàng được chấp nhận, số lượng thực nhận, giá nhập và chứng từ liên quan.
+3. **Luồng 1.2 → 1.4 mang dữ liệu gì?**
+   Thông tin hàng lỗi, thiếu hụt và kết quả kiểm tra để lập biên bản sự cố.
+4. **Nếu nhà cung cấp giao hàng thay thế thì dữ liệu đi đâu?**
+   Thông tin hàng thay thế và chứng từ đi vào 1.2 để kiểm nhận lại; phản hồi đổi trả vào 1.4 không trực tiếp làm tăng tồn kho.
+5. **Nếu chưa nhận được xác nhận thanh toán thì có giảm công nợ không?**
+   Chưa giảm công nợ; cần giữ trạng thái chờ xác nhận. Nhánh chờ hoặc thanh toán thất bại chưa được thể hiện riêng trên sơ đồ.
+6. **Các luồng giữa mức 0 và mức 1 đã cân bằng chưa?**
+   Mức 0 hiện chưa nêu thông tin thanh toán, xác nhận thanh toán và kết quả xử lý đổi trả có ở mức 1; cần bổ sung vào nội dung hai luồng tổng hợp để giữ cách vẽ hai mũi tên.
+
+##### **c. Danh sách câu hỏi và trả lời liên quan đến các kho dữ liệu (Data Store)**
+
+1. **Các kho dữ liệu nào được dùng trong nhập hàng?**
+   D4 Hàng hóa và tồn kho; D8 Giao dịch thanh toán; D12 Đơn đặt hàng nhập; D13 Phiếu nhập kho; D14 Công nợ nhà cung cấp; D15 Biên bản sự cố và đổi trả nhà cung cấp.
+2. **Vì sao lập đơn nhập dùng D4 mà không dùng D5?**
+   D4 đã cung cấp thông tin hàng hóa và số lượng tồn để xác định nhu cầu nhập. D5 phục vụ danh mục và giá bán, không cần cho quy trình này.
+3. **Các tiến trình chính tra cứu/cập nhật những kho nào?**
+   1.1 đọc D4, ghi D12; 1.2 đọc D12; 1.3 ghi D13, cập nhật D4, D12 và D14; 1.4 ghi/cập nhật D15; 1.5 đọc/cập nhật D14 và ghi D8.
+4. **D8 và D14 khác nhau thế nào?**
+   D8 lưu từng giao dịch thanh toán; D14 theo dõi khoản phải trả và số công nợ còn lại của nhà cung cấp.
+5. **Nếu thanh toán một phần công nợ thì cập nhật kho nào?**
+   1.5.3 ghi số tiền đã thanh toán vào D8 và giảm khoản nợ tương ứng trong D14; phần chưa trả vẫn được theo dõi.
+6. **Nếu cùng một phiếu nhập được ghi nhận hai lần thì cần xử lý thế nào?**
+   Cần kiểm tra phiếu đã ghi nhận tại D13 trước khi cập nhật D4 và D14 để tránh tăng tồn và công nợ hai lần. Sơ đồ hiện chưa thể hiện luồng kiểm tra trùng này.
+
+##### **d. Danh sách câu hỏi và trả lời liên quan đến các thực thể ngoài (External Entity)**
+
+1. **Thực thể ngoài của chức năng nhập hàng là ai?**
+   Nhà cung cấp là thực thể ngoài, xuất hiện một lần trong mỗi sơ đồ có trao đổi dữ liệu với nhà cung cấp.
+2. **Vì sao nhân viên và quản lý không được vẽ thành thực thể ngoài?**
+   Trong phạm vi mô hình đang chọn, họ là người vận hành nội bộ, thực hiện lập đơn, kiểm nhận và ghi nhận dữ liệu trên hệ thống.
+3. **Nếu nhà cung cấp chưa phản hồi hoặc từ chối đổi trả thì xử lý thế nào?**
+   Theo dõi hồ sơ chờ xử lý hoặc ghi nhận kết quả từ chối trong D15; không tự nhập kho phần hàng bị từ chối. Các nhánh này chưa được vẽ riêng.
+4. **Nếu nhà cung cấp xác nhận số tiền nhận được khác số tiền đã ghi thì xử lý thế nào?**
+   1.5.3 cần đối chiếu và làm rõ chênh lệch trước khi xác nhận giao dịch, giảm công nợ. Nhánh sai lệch thanh toán chưa được thể hiện riêng trên sơ đồ.
 
 #### Mô hình mức ngữ cảnh (Context Level)
+
+![DFD Mức 0 - Nhập hàng](./images/nhaphang/DFD_muc0.png)
 
 
 #### Mô hình mức đỉnh (Level 1)
 
+![DFD Mức 1 - Nhập hàng](./images/nhaphang/DFD_muc1.png)
+
 
 #### Mô hình mức dưới đỉnh (Level 2)
+
+![DFD Mức 2 - 1.1 Lập đơn đặt hàng](./images/nhaphang/DFD_muc2_LapDon_DatHang.png)
+
+![DFD Mức 2 - 1.2 Kiểm nhận hàng](./images/nhaphang/DFD_muc2_KiemNhan_Hang.png)
+
+![DFD Mức 2 - 1.3 Lập phiếu nhập, cập nhật tồn kho và công nợ](./images/nhaphang/DFD_muc2_LapPhieuNhap_CapNhatKho_CongNo.png)
+
+![DFD Mức 2 - 1.4 Xử lý sự cố, đổi trả](./images/nhaphang/DFD_muc2_XuLySuCo_DoiTra.png)
+
+![DFD Mức 2 - 1.5 Thanh toán nhà cung cấp](./images/nhaphang/DFD_muc2_ThanhToan_NhaCungCap.png)
 
 
 ### Chức năng: Bán Hàng
