@@ -93,17 +93,65 @@ Trả lời:
 ### Chức năng: Bán Hàng
 
 ####  Bảng danh sách câu hỏi và trả lời
-Câu hỏi:
-Trả lời:
+## **a. Danh sách câu hỏi và trả lời liên quan đến các ô xử lý (Process)**
+
+1. **Mức 1 của chức năng Bán hàng được phân rã thành bao nhiêu tiến trình?**
+   Gồm 5 tiến trình: 2.1 Tiếp nhận và kiểm tra đơn hàng; 2.2 Xử lý thanh toán và lập hóa đơn; 2.3 Gửi yêu cầu và theo dõi giao hàng; 2.4 Xử lý đổi trả và hoàn tiền; 2.5 Cấp hàng và đối soát cộng tác viên.
+2. **Tiến trình 2.1 được phân rã thành những tiến trình mức 2 nào?**
+   Gồm 4 tiến trình: 2.1.1 Tiếp nhận thông tin đặt hàng; 2.1.2 Kiểm tra sản phẩm và giá; 2.1.3 Kiểm tra tồn kho; 2.1.4 Kiểm tra khuyến mãi và tính tổng đơn.
+3. **Các tiến trình 2.2, 2.3, 2.4 và 2.5 được phân rã thành bao nhiêu tiến trình mức 2?**
+   Mỗi tiến trình được phân rã thành 4 tiến trình mức 2.
+4. **Các tiến trình con của 2.2 là gì?**
+   2.2.1 Tiếp nhận đơn hàng và phương thức thanh toán; 2.2.2 Ghi nhận giao dịch thanh toán; 2.2.3 Xác nhận thanh toán và lập hóa đơn; 2.2.4 Trả kết quả và chuyển đơn giao.
+5. **Các tiến trình con của 2.3, 2.4 và 2.5 là gì?**
+   2.3 gồm tiếp nhận đơn đã thanh toán, chuẩn bị/gửi yêu cầu giao hàng, cập nhật mã vận đơn/trạng thái và thông báo tình trạng giao hàng. 2.4 gồm tiếp nhận yêu cầu đổi trả, kiểm tra đơn/điều kiện, ghi nhận đổi trả/yêu cầu hoàn tiền và xử lý hoàn tiền/thông báo kết quả. 2.5 gồm tiếp nhận yêu cầu cấp hàng, kiểm tra tồn kho/cấp hàng, đối chiếu báo cáo doanh số và ghi nhận chuyển tiền/kết quả đối soát.
+
+## **b. Danh sách câu hỏi và trả lời liên quan đến các dòng dữ liệu (Data Flow)**
+
+1. **Khách hàng gửi dữ liệu gì vào hệ thống?**
+   Khách tại quầy gửi thông tin mua hàng và yêu cầu đổi trả; khách trực tuyến gửi thông tin đặt hàng, người nhận, phương thức thanh toán và yêu cầu đổi trả.
+2. **Hệ thống trả dữ liệu gì cho khách hàng?**
+   Hệ thống trả thông tin thanh toán/hóa đơn, xác nhận đơn hàng và mã vận đơn (đối với đơn giao), hoặc kết quả đổi trả và thông tin hoàn tiền.
+3. **Cộng tác viên gửi và nhận những dòng dữ liệu nào?**
+   Cộng tác viên gửi yêu cầu cấp hàng, báo cáo doanh số và thông tin chuyển tiền. Hệ thống gửi xác nhận cấp hàng, thông tin tồn kho, kết quả đối soát và số tiền phải nộp.
+4. **Đơn vị vận chuyển trao đổi dữ liệu gì với hệ thống?**
+   Hệ thống gửi thông tin đơn cần giao; đơn vị vận chuyển trả mã vận đơn và trạng thái giao hàng. Hệ thống dùng dữ liệu đó để cập nhật hồ sơ và thông báo khách trực tuyến.
+
+## **c. Danh sách câu hỏi và trả lời liên quan đến các kho dữ liệu (Data Store)**
+
+1. **Các kho dữ liệu nào xuất hiện trong những sơ đồ phân rã bán hàng?**
+   D4 Hàng hóa và tồn kho; D5 Danh mục sản phẩm và giá bán; D6 Mã giảm giá và khuyến mãi; D7 Đơn hàng và hóa đơn; D8 Giao dịch thanh toán; D9 Hồ sơ giao hàng; D10 Hồ sơ đổi trả và hoàn tiền; D11 Đối soát cộng tác viên.
+2. **Các tiến trình tra cứu hoặc cập nhật những kho nào?**
+   2.1 tra cứu D4, D5, D6; 2.2 ghi/tra cứu D7 và D8; 2.3 ghi/cập nhật D9; 2.4 tra cứu D7, ghi D8 khi hoàn tiền và cập nhật D10; 2.5 tra cứu/cập nhật D4, đối chiếu D7 và ghi/cập nhật D11.
+
+## **d. Danh sách câu hỏi và trả lời liên quan đến các thực thể ngoài (External Entity)**
+
+1. **Các thực thể ngoài của hệ thống bán hàng là những ai?**
+   Khách hàng tại quầy, khách hàng trực tuyến, cộng tác viên và đơn vị vận chuyển.
+2. **Vai trò của từng thực thể ngoài là gì?**
+   Hai nhóm khách hàng đặt mua và yêu cầu đổi trả; cộng tác viên yêu cầu cấp hàng, báo cáo doanh số và nộp tiền; đơn vị vận chuyển nhận yêu cầu giao hàng và phản hồi trạng thái cùng mã vận đơn.
 
 #### Mô hình mức ngữ cảnh (Context Level)
-
+![DFD bán hàng mức 0](images/banhang/DFD_muc0.png)
 
 #### Mô hình mức đỉnh (Level 1)
-
+![DFD bán hàng mức 1](images/banhang/DFD_muc1.png)
 
 #### Mô hình mức dưới đỉnh (Level 2)
+##### 2.1 Tiếp nhận và kiểm tra đơn hàng
+![DFD 2.1 - Tiếp nhận và kiểm tra đơn hàng](images/banhang/DFD_muc2_1_TiepNhanKiemTraDonHang.png)
 
+##### 2.2 Xử lý thanh toán và lập hóa đơn
+![DFD 2.2 - Xử lý thanh toán và lập hóa đơn](images/banhang/DFD_muc2_2_ThanhToanLapHoaDon.png)
+
+##### 2.3 Gửi yêu cầu và theo dõi giao hàng
+![DFD 2.3 - Gửi yêu cầu và theo dõi giao hàng](images/banhang/DFD_muc2_3_TheoDoiGiaoHang.png)
+
+##### 2.4 Xử lý đổi trả và hoàn tiền
+![DFD 2.4 - Xử lý đổi trả và hoàn tiền](images/banhang/DFD_muc2_4_DoiTraHoanTien.png)
+
+##### 2.5 Cấp hàng và đối soát cộng tác viên
+![DFD 2.5 - Cấp hàng và đối soát cộng tác viên](images/banhang/DFD_muc2_5_CapHangDoiSoatCTV.png)
 
 
 ### Chức năng: Tổ Chức Giải Đấu & Tài Trợ Sự Kiện
