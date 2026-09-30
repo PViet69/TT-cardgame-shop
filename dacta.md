@@ -46,11 +46,33 @@
 
 
 ---
-## 2. Phân tích những hạn chế đang tồn tại trong hệ thống và đề xuất giải pháp cải tiến
+## 2. Mô tả các kho dữ liệu (Data Store)
+
+| Mã | Tên kho dữ liệu | Mô tả |
+| --- | --- | --- |
+| D1 | Hồ sơ sự kiện | Lưu thông tin và kết quả giải đấu. |
+| D2 | Danh sách đăng ký giải đấu | Lưu đăng ký và điểm danh người tham gia. |
+| D3 | Thông tin tài trợ | Lưu các khoản tài trợ cho sự kiện. |
+| D4 | Hàng hóa và tồn kho | Lưu thông tin hàng hóa và số lượng tồn. |
+| D5 | Danh mục sản phẩm và giá bán | Lưu danh mục sản phẩm và giá bán. |
+| D6 | Mã giảm giá và khuyến mãi | Lưu các ưu đãi bán hàng. |
+| D7 | Đơn hàng và hóa đơn | Lưu đơn bán hàng và hóa đơn. |
+| D8 | Giao dịch thanh toán | Lưu các giao dịch thu, chi và hoàn tiền. |
+| D9 | Hồ sơ giao hàng | Lưu thông tin và trạng thái giao hàng. |
+| D10 | Hồ sơ đổi trả và hoàn tiền | Lưu đổi trả và hoàn tiền cho khách hàng. |
+| D11 | Đối soát cộng tác viên | Lưu kết quả đối soát hàng và tiền với cộng tác viên. |
+| D12 | Đơn đặt hàng nhập | Lưu đơn mua hàng từ nhà cung cấp. |
+| D13 | Phiếu nhập kho | Lưu các lần nhập hàng vào kho. |
+| D14 | Công nợ nhà cung cấp | Lưu khoản phải trả và nợ còn lại của nhà cung cấp. |
+| D15 | Biên bản sự cố và đổi trả nhà cung cấp | Lưu sự cố nhập hàng và kết quả đổi trả. |
+
+---
+
+## 3. Phân tích những hạn chế đang tồn tại trong hệ thống và đề xuất giải pháp cải tiến
 place holder
 ---
 
-## 3. Xây dựng mô hình DFD cho từng chức năng
+## 4. Xây dựng mô hình DFD cho từng chức năng
 
 ### Chức năng: Nhập Hàng
 
