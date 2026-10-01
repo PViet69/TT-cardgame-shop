@@ -14,6 +14,10 @@ Dự án hướng đến việc quản lý tập trung thông tin hàng hóa, đ
 3. Chức năng Bán Hàng
 4. Chức năng Quản lý Nhân Viên và Cộng Tác Viên
 5. Chức năng Quản lý Giải Đấu và Tài Trợ Sự Kiện
+6. Chức năng quản lý nội dung Fanpage
+7. Chức năng quản lý order nước ngoài
+
+
 
 ### 1.2. Đặc tả quy trình hoạt động và xử lý
 
@@ -50,6 +54,36 @@ Dự án hướng đến việc quản lý tập trung thông tin hàng hóa, đ
 - **Quy trình hoạt động & xử lý:**  
   Quy trình quản lý giải đấu và tài trợ bắt đầu khi ban tổ chức khởi tạo thông tin sự kiện trên hệ thống, xác định thể thức thi đấu, lệ phí tham gia và cơ cấu giải thưởng. Đồng thời, hệ thống tiếp nhận thông tin từ các nhà tài trợ (nếu có), ghi nhận gói tài trợ bằng hiện vật độc quyền (thảm đấu vô địch, bọc bài quảng bá, phụ kiện chính hãng) và cập nhật hiển thị quyền lợi biểu trưng, áp phích quảng bá trên trang sự kiện. Người chơi đăng ký thi đấu, nộp lệ phí trực tiếp hoặc thanh toán từ xa để hệ thống ghi nhận doanh thu và thực hiện điểm danh trước giờ khai mạc. Tiếp đó, hệ thống tự động chia cặp thi đấu theo từng vòng đấu và cho phép trọng tài cập nhật tỷ số trực tiếp. Khi giải đấu kết thúc, hệ thống tự động tổng kết bảng xếp hạng chung cuộc, đồng thời tạo phiếu xuất kho các phần quà tài trợ cùng vật phẩm của cửa hàng để trao thưởng cho đấu thủ chiến thắng.
 
+#### Chức năng: Quản lý nội dung Fanpage
+
+> [!NOTE]
+> **CHƯA HOÀN THIỆN**
+>
+> Chưa triển khai đặc tả — chờ bổ sung.
+
+
+- **Mục đích:** **[TODO]** Bổ sung mục đích quản lý nội dung Fanpage.
+
+- **Đối tượng thực hiện:** **[TODO]** Xác định người soạn, duyệt và đăng nội dung.
+
+- **Quy trình hoạt động & xử lý:** **[TODO]** Đặc tả quy trình soạn, duyệt, đăng, cập nhật và gỡ nội dung.
+
+---
+
+#### Chức năng: Quản lý order nước ngoài
+
+> [!NOTE]
+> **CHƯA HOÀN THIỆN**
+>
+> Chưa triển khai đặc tả — chờ bổ sung.
+
+
+- **Mục đích:** Quản lý đơn khách hàng nhờ cửa hàng mua hộ từ các sàn thương mại điện tử nước ngoài như Mercari, Taobao.
+
+- **Đối tượng thực hiện:** **[TODO]** Xác định người phụ trách tiếp nhận yêu cầu, báo giá, đặt mua và giao hàng.
+
+- **Quy trình hoạt động & xử lý:** **[TODO]** Đặc tả tiếp nhận đường dẫn sản phẩm, báo giá theo rate của đồng tiền tương ứng và phí vận chuyển, xác nhận/đặt cọc, đặt mua, theo dõi vận chuyển, quyết toán và bàn giao; bổ sung xử lý sự cố.
+
 
 ---
 ## 2. Mô tả các kho dữ liệu (Data Store)
@@ -72,10 +106,22 @@ Dự án hướng đến việc quản lý tập trung thông tin hàng hóa, đ
 | D14 | Công nợ nhà cung cấp | Lưu khoản phải trả và nợ còn lại của nhà cung cấp. |
 | D15 | Biên bản sự cố và đổi trả nhà cung cấp | Lưu sự cố nhập hàng và kết quả đổi trả. |
 
+> [!NOTE]
+> **KHO DỮ LIỆU CHỜ BỔ SUNG**
+>
+> Bổ sung kho dữ liệu cho Quản lý nội dung Fanpage và Quản lý order nước ngoài sau khi hoàn thiện đặc tả; dùng lại kho dùng chung phù hợp và cấp mã mới không trùng các mã hiện có.
+
+
+> Cứ ghi thẳng kho dữ liệu vào đây, nếu hợp lý ,sẽ sửa lại sau mỗi lần merge PR 
 ---
 
 ## 3. Phân tích những hạn chế đang tồn tại trong hệ thống và đề xuất giải pháp cải tiến
-place holder
+
+> [!NOTE]
+> **CHỜ BỔ SUNG**
+>
+> Phân tích những hạn chế đang tồn tại và đề xuất giải pháp cải tiến.
+
 ---
 
 ## 4. Xây dựng mô hình DFD cho từng chức năng
@@ -286,4 +332,152 @@ Trả lời: Hệ thống tự động tổng kết bảng xếp hạng chung cu
 ![DFD Mức 2 - Xếp lịch & Vận hành thi đấu](./images/giaidau/DFD_muc2_XepLich_VanHanh.png)
 
 ![DFD Mức 2 - Tổng kết và trao thưởng](./images/giaidau/DFD_muc2_TongKet_TraoThuong.png)
+
+---
+
+### Chức năng: Quản lý Kho
+
+> [!NOTE]
+> **CHƯA HOÀN THIỆN**
+>
+> Chưa bổ sung mô hình DFD.
+
+#### Bảng danh sách câu hỏi và trả lời
+
+> [!NOTE]
+> **CHỜ BỔ SUNG**
+>
+> Bổ sung câu hỏi và trả lời về tiến trình, luồng dữ liệu, kho dữ liệu và thực thể ngoài.
+
+#### Mô hình mức ngữ cảnh (Context Level)
+
+> [!NOTE]
+> **CHỜ BỔ SUNG**
+>
+> Bổ sung sơ đồ DFD mức ngữ cảnh.
+
+#### Mô hình mức đỉnh (Level 1)
+
+> [!NOTE]
+> **CHỜ BỔ SUNG**
+>
+> Bổ sung sơ đồ DFD mức đỉnh.
+
+#### Mô hình mức dưới đỉnh (Level 2)
+
+> [!NOTE]
+> **CHỜ BỔ SUNG**
+>
+> Bổ sung sơ đồ phân rã các tiến trình mức đỉnh.
+
+---
+
+### Chức năng: Quản lý Nhân Viên và Cộng Tác Viên
+
+> [!NOTE]
+> **CHƯA HOÀN THIỆN**
+>
+> Chưa bổ sung mô hình DFD.
+
+#### Bảng danh sách câu hỏi và trả lời
+
+> [!NOTE]
+> **CHỜ BỔ SUNG**
+>
+> Bổ sung câu hỏi và trả lời về tiến trình, luồng dữ liệu, kho dữ liệu và thực thể ngoài.
+
+#### Mô hình mức ngữ cảnh (Context Level)
+
+> [!NOTE]
+> **CHỜ BỔ SUNG**
+>
+> Bổ sung sơ đồ DFD mức ngữ cảnh.
+
+#### Mô hình mức đỉnh (Level 1)
+
+> [!NOTE]
+> **CHỜ BỔ SUNG**
+>
+> Bổ sung sơ đồ DFD mức đỉnh.
+
+#### Mô hình mức dưới đỉnh (Level 2)
+
+> [!NOTE]
+> **CHỜ BỔ SUNG**
+>
+> Bổ sung sơ đồ phân rã các tiến trình mức đỉnh.
+
+---
+
+### Chức năng: Quản lý nội dung Fanpage
+
+> [!NOTE]
+> **CHƯA HOÀN THIỆN**
+>
+> Chưa bổ sung mô hình DFD.
+
+#### Bảng danh sách câu hỏi và trả lời
+
+> [!NOTE]
+> **CHỜ BỔ SUNG**
+>
+> Bổ sung câu hỏi và trả lời về tiến trình, luồng dữ liệu, kho dữ liệu và thực thể ngoài.
+
+#### Mô hình mức ngữ cảnh (Context Level)
+
+> [!NOTE]
+> **CHỜ BỔ SUNG**
+>
+> Bổ sung sơ đồ DFD mức ngữ cảnh.
+
+#### Mô hình mức đỉnh (Level 1)
+
+> [!NOTE]
+> **CHỜ BỔ SUNG**
+>
+> Bổ sung sơ đồ DFD mức đỉnh.
+
+#### Mô hình mức dưới đỉnh (Level 2)
+
+> [!NOTE]
+> **CHỜ BỔ SUNG**
+>
+> Bổ sung sơ đồ phân rã các tiến trình mức đỉnh.
+
+---
+
+### Chức năng: Quản lý order nước ngoài
+
+> [!NOTE]
+> **CHƯA HOÀN THIỆN**
+>
+> Chưa bổ sung mô hình DFD.
+
+#### Bảng danh sách câu hỏi và trả lời
+
+> [!NOTE]
+> **CHỜ BỔ SUNG**
+>
+> Bổ sung câu hỏi và trả lời về tiến trình, luồng dữ liệu, kho dữ liệu và thực thể ngoài; xác định cách biểu diễn các sàn Mercari, Taobao trong thực thể chung Sàn thương mại điện tử nước ngoài.
+
+#### Mô hình mức ngữ cảnh (Context Level)
+
+> [!NOTE]
+> **CHỜ BỔ SUNG**
+>
+> Bổ sung sơ đồ DFD mức ngữ cảnh.
+
+#### Mô hình mức đỉnh (Level 1)
+
+> [!NOTE]
+> **CHỜ BỔ SUNG**
+>
+> Bổ sung sơ đồ DFD mức đỉnh.
+
+#### Mô hình mức dưới đỉnh (Level 2)
+
+> [!NOTE]
+> **CHỜ BỔ SUNG**
+>
+> Bổ sung sơ đồ phân rã các tiến trình mức đỉnh.
 ---
