@@ -348,26 +348,36 @@ Trả lời: Hệ thống tự động tổng kết bảng xếp hạng chung cu
 > **CHỜ BỔ SUNG**
 >
 > Bổ sung câu hỏi và trả lời về tiến trình, luồng dữ liệu, kho dữ liệu và thực thể ngoài.
+Câu hỏi 1 : Tiến trình 3.0 (Xuất kho thời gian thực) tương tác với kho dữ liệu nào để đảm bảo tính chính xác khi có nhiều giao dịch bán lẻ diễn ra đồng thời?
+Trả lời: Khi phát sinh giao dịch từ thực thể Hệ thống Bán lẻ / Giải đấu, tiến trình 3.0 truy vấn mã sản phẩm tại D5 (Danh mục sản phẩm), thực hiện trừ số lượng trực tiếp trong D4 (Hàng hóa và tồn kho) và ghi log đơn bán tại D7 (Đơn hàng & Hóa đơn). Tiến trình sử dụng cơ chế khóa tạm thời (Transactional Locking) trên bản ghi mặt hàng ở D4 để tránh xung đột số lượng.
+Câu hỏi 2 : Luồng dữ liệu di chuyển như thế nào khi Cộng tác viên trả lại hàng không bán hết?
+Trả lời:CTV gửi Yêu cầu trả hàng/đổi trả -> Tiến trình 1.0 (Quản lý Nhập kho).
+Nhân viên kho kiểm tra hàng và xác nhận Lập phiếu nhập hoàn.
+Tiến trình 1.0 ghi dữ liệu vào D13 (Phiếu nhập kho), đồng thời phát 2 luồng cập nhật: Cộng lại số lượng tồn kho chính vào D4 và Trừ số lượng tồn ký gửi trong D11 (Đối soát CTV).
+Câu hỏi 3 : Sự khác biệt về vai trò dữ liệu giữa kho D4 (Hàng hóa & Tồn kho) và D11 (Đối soát CTV) là gì?
+Trả lời: D4 đóng vai trò lưu trữ vị trí lưu trữ và tổng số lượng hàng vật lý thực tế nằm tại cửa hàng/kho chính. Trong khi đó, D11 lưu trữ số lượng hàng hóa đã rời khỏi kho chính nhưng chưa bán (đang nằm dưới dạng hàng ký gửi do từng CTV nắm giữ). Việc tách biệt 2 kho dữ liệu này giúp công tác kiểm kê tài sản tại chỗ không bị nhầm lẫn với hàng hóa đang phân phối ở xa.
+Câu hỏi 4 : Thực thể "Quản lý cửa hàng" tham gia vào những luồng dữ liệu nào trong quy trình xử lý thất thoát?
+Trả lời: Trong chu trình kiểm kê (Tiến trình 4.0), Quản lý cửa hàng đóng vai trò là thực thể tiếp nhận luồng dữ liệu Báo cáo thất thoát & Biên bản chênh lệch từ tiến trình 4.3. Sau khi xem xét, Quản lý phản hồi luồng dữ liệu Chỉ đạo & Lệnh điều chỉnh sổ sách, cho phép hệ thống cập nhật lại đúng số lượng thực tế vào D4 và D11.
 
 #### Mô hình mức ngữ cảnh (Context Level)
 
 > [!NOTE]
 > **CHỜ BỔ SUNG**
->
+> diagram_sketch/docs/Quanlykho/QuanLyKho_context.png
 > Bổ sung sơ đồ DFD mức ngữ cảnh.
 
 #### Mô hình mức đỉnh (Level 1)
 
 > [!NOTE]
 > **CHỜ BỔ SUNG**
->
+> diagram_sketch/docs/Quanlykho/QuanLyKho_level1.png
 > Bổ sung sơ đồ DFD mức đỉnh.
 
 #### Mô hình mức dưới đỉnh (Level 2)
 
 > [!NOTE]
 > **CHỜ BỔ SUNG**
->
+> diagram_sketch/docs/Quanlykho/QuanLyKho_level2(2.0&4.0).png
 > Bổ sung sơ đồ phân rã các tiến trình mức đỉnh.
 
 ---
