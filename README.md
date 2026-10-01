@@ -381,33 +381,201 @@ Trả lời: Hệ thống tự động tổng kết bảng xếp hạng chung cu
 
 #### Bảng danh sách câu hỏi và trả lời
 
-> [!NOTE]
-> **CHỜ BỔ SUNG**
->
-> Bổ sung câu hỏi và trả lời về tiến trình, luồng dữ liệu, kho dữ liệu và thực thể ngoài.
+a. Các ô xử lý (Process)
+
+1. Mức độ cảnh có bao nhiêu tiến trình, được phân tích thành bao nhiêu tiến trình ở Cấp độ 1?
+
+Cấp độ cảnh có 1 tiến trình: 4 -- Hệ thống Quản lý Nhân viên và Cộng tác viên . Quá trình phân tích cấp 1 thành 4:
+
+4.1 Quản lý hồ sơ nhân viên & CTV
+4.2 Phân ca & Chấm công
+4.3 Tính lương & Hoa hồng
+4.4 Đánh giá & Báo cáo nhân sự
+
+2. Tiến trình nào quản lý hồ sơ nhân viên và CTV?
+
+4.1 -- Quản lý hồ sơ nhân viên & CTV nhận:
+
+"Thông tin cá nhân" từ Nhân viên.
+"Thông tin đăng ký" của cộng tác viên.
+"Phê duyệt hồ sơ" từ Quản lý cửa hàng.
+
+Tiến trình gửi "Hồ sơ cần duyệt" cho Quản lý cửa hàng, gửi "Kết quả đăng ký" cho Cộng tác viên và ghi "Hồ sơ đã duyệt" vào kho D1.
+
+3. Tiến hành phân tích và chấm công nào?
+
+4.2 -- Phân ca & Chấm công nhận "Danh sách nhân viên" từ kho D1; “Đăng ký ca, Yêu cầu nghỉ” và “Dữ liệu chấm công” của Nhân viên; "Duyệt ca, Duyệt nghỉ" từ Quản lý cửa hàng. Tiến trình gửi "Lịch làm việc, Thông báo trình duyệt nghỉ" cho Nhân viên, gửi "Ca, Nghỉ cần duyệt" cho Quản lý cửa hàng và ghi "Lịch làm việc, Dữ liệu chấm công" vào kho D2.
+
+4. Tiến trình nào tính lương và hoa hồng?
+
+4.3 -- Tính lương & Hoa hồng nhận "Giờ công" từ kho D2, "Mức lương, Tỉ lệ hoa hồng" từ kho D1, "Chính sách lương & hoa hồng" từ Quản lý cửa hàng và "Báo cáo doanh số" từ Cộng tác viên. Tiến trình gửi "Phiếu lương" cho Nhân viên, "Hoa hồng" cho Cộng tác viên và ghi "Bảng lương, Hoa hồng" vào kho D3.
+
+5. Tiến trình nào đánh giá và lập báo cáo nhân viên?
+
+4.4 -- Đánh giá & Báo cáo nhân sự nhận "Dữ liệu lương, Hoa hồng" từ kho D3 và "Dữ liệu chấm công" từ kho D2; gửi "Báo cáo nhân sự" cho Quản lý cửa hàng và "Kết quả đánh giá" cho Nhân viên.
+
+6. If Nhân viên xin nghỉ thì tiến trình nào sẽ được xử lý?
+
+Tiến trình 4.2 -- Phân ca & Chấm công xử lý đăng ký ca và yêu cầu nghỉ. 4.2 Nhận yêu cầu từ Nhân viên, gửi "Ca, Nghỉ cần duyệt" cho Quản lý cửa hàng, nhận "Duyệt ca, Duyệt nghỉ" từ Quản lý cửa hàng, sau đó gửi "Lịch làm việc, Thông báo duyệt nghỉ" cho Nhân viên và cập nhật lịch làm việc vào kho D2.
+
+7. 4.1 được phân tích thành các tiến trình nào?
+
+4.1.1 Tiếp nhận hồ sơ
+4.1.2 Kiểm tra hồ sơ duyệt & phê duyệt
+4.1.3 Lưu hồ sơ & kết quả thông báo
+
+8. 4.2 được phân tích thành các tiến trình nào?
+
+4.2.1 Tiếp nhận đăng ký ca & nghỉ
+4.2.2 Xếp lịch & Duyệt ca
+4.2.3 Ghi nhận chấm công
+
+9. 4.3 được phân tích thành những tiến trình nào?
+
+4.3.1 Tổng hợp giờ công & doanh số
+4.3.2 Tính lương & hoa hồng
+4.3.3 Lập phiếu lương & Chi trả hoa hồng
+
+10. 4.4 được phân tích thành những tiến trình nào?
+
+4.4.1 Tổng hợp dữ liệu nhân
+4.4.2 Đánh giá hiệu suất
+4.4.3 Lập báo cáo nhân vật
+
+11. Quá trình nhận và trả dữ liệu của 4.1 là gì?
+
+4.1.1 Nhận "Thông tin cá nhân" của Nhân viên và "Thông tin đăng ký" của Cộng tác viên; gửi "Hồ sơ cần kiểm tra" cho 4.1.2.
+4.1.2 Nhận "Hồ sơ cần kiểm tra" từ 4.1.1; gửi "Hồ sơ cần duyệt" cho Quản lý cửa hàng; nhận "Phê duyệt hồ sơ" từ Quản lý cửa hàng; gửi "Kết quả phê duyệt hồ sơ" cho 4.1.3.
+4.1.3 nhận "Kết quả phê duyệt hồ sơ"; ghi "Hồ sơ đã duyệt" vào kho D1 và gửi "Kết quả đăng ký" cho Cộng tác viên.
+
+12. Quá trình nhận 4.2 của 4.2 và trả về dữ liệu gì?
+
+4.2.1 nhận "Đăng ký ca, Yêu cầu nghỉ" từ Nhân viên; gửi "Yêu cầu ca & nghỉ" cho 4.2.2.
+4.2.2 nhận "Yêu cầu ca & nghỉ" từ 4.2.1 và "Danh sách nhân viên" từ kho D1; gửi “Ca, Nghỉ cần duyệt” cho Quản lý cửa hàng; nhận "Duyệt ca, Duyệt nghỉ" từ Quản lý cửa hàng; gửi "Lịch làm việc, Thông báo duyệt nghỉ" cho Nhân viên và ghi "Lịch làm việc" vào kho D2.
+4.2.3 Nhận "Dữ liệu chấm công" từ Nhân viên và ghi "Dữ liệu chấm công" vào kho D2.
+
+13. Quá trình nhận và trả dữ liệu của 4.3 là gì?
+
+4.3.1 nhận "Giờ công" từ kho D2 và "Báo cáo doanh thu" của Cộng tác viên; gửi "Giờ công & số doanh nghiệp" cho 4.3.2.
+4.3.2 nhận "Giờ công & doanh số" từ 4.3.1, "Mức lương, Tỉ lệ hoa hồng" từ kho D1 và "Chính sách lương & hoa hồng" từ Quản lý cửa hàng; gửi “Kết quả tính lương, hoa hồng” cho 4.3.3.
+4.3.3 nhận kết quả tính toán; gửi "Phiếu lương" cho Nhân viên, "Hoa hồng" cho Cộng tác viên và ghi "Bảng lương, Hoa hồng" vào kho D3.
+
+14. Quá trình nhận 4.4 của 4.4 và trả về dữ liệu gì?
+
+4.4.1 nhận “Dữ liệu lương, Hoa hồng” từ kho D3 và “Dữ liệu chấm công” từ kho D2; gửi "Dữ liệu nhân tổng hợp" cho 4.4.2.
+4.4.2 Nhận tổng hợp dữ liệu; gửi "Kết quả đánh giá" cho Nhân viên và "Kết quả đánh giá hiệu suất" cho 4.4.3.
+4.4.3 nhận kết quả đánh giá hiệu suất; gửi "Báo cáo nhân sự" cho Quản lý cửa hàng.
+b. Data line (Data Flow)
+
+1. Nhân viên gửi dữ liệu gì vào hệ thống?
+
+Ở bối cảnh, Nhân viên gửi "Thông tin cá nhân, Đăng ký ca, Yêu cầu nghỉ, Dữ liệu chấm công". Ở Cấp độ 1, dữ liệu này được chuyển đến 4.1 và 4.2 theo chức năng tương ứng.
+
+2. Hệ thống trả dữ liệu gì cho Nhân viên?
+
+Ở hiện trường, hệ thống trả tiền "Lịch làm việc, Thông báo phê duyệt, phiếu lương, Kết quả đánh giá". Ở Cấp 1, các dữ liệu này được cung cấp lần thứ 4.2, 4.3 và 4.4.
+
+3. Cộng tác viên gửi và nhận dữ liệu gì?
+
+Cộng tác viên gửi "Thông tin đăng ký" đến 4.1 và "Báo cáo doanh thu" đến 4.3; nhận "Kết quả đăng ký" từ 4.1 và "Hoa hồng" từ 4.3.
+
+4. Quản lý cửa hàng gửi và nhận dữ liệu gì?
+
+Quản lý cửa hàng gửi "Phê duyệt hồ sơ" đến 4.1, "Duyệt ca, Duyệt nghỉ" đến 4.2 và "Chính sách lương & hoa hồng" đến 4.3; nhận "Hồ sơ cần duyệt" từ 4.1, "Ca, Nghỉ cần duyệt" từ 4.2 và "Báo cáo nhân sự" từ 4.4.
+
+5. Trung cảnh và cấp độ 1 của các luồng được tổng hợp như thế nào?
+
+Các luồng tương tự được thực thi ở Cấp 1 đã được tổng hợp thành luồng vào/ra tương thích ở cảnh ngữ. Ví dụ: các nhân viên dữ liệu gửi đến 4.1 và 4.2 được thành "Thông tin cá nhân, Đăng ký ca, Yêu cầu nghỉ, Dữ liệu chấm công".
+
+6. Giữa các tiến trình có luồng dữ liệu nào?
+
+Các nội bộ luồng:
+
+4.1.1 → 4.1.2: "Hồ sơ cần kiểm tra".
+4.1.2 → 4.1.3: "Kết quả phê duyệt hồ sơ".
+4.2.1 → 4.2.2: "Yêu cầu ca & nghỉ".
+4.3.1 → 4.3.2: " Giờ công & số doanh thu".
+4.3.2 → 4.3.3: “Kết quả tính lương, hoa hồng”.
+4.4.1 → 4.4.2: "Dữ liệu nhân tổng hợp".
+4.4.2 → 4.4.3: "Kết quả đánh giá hiệu suất".
+
+7. Luồng "Lịch làm việc, dữ liệu chấm công" ở Cấp 1 được phân tách như thế nào ở Cấp 2?
+
+Ở Cấp 2, tổng hợp luồng đã được tích hợp thành công:
+
+4.2.2 ghi "Lịch làm việc" vào kho D2.
+4.2.3 write "Dữ liệu chấm công" vào kho D2.
+c. Kho dữ liệu (Data Store)
+
+1. Kho dữ liệu nào xuất hiện trong sơ đồ?
+
+D1: Hồ sơ nhân viên & CTV.
+D2: Lịch làm việc & chấm công.
+D3: Bảng lương & hoa hồng.
+
+2. Các tiến trình chính đào tạo/cập nhật những kho nào?
+
+4.1 ghi kho D1.
+4.2 đọc kho D1 và ghi kho D2.
+4.3 đọc kho D1, kho D2 và ghi kho D3.
+4.4 đọc kho D2 và kho D3.
+
+3. Kho D1 nhận và trả dữ liệu gì?
+
+Kho D1 nhận "Hồ sơ đã duyệt" từ 4.1; trả "Danh sách nhân viên" cho 4.2 và "Mức lương, Tỉ lệ hoa hồng" cho 4.3.
+
+4. Kho D2 nhận và trả dữ liệu gì?
+
+Kho D2 nhận "Lịch làm việc" và "Dữ liệu chấm công" từ 4.2; trả "Time công" cho 4.3 và "Dữ liệu chấm công" cho 4.4.
+
+5. Kho D3 nhận và trả dữ liệu gì?
+
+Kho D3 nhận "Bảng lương, Hoa hồng" từ 4.3; trả "Dữ liệu lương, Hoa hồng" cho 4.4.
+
+6. Kho dữ liệu nào được đọc và ghi bởi tiến trình nào?
+
+Kho D1: write by 4.1.3; read by 4.2.2 và 4.3.2.
+Kho D2: write by 4.2.2 và 4.2.3; read by 4.3.1 và 4.4.1.
+Kho D3: write by 4.3.3; đọc bởi 4.4.1.
+d. Các thực thể bên ngoài (External Entity)
+
+1. Các thực thể bên ngoài hệ thống là ai?
+
+Nhân viên.
+Cộng tác viên.
+Quản lý cửa hàng.
+
+2. Vai trò và trao đổi dữ liệu của bạn thực sự là gì?
+
+Nhân viên: gửi thông tin cá nhân, đăng ký ca, yêu cầu nghỉ và dữ liệu chấm công; nhận lịch làm việc, thông báo phê duyệt, phiếu lương và kết quả đánh giá.
+Cộng tác viên: gửi thông tin đăng ký và báo cáo số doanh nghiệp; nhận kết quả đăng ký và hoa hồng.
+Quản lý cửa hàng: gửi phê duyệt hồ sơ, duyệt ca/nghỉ và chính sách lương & hoa hồng; get hồ sơ cần duyệt, ca/nghi chỉ cần duyệt và báo cáo nhân sự.
+
+3. Mỗi lần thực hiện có thể xuất hiện ở những sơ đồ nào?
+
+Cả ba thực tế đều xuất hiện ở các cấp độ cảnh báo, Cấp 1 và các sơ đồ Cấp 2 có liên quan đến chức năng của chúng.
+
+4. Thực thể nào có thể nhận dữ liệu từ nhiều tiến trình nhất?
+
+Nhân viên nhận dữ liệu từ ba tiến trình chính: 4.2 (Lịch làm việc, Thông báo duyệt nghỉ), 4.3 (Phiếu lương) và 4.4 (Kết quả đánh giá).
 
 #### Mô hình mức ngữ cảnh (Context Level)
 
-> [!NOTE]
-> **CHỜ BỔ SUNG**
->
-> Bổ sung sơ đồ DFD mức ngữ cảnh.
+<img width="2967" height="951" alt="1_Mo_hinh_ngu_canh" src="https://github.com/user-attachments/assets/d605fecc-f173-40b2-8038-d53d551f723f" />
+
 
 #### Mô hình mức đỉnh (Level 1)
 
-> [!NOTE]
-> **CHỜ BỔ SUNG**
->
-> Bổ sung sơ đồ DFD mức đỉnh.
+<img width="3498" height="3428" alt="2_Level_1" src="https://github.com/user-attachments/assets/73736f6b-31bc-4e68-a92f-4fa2c5c12537" />
+
 
 #### Mô hình mức dưới đỉnh (Level 2)
 
-> [!NOTE]
-> **CHỜ BỔ SUNG**
->
-> Bổ sung sơ đồ phân rã các tiến trình mức đỉnh.
+<img width="4717" height="721" alt="3_Level_2_4 1" src="https://github.com/user-attachments/assets/c21f269a-4cc7-49af-831f-fbe9872fac2f" />
+<img width="3824" height="1020" alt="4_Level_2_4 2" src="https://github.com/user-attachments/assets/7e0f42e3-4770-4047-8558-9b6cc79b87bc" />
+<img width="4397" height="1080" alt="5_Level_2_4 3" src="https://github.com/user-attachments/assets/acc7d819-9aec-4a5f-bf62-90c4627424f2" />
+<img width="4804" height="548" alt="6_Level_2_4 4" src="https://github.com/user-attachments/assets/9f973d1b-7e73-401f-a0b4-e3426bbb6901" />
 
----
 
 ### Chức năng: Quản lý nội dung Fanpage
 
