@@ -383,6 +383,7 @@ Trả lời: Hệ thống tự động tổng kết bảng xếp hạng chung cu
 
 a. Các ô xử lý (Process)
 
+
 1. Mức ngữ cảnh có bao nhiêu tiến trình, được phân rã thành bao nhiêu tiến trình ở Level 1?
 
 Mức ngữ cảnh có 1 tiến trình: 4 -- Hệ thống Quản lý Nhân viên và Cộng tác viên. Level 1 phân rã thành 4 tiến trình:
@@ -459,6 +460,7 @@ Tiến trình 4.2 -- Phân ca & Chấm công xử lý, cụ thể là tiến tr�
 4.4.1 nhận "Dữ liệu lương, Hoa hồng" từ kho D3 và "Dữ liệu chấm công" từ kho D2; gửi "Dữ liệu nhân sự tổng hợp" cho 4.4.2.
 4.4.2 nhận dữ liệu tổng hợp; gửi "Kết quả đánh giá" cho Nhân viên và "Kết quả đánh giá hiệu suất" cho 4.4.3.
 4.4.3 nhận kết quả đánh giá hiệu suất; gửi "Báo cáo nhân sự" cho Quản lí cửa hàng.
+
 b. Các dòng dữ liệu (Data Flow)
 
 1. Nhân viên gửi những dữ liệu gì vào hệ thống?
@@ -499,6 +501,7 @@ Các luồng nội bộ gồm:
 
 4.2.3 ghi "Lịch làm việc" vào kho D2.
 4.2.4 ghi "Dữ liệu chấm công" vào kho D2.
+
 c. Các kho dữ liệu (Data Store)
 
 1. Các kho dữ liệu nào xuất hiện trong sơ đồ?
@@ -531,6 +534,7 @@ Kho D3 nhận "Bảng lương, Hoa hồng" từ 4.3; trả "Dữ liệu lương,
 Kho D1: ghi bởi 4.1.2; đọc bởi 4.2.3 và 4.3.2.
 Kho D2: ghi bởi 4.2.3 và 4.2.4; đọc bởi 4.3.1 và 4.4.1.
 Kho D3: ghi bởi 4.3.3; đọc bởi 4.4.1.
+
 d. Cơ sở dữ liệu (Database)
 
 1. Cơ sở dữ liệu (database) là gì và dùng để làm gì trong hệ thống?
@@ -561,6 +565,7 @@ HOA_HONG: khóa chính MaHH; khóa ngoại MaCTV tham chiếu CONG_TAC_VIEN.
 5. Các bảng quan hệ với nhau như thế nào?
 
 Một nhân viên có nhiều dòng lịch làm việc, chấm công và bảng lương. Một cộng tác viên có nhiều dòng hoa hồng. Thuộc tính và kiểu dữ liệu chi tiết của từng bảng xem mục IV.
+
 
 e. Các thực thể ngoài (External Entity)
 
