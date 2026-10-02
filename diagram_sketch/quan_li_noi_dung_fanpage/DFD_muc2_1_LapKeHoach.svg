@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1100" height="650" viewBox="0 0 1100 650">
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto"><path d="M0,0 L10,4 L0,8 Z" fill="#1769aa"/></marker>
+    <style>
+      text{font-family:Arial,"DejaVu Sans",sans-serif;fill:#183047}.title{font-size:23px;font-weight:bold}.label{font-size:15px}.small{font-size:13px}.process{fill:#e5f5fb;stroke:#2384a8;stroke-width:2}.entity{fill:#e8edff;stroke:#596fb4;stroke-width:2}.store{fill:#fff2c9;stroke:#b88b22;stroke-width:2}.flow{fill:none;stroke:#1769aa;stroke-width:2;marker-end:url(#arrow)}.boundary{fill:#f0f8fc;stroke:#1769aa;stroke-width:1.5;stroke-dasharray:6 4}
+    </style>
+  </defs>
+  <rect width="1100" height="650" fill="#fff"/>
+  <text x="550" y="42" text-anchor="middle" class="title">DFD mức 2 - 1.1 Lập kế hoạch nội dung</text>
+  <rect x="35" y="268" width="175" height="78" rx="4" class="entity"/><text x="122" y="301" text-anchor="middle" class="label"><tspan x="122">Nhân viên</tspan><tspan x="122" dy="21">Marketing</tspan></text>
+  <rect x="270" y="125" width="205" height="90" rx="18" class="process"/><text x="372" y="162" text-anchor="middle" class="label"><tspan x="372">1.1.1 Xác định mục tiêu,</tspan><tspan x="372" dy="21">chủ đề và đối tượng</tspan></text>
+  <rect x="540" y="125" width="205" height="90" rx="18" class="process"/><text x="642" y="162" text-anchor="middle" class="label"><tspan x="642">1.1.2 Xây dựng lịch</tspan><tspan x="642" dy="21">và phân bổ nội dung</tspan></text>
+  <rect x="810" y="125" width="205" height="90" rx="18" class="process"/><text x="912" y="162" text-anchor="middle" class="label"><tspan x="912">1.1.3 Hoàn thiện và</tspan><tspan x="912" dy="21">lưu kế hoạch</tspan></text>
+  <rect x="780" y="425" width="250" height="78" class="store"/><rect x="780" y="425" width="52" height="78" fill="#f1d985" stroke="#b88b22" stroke-width="2"/><text x="806" y="470" text-anchor="middle" class="label">D16</text><text x="930" y="459" text-anchor="middle" class="label"><tspan x="930">Kế hoạch nội dung</tspan><tspan x="930" dy="21">Fanpage</tspan></text>
+  <path d="M122 268 V85 H372 V125" class="flow"/><text x="245" y="76" text-anchor="middle" class="small">Yêu cầu lên lịch, mục tiêu chiến dịch</text>
+  <path d="M475 170 H540" class="flow"/><text x="507" y="151" text-anchor="middle" class="small">Chủ đề và mục tiêu</text>
+  <path d="M745 170 H810" class="flow"/><text x="777" y="151" text-anchor="middle" class="small">Lịch nội dung, phân công</text>
+  <path d="M912 215 V425" class="flow"/><text x="923" y="330" class="small">Kế hoạch đã duyệt</text>
+  <path d="M780 463 H750 V260 H642 V215" class="flow"/><text x="655" y="248" class="small">Tra cứu kế hoạch</text>
+  <path d="M270 195 H235 V385 H122 V346" class="flow"/><text x="128" y="380" class="small">Lịch và phân công</text>
+</svg>

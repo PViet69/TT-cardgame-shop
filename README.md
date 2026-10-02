@@ -430,6 +430,15 @@ Trả lời: Hệ thống tự động tổng kết bảng xếp hạng chung cu
 >
 > Bổ sung câu hỏi và trả lời về tiến trình, luồng dữ liệu, kho dữ liệu và thực thể ngoài.
 
+Câu hỏi 1: Xác định các tác nhân ngoài tương tác trực tiếp với chức năng "Quản lý nội dung Fanpage"?
+Trả lời: Các tác nhân ngoài bao gồm: Nhân viên Marketing (lên kế hoạch, soạn thảo và gửi yêu cầu đăng bài), Quản lý cửa hàng (kiểm duyệt, phê duyệt hoặc yêu cầu chỉnh sửa nội dung), và Nền tảng Fanpage (môi trường mạng xã hội nhận bài viết hiển thị và trả về dữ liệu tương tác).   
+Câu hỏi 2: Kho lưu trữ dữ liệu chính nào được sử dụng trong quá trình quản lý nội dung Fanpage?
+Trả lời: Các kho dữ liệu chính gồm: Kho kế hoạch nội dung Fanpage (D16), Kho bài viết & tài nguyên truyền thông (D17), và Kho chỉ số tương tác & hiệu suất nội dung (D18).   
+Câu hỏi 3: Luồng dữ liệu chính đi từ Nhân viên Marketing vào hệ thống trong quy trình này là gì?
+Trả lời: Kế hoạch nội dung định kỳ, ý tưởng, văn bản, hình ảnh/banner thiết kế, yêu cầu lên lịch đăng bài và các yêu cầu gỡ bài hoặc cập nhật phát sinh.   
+Câu hỏi 4: Nhiệm vụ của tiến trình theo dõi và đo lường hiệu suất trong mô hình là gì?
+Trả lời: Hệ thống tự động thu thập các chỉ số tương tác thực tế (lượt tiếp cận, thích, bình luận, chia sẻ) từ nền tảng Fanpage, ghi nhận vào kho dữ liệu hiệu suất để tổng hợp báo cáo gửi về cho nhân viên marketing và quản lý cửa hàng.
+
 #### Mô hình mức ngữ cảnh (Context Level)
 ![DFD Mức ngữ cảnh - Quản lí nội dung Fanpage](./diagram_sketch/quan_li_noi_dung_fanpage/DFD_muc0_Quan_li_Fanpage.png)
 > [!NOTE]
@@ -450,7 +459,13 @@ Trả lời: Hệ thống tự động tổng kết bảng xếp hạng chung cu
 > **CHỜ BỔ SUNG**
 >
 > Bổ sung sơ đồ phân rã các tiến trình mức đỉnh.
+![DFD Mức 2 - 1.1 Lập kế hoạch nội dung](./diagram_sketch/quan_li_noi_dung_fanpage/DFD_muc2_1_LapKeHoach.svg)
 
+![DFD Mức 2 - 1.2 Soạn thảo và kiểm duyệt nội dung](./diagram_sketch/quan_li_noi_dung_fanpage/DFD_muc2_2_SoanThaoKiemDuyet.svg)
+
+![DFD Mức 2 - 1.3 Đăng tải và phân phối nội dung](./diagram_sketch/quan_li_noi_dung_fanpage/DFD_muc2_3_DangTaiPhanPhoi.svg)
+
+![DFD Mức 2 - 1.4 Theo dõi tương tác và đo lường hiệu suất](./diagram_sketch/quan_li_noi_dung_fanpage/DFD_muc2_4_TheoDoiTuongTac.svg)
 ---
 
 ### Chức năng: Quản lý order nước ngoài
