@@ -350,56 +350,73 @@ Trả lời: Hệ thống tự động tổng kết bảng xếp hạng chung cu
 > Bổ sung câu hỏi và trả lời về tiến trình, luồng dữ liệu, kho dữ liệu và thực thể ngoài.
 
 a. Danh sách câu hỏi và trả lời liên quan đến các ô xử lý (Process)
-Câu hỏi 1 : Các tiến trình 1.0, 3.0 và 5.0 đảm nhận những nhiệm vụ cốt lõi gì?
+    Câu hỏi 1 : Các tiến trình 1.0, 3.0 và 5.0 đảm nhận những nhiệm vụ cốt lõi gì?
+  Trả lời : 
 + 1.0: Tiếp nhận hàng hóa/chứng từ nhập từ Nhà cung cấp hoặc thu hồi hàng nhập hoàn từ CTV.   
 + 3.0: Xử lý xuất hàng đóng gói (Pick/Pack) cho các giao dịch bán lẻ và nhu cầu xuất thưởng giải đấu.   
-+ 5.0: Tổng hợp số liệu từ các kho dữ liệu để lập báo cáo tồn kho, ký gửi và thất thoát trình Quản lý cửa hàng.   
-Câu hỏi 2 : Nếu lượng tồn kho chính không đủ khi CTV gửi yêu cầu lấy hàng, tiến trình nào xử lý?
-- Tiến trình 2.1 (Kiểm tra tồn kho & Xác thực CTV) sẽ kiểm tra tồn khả dụng tại D4. Nếu thiếu hàng, tiến trình sẽ phát thông báo từ chối hoặc yêu cầu điều chỉnh số lượng trước khi chuyển sang bước phê duyệt 2.2.   
-Câu hỏi 3 : Nếu phát hiện chênh lệch giữa thực tế và sổ sách khi kiểm kê, tiến trình nào thực hiện cân bằng kho?
-- Tiến trình 4.1 (kiểm kê quầy) và 4.2 (đối soát CTV) ghi nhận chênh lệch. Sau đó, 4.3 trình báo cáo lên Quản lý cửa hàng; khi nhận phản hồi phê duyệt, 4.3 sẽ trực tiếp ghi điều chỉnh cân bằng lại kho D4 và D11.   
-Câu hỏi 4 : Khi CTV không bán hết hàng hoặc trả lại hàng lỗi, tiến trình nào thu hồi về kho chính?
++ 5.0: Tổng hợp số liệu từ các kho dữ liệu để lập báo cáo tồn kho, ký gửi và thất thoát trình Quản lý cửa hàng.
+    Câu hỏi 2 : Nếu lượng tồn kho chính không đủ khi CTV gửi yêu cầu lấy hàng, tiến trình nào xử lý?
+  Trả lời : 
+- Tiến trình 2.1 (Kiểm tra tồn kho & Xác thực CTV) sẽ kiểm tra tồn khả dụng tại D4. Nếu thiếu hàng, tiến trình sẽ phát thông báo từ chối hoặc yêu cầu điều chỉnh số lượng trước khi chuyển sang bước phê duyệt 2.2.
+    Câu hỏi 3 : Nếu phát hiện chênh lệch giữa thực tế và sổ sách khi kiểm kê, tiến trình nào thực hiện cân bằng kho?
+  Trả lời : 
+- Tiến trình 4.1 (kiểm kê quầy) và 4.2 (đối soát CTV) ghi nhận chênh lệch. Sau đó, 4.3 trình báo cáo lên Quản lý cửa hàng; khi nhận phản hồi phê duyệt, 4.3 sẽ trực tiếp ghi điều chỉnh cân bằng lại kho D4 và D11.
+    Câu hỏi 4 : Khi CTV không bán hết hàng hoặc trả lại hàng lỗi, tiến trình nào thu hồi về kho chính?
+  Trả lời : 
 - Tiến trình 1.0 (Xử lý Ghi nhận Nhập kho & Hoàn kho) tiếp nhận yêu cầu nhập hoàn, kiểm tra hàng hóa, lập phiếu nhập hoàn, ghi tăng lại tồn kho chính D4 và giảm tồn ký gửi CTV tại D11. 
 
 b. Danh sách câu hỏi và trả lời liên quan đến các dòng dữ liệu (Data Flow)
-Câu hỏi 1 : Nhân viên kho gửi và nhận những dữ liệu gì với hệ thống kho?
+    Câu hỏi 1 : Nhân viên kho gửi và nhận những dữ liệu gì với hệ thống kho?
+  Trả lời : 
 - Gửi: Lập phiếu nhập kho, yêu cầu Pick/Pack xuất hàng, dữ liệu quét mã kiểm kê thực tế.   
 - Nhận: Xác nhận nhập kho, thông tin xuất hàng confirm, kết quả đối chiếu kiểm kê.
-Câu hỏi 2 : Cộng tác viên (CTV) trao đổi những dữ liệu gì với phân hệ Quản lý Kho?
+    Câu hỏi 2 : Cộng tác viên (CTV) trao đổi những dữ liệu gì với phân hệ Quản lý Kho?
+  Trả lời : 
 - Gửi: Yêu cầu lấy hàng (gắn mã CTV), yêu cầu trả hàng/nhập hoàn, số liệu báo cáo tồn kho từ xa.   
 - Nhận: Phiếu xuất kho chuyển hàng, xác nhận phiếu nhập hoàn, kết quả đối soát ký gửi.
-Câu hỏi 3 : Dữ liệu trao đổi giữa Hệ thống Bán lẻ / Giải đấu và Phân hệ Quản lý Kho gồm những gì?
+    Câu hỏi 3 : Dữ liệu trao đổi giữa Hệ thống Bán lẻ / Giải đấu và Phân hệ Quản lý Kho gồm những gì?
+  Trả lời :
 - Gửi vào Kho: Thông tin giao dịch bán lẻ, yêu cầu xuất thưởng giải đấu.   
 - Nhận từ Kho: Xác nhận Fulfill (hoàn tất xuất kho/trừ tồn thời gian thực).
-Câu hỏi 4 : Nhà cung cấp (NCC) và Hệ thống Kho trao đổi những thông tin nào?
+    Câu hỏi 4 : Nhà cung cấp (NCC) và Hệ thống Kho trao đổi những thông tin nào?
+  Trả lời : 
 - NCC gửi: Thông tin hàng hóa incoming, Packing list / Hóa đơn nhập hàng.   
 - Kho gửi NCC: Biên bản sự cố hư hỏng & yêu cầu đổi trả (khi phát hiện hàng lỗi lúc nhập kiểm).
-Câu hỏi 5 : Luồng dữ liệu báo cáo và phê duyệt giữa Quản lý cửa hàng và Kho diễn ra như thế nào?
+    Câu hỏi 5 : Luồng dữ liệu báo cáo và phê duyệt giữa Quản lý cửa hàng và Kho diễn ra như thế nào?
+  Trả lời : 
 - Kho gửi: Báo cáo tồn kho tổng hợp, báo cáo thất thoát/hư hỏng.
 - Quản lý gửi: Phê duyệt hiệu chỉnh tồn kho, chỉ đạo xử lý thất thoát.
-Câu hỏi 6 : Nếu số liệu quét mã kiểm kê thực tế bị lệch so với sổ sách, luồng dữ liệu đi ra sao?
+    Câu hỏi 6 : Nếu số liệu quét mã kiểm kê thực tế bị lệch so với sổ sách, luồng dữ liệu đi ra sao?
+  Trả lời : 
 - Từ 4.1/4.2 gửi luồng Chênh lệch tồn kho sang 4.3.
 - Từ 4.3 gửi luồng Báo cáo thất thoát tổng hợp tới Quản lý cửa hàng.
 - Quản lý trả lại luồng Phê duyệt hiệu chỉnh & Xử lý, từ đó 4.3 gửi luồng Điều chỉnh tồn kho cập nhật vào D4/D11. 
 
 c. Danh sách câu hỏi và trả lời liên quan đến các kho dữ liệu (Data Store)
-Câu hỏi 1 : Kho D11 (Đối soát CTV) lưu trữ thông tin gì và tương tác với tiến trình nào? Lưu số lượng hàng ký gửi, lịch sử xuất/hoàn và dư nợ hàng hóa của từng CTV.   
+    Câu hỏi 1 : Kho D11 (Đối soát CTV) lưu trữ thông tin gì và tương tác với tiến trình nào? Lưu số lượng hàng ký gửi, lịch sử xuất/hoàn và dư nợ hàng hóa của từng CTV.
+  Trả lời : 
 - Tiến trình 2.3 ghi tăng kho ký gửi CTV khi xuất hàng.   
 - Tiến trình 4.2 đọc đối chiếu và 4.3 ghi điều chỉnh lại số dư ký gửi thực tế.
-Câu hỏi 2 : Dữ liệu trong D13 (Phiếu nhập kho) và D15 (Biên bản thất thoát) phục vụ mục đích gì?
+    Câu hỏi 2 : Dữ liệu trong D13 (Phiếu nhập kho) và D15 (Biên bản thất thoát) phục vụ mục đích gì?
+  Trả lời : 
 - D13: Lưu trữ lịch sử chi tiết từng lần nhập kho (từ NCC hoặc CTV nhập hoàn) phục vụ truy xuất nguồn gốc.
 - D15: Đăng ký số biên bản, lưu vết thông tin thất thoát, hư hỏng, lệch kho và các yêu cầu khiếu nại/đổi trả NCC.
-Câu hỏi 3 : Thời điểm nào kho D4 và D11 đồng thời được cập nhật trong quy trình Ký gửi CTV?
+    Câu hỏi 3 : Thời điểm nào kho D4 và D11 đồng thời được cập nhật trong quy trình Ký gửi CTV?
+  Trả lời : 
 - Ngay khi tiến trình 2.2 phê duyệt đơn và 2.3 ghi nhận giao dịch, hệ thống tự động chạy đồng thời: giảm số lượng tồn kho chính tại D4 và tăng tương ứng số lượng tồn ký gửi tại D11 của CTV đó.
-Câu hỏi 4 : Khi phát hiện hàng hư hỏng do nhà cung cấp lúc nhập hàng, CSDL ghi nhận ra sao?
+    Câu hỏi 4 : Khi phát hiện hàng hư hỏng do nhà cung cấp lúc nhập hàng, CSDL ghi nhận ra sao?
+  Trả lời : 
 - Tiến trình 1.0 ghi nhận phiếu nhập cho phần đạt chuẩn vào D13 và tăng tồn D4, đồng thời đẩy dữ liệu lô bị lỗi sang D15 (Biên bản sự cố và đổi trả NCC) để lưu vết xử lý.
 
 d. Danh sách câu hỏi và trả lời liên quan đến các thực thể ngoài (External Entity)
-Câu hỏi 1 : Thực thể Quản lý cửa hàng đóng vai trò quyết định nào trong luồng thông tin kho?
+    Câu hỏi 1 : Thực thể Quản lý cửa hàng đóng vai trò quyết định nào trong luồng thông tin kho?
+  Trả lời : 
 -Đóng vai trò phê duyệt cuối cùng (Approval Boundary). Hệ thống cung cấp báo cáo thất thoát/chênh lệch cho Quản lý, và Quản lý phát ra các chỉ đạo xử lý, cho phép hệ thống cập nhật điều chỉnh CSDL.
-Câu hỏi 2 : Mối quan hệ giữa thực thể Hệ thống Bán lẻ / Giải đấu với phân hệ Kho là gì?
+    Câu hỏi 2 : Mối quan hệ giữa thực thể Hệ thống Bán lẻ / Giải đấu với phân hệ Kho là gì?
+  Trẳ lời : 
 -Đóng vai trò là các nguồn phát sinh nhu cầu xuất kho tự động. Khi có giao dịch bán lẻ hoặc phát giải thưởng, thực thể này gửi thông tin giao dịch đến Kho để tiến hành trừ tồn kho theo thời gian thực.
-Câu hỏi 3 : Nếu CTV gửi yêu cầu lấy hàng nhưng thông tin mã CTV không hợp lệ thì xử lý ra sao?
+    Câu hỏi 3 : Nếu CTV gửi yêu cầu lấy hàng nhưng thông tin mã CTV không hợp lệ thì xử lý ra sao?
+  Trả lời : 
 - Tại tiến trình 2.1 (Kiểm tra tồn kho & Xác thực CTV), hệ thống đối chiếu mã CTV. Nếu không hợp lệ, luồng dữ liệu sẽ phát tín hiệu từ chối phản hồi lại cho CTV mà không tạo đơn Pick/Pack hay làm thay đổi CSDL.
 
 #### Mô hình mức ngữ cảnh (Context Level)
