@@ -112,7 +112,68 @@ Dự án hướng đến việc quản lý tập trung thông tin hàng hóa, đ
 > Bổ sung kho dữ liệu cho Quản lý nội dung Fanpage và Quản lý order nước ngoài sau khi hoàn thiện đặc tả; dùng lại kho dùng chung phù hợp và cấp mã mới không trùng các mã hiện có.
 
 
-> Cứ ghi thẳng kho dữ liệu vào đây, nếu hợp lý ,sẽ sửa lại sau mỗi lần merge PR 
+> Cứ ghi thẳng kho dữ liệu vào đây, nếu hợp lý ,sẽ sửa lại sau mỗi lần merge PR
+> **1. D1: Danh mục Hàng hóa & Vị trí (Products & Locations Master Data)**
+Mô tả: Đây là kho dữ liệu gốc (Master Data) lưu trữ các thông tin tĩnh và quy hoạch không gian của kho.
+
+Dữ liệu lưu trữ:
+
+Thông tin sản phẩm: Mã hàng (SKU), tên hàng, nhóm hàng, quy cách đóng gói, đơn vị tính, định mức tồn kho (Min/Max).
+
+Thông tin vị trí: Sơ đồ kho (Khu vực/Zone, Dãy/Aisle, Kệ/Rack, Tầng, Hộc/Bin) và vị trí lưu trữ mặc định của từng mã hàng.
+
+Tương tác Tiến trình:
+
+Tiến trình 1.0 (Nhập kho & Vị trí): Đọc để quyết định vị trí cất hàng (Put-away).
+
+Tiến trình 2.0 (Xuất kho Nội bộ): Đọc để in Lệnh lấy hàng (Pick-list) kèm chính xác vị trí cần lấy.
+
+**2. D2: Sổ Tồn kho Chính / Tồn kho Thực tế (Main Stock / On-hand Inventory)**
+Mô tả: Kho dữ liệu quan trọng nhất, phản ánh số lượng hàng hóa khả dụng thực tế tại kho theo thời gian thực (Real-time).
+
+Dữ liệu lưu trữ: Mã hàng hóa, Số lượng tồn sổ sách, Số lượng khả dụng (Available), Số lượng đang bị block (hàng lỗi đang chờ xử lý).
+
+Tương tác Tiến trình:
+
+Tiến trình 1.0: Ghi cộng (+) tồn kho sau khi hoàn tất cất hàng.
+
+Tiến trình 2.0: Ghi trừ (-) tồn kho sau khi xuất hàng hoàn tất theo Lệnh xuất nội bộ.
+
+Tiến trình 3.0: Đọc số liệu tồn sổ sách để đối chiếu với mã quét thực tế từ nhân viên.
+
+Tiến trình 4.0: Ghi cập nhật/hiệu chỉnh (=) lại tồn kho thực tế nếu có chênh lệch sau khi Quản lý phê duyệt.
+
+  **Các kho dữ liệu D3 - Ký gửi CTV và D11 - Đối soát CTV đã được xóa bỏ hoàn toàn để đảm bảo hệ thống quản lý kho chỉ tập trung vào nghiệp vụ "Kho nội bộ", đẩy phần thương mại lên Hệ thống Bán hàng xử lý**
+
+**3. D4: Sổ Nhật ký Phiếu kho (Inventory Transaction Log / Ledger)**
+Mô tả: Đóng vai trò như một "sổ cái" (Ledger) lưu vết toàn bộ lịch sử biến động của hàng hóa để phục vụ truy xuất, kiểm toán (Audit trail). Không bao giờ được xóa dữ liệu ở kho này.
+
+Dữ liệu lưu trữ: Mã giao dịch, Loại giao dịch (Nhập/Xuất/Điều chỉnh/Chuyển vị trí), Mã hàng, Số lượng thay đổi, Thời gian thực hiện, Nhân viên thực hiện, Tham chiếu đến chứng từ gốc (Mã Lệnh xuất nội bộ, Mã Packing list NCC).
+
+  Tương tác Tiến trình:
+
+Tiến trình 1.0 & 2.0: Tự động ghi (Insert) một dòng lịch sử giao dịch mỗi khi một lệnh nhập/xuất hoàn tất.
+
+Tiến trình 4.0: Ghi nhận lịch sử giao dịch "Điều chỉnh tồn kho" (Adjustment) khi xử lý chênh lệch.
+
+**4. D5: Sổ Kiểm kê & Thất thoát (Audit & Loss Records)**
+Mô tả: Kho dữ liệu chuyên biệt dùng để quản lý các rủi ro, sai lệch, tình trạng hàng hóa bất thường và kết quả của các kỳ kiểm kê định kỳ/đột xuất.
+
+  Dữ liệu lưu trữ:
+
+Dữ liệu kiểm kê: Mã kỳ kiểm kê, danh sách hàng đếm, số lượng đếm thực tế, số lượng lệch (thừa/thiếu).
+
+Dữ liệu tình trạng: Danh sách hàng lỗi, hư hỏng, hết hạn, cần bảo dưỡng.
+
+Quyết định xử lý: Phương án xử lý (hủy, đền bù, nhập lại), Trạng thái phê duyệt của Quản lý.
+
+  Tương tác Tiến trình:
+
+Tiến trình 3.0: Ghi nhận các chênh lệch ban đầu và cập nhật tình trạng hàng hóa lỗi/hư hỏng vào sổ.
+
+Tiến trình 4.0: Cập nhật phương án xử lý thất thoát sau khi có chỉ đạo từ Quản lý.
+
+Tiến trình 5.0: Đọc dữ liệu tổng hợp để xuất Báo cáo Thất thoát định kỳ cho Quản lý cửa hàng.
 ---
 
 ## 3. Phân tích những hạn chế đang tồn tại trong hệ thống và đề xuất giải pháp cải tiến
