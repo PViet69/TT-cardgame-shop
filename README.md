@@ -15,7 +15,6 @@ Dự án hướng đến việc quản lý tập trung thông tin hàng hóa, đ
 4. Chức năng Quản lý Nhân Viên và Cộng Tác Viên
 5. Chức năng Quản lý Giải Đấu và Tài Trợ Sự Kiện
 6. Chức năng quản lý nội dung Fanpage
-7. Chức năng quản lý order nước ngoài
 
 
 
@@ -56,17 +55,11 @@ Dự án hướng đến việc quản lý tập trung thông tin hàng hóa, đ
 
 #### Chức năng: Quản lý nội dung Fanpage
 
-> [!NOTE]
-> **CHƯA HOÀN THIỆN**
->
-> Chưa triển khai đặc tả — chờ bổ sung.
-
-
-- **Mục đích:** **[TODO]** Bổ sung mục đích quản lý nội dung Fanpage.
+- **Mục đích:**
    Hoạch định chiến lược, lên lịch, biên soạn, kiểm duyệt và đăng tải các nội dung truyền thông, thông tin sản phẩm, sự kiện giải đấu, chương trình khuyến mãi lên trang mạng xã hội (Fanpage) nhằm thu hút khách hàng, tăng nhận diện thương hiệu và thúc đẩy doanh số bán hàng đa kênh.
-- **Đối tượng thực hiện:** **[TODO]** Xác định người soạn, duyệt và đăng nội dung.
+- **Đối tượng thực hiện:**
    Nhân viên Marketing, Quản lý cửa hàng, Nền tảng Fanpage.
-- **Quy trình hoạt động & xử lý:** **[TODO]** Đặc tả quy trình soạn, duyệt, đăng, cập nhật và gỡ nội dung.
+- **Quy trình hoạt động & xử lý:**
    Quy trình quản lý nội dung Fanpage bắt đầu từ việc Nhân viên Marketing tiến hành lập kế hoạch nội dung định kỳ (tuần/tháng) dựa trên lịch sự kiện giải đấu, các đợt nhập hàng mới hoặc chương trình khuyến mãi. Nhân viên tiến hành soạn thảo nội dung (bài viết, hình ảnh, video ngắn, thiết kế banner) và tạo yêu cầu đăng bài trên hệ thống.
    Sau khi hoàn tất, yêu cầu sẽ được chuyển đến Quản lý cửa hàng để kiểm tra chất lượng, tính chính xác về thông tin sản phẩm/giá bán và thuần phong mỹ tục:
       - Nếu bài viết đạt yêu cầu, Quản lý tiến hành phê duyệt và hệ thống sẽ tự động đăng tải theo lịch hẹn (hoặc đăng ngay lập tức).
@@ -74,22 +67,6 @@ Dự án hướng đến việc quản lý tập trung thông tin hàng hóa, đ
    Sau khi bài viết được phát hành, hệ thống ghi nhận các chỉ số tương tác ban đầu (lượt thích, bình luận, chia sẻ) để phục vụ công tác đánh giá hiệu quả chiến dịch truyền thông. Trường hợp phát sinh thông tin sai lệch hoặc cần gỡ bỏ, quản lý hoặc nhân viên có quyền thực hiện thao tác cập nhật hoặc ẩn/gỡ bài viết trên hệ thống.
 ---
 
-#### Chức năng: Quản lý order nước ngoài
-
-> [!NOTE]
-> **CHƯA HOÀN THIỆN**
->
-> Chưa triển khai đặc tả — chờ bổ sung.
-
-
-- **Mục đích:** Quản lý đơn khách hàng nhờ cửa hàng mua hộ từ các sàn thương mại điện tử nước ngoài như Mercari, Taobao.
-
-- **Đối tượng thực hiện:** **[TODO]** Xác định người phụ trách tiếp nhận yêu cầu, báo giá, đặt mua và giao hàng.
-
-- **Quy trình hoạt động & xử lý:** **[TODO]** Đặc tả tiếp nhận đường dẫn sản phẩm, báo giá theo rate của đồng tiền tương ứng và phí vận chuyển, xác nhận/đặt cọc, đặt mua, theo dõi vận chuyển, quyết toán và bàn giao; bổ sung xử lý sự cố.
-
-
----
 ## 2. Mô tả các kho dữ liệu (Data Store)
 
 | Mã | Tên kho dữ liệu | Mô tả |
@@ -109,12 +86,6 @@ Dự án hướng đến việc quản lý tập trung thông tin hàng hóa, đ
 | D13 | Phiếu nhập kho | Lưu các lần nhập hàng vào kho. |
 | D14 | Công nợ nhà cung cấp | Lưu khoản phải trả và nợ còn lại của nhà cung cấp. |
 | D15 | Biên bản sự cố và đổi trả nhà cung cấp | Lưu sự cố nhập hàng và kết quả đổi trả. |
-
-> [!NOTE]
-> **KHO DỮ LIỆU CHỜ BỔ SUNG**
->
-> Bổ sung kho dữ liệu cho Quản lý nội dung Fanpage và Quản lý order nước ngoài sau khi hoàn thiện đặc tả; dùng lại kho dùng chung phù hợp và cấp mã mới không trùng các mã hiện có.
-
 | D16 | Kế hoạch nội dung Fanpage | Lưu trữ lịch trình, kế hoạch nội dung tổng thể, mục tiêu chiến dịch và phân công nhân sự thực hiện. |
 | D17 | Kho lưu trữ bài viết & tài nguyên truyền thông | Lưu trữ nội dung chi tiết các bài viết, trạng thái bài viết. |
 | D18 | Chỉ số tương tác & hiệu suất nội dung | Lưu trữ dữ liệu về lượt tiếp cận, tương tác (like, share, comment) và hiệu quả chuyển đổi từ các bài đăng trên Fanpage. |
@@ -418,88 +389,77 @@ Trả lời: Hệ thống tự động tổng kết bảng xếp hạng chung cu
 
 ### Chức năng: Quản lý nội dung Fanpage
 
-> [!NOTE]
-> **CHƯA HOÀN THIỆN**
->
-> Chưa bổ sung mô hình DFD.
-
 #### Bảng danh sách câu hỏi và trả lời
 
-> [!NOTE]
-> **CHỜ BỔ SUNG**
->
-> Bổ sung câu hỏi và trả lời về tiến trình, luồng dữ liệu, kho dữ liệu và thực thể ngoài.
+##### **a. Danh sách câu hỏi và trả lời liên quan đến các ô xử lý (Process)**
 
-Câu hỏi 1: Xác định các tác nhân ngoài tương tác trực tiếp với chức năng "Quản lý nội dung Fanpage"?
-Trả lời: Các tác nhân ngoài bao gồm: Nhân viên Marketing (lên kế hoạch, soạn thảo và gửi yêu cầu đăng bài), Quản lý cửa hàng (kiểm duyệt, phê duyệt hoặc yêu cầu chỉnh sửa nội dung), và Nền tảng Fanpage (môi trường mạng xã hội nhận bài viết hiển thị và trả về dữ liệu tương tác).   
-Câu hỏi 2: Kho lưu trữ dữ liệu chính nào được sử dụng trong quá trình quản lý nội dung Fanpage?
-Trả lời: Các kho dữ liệu chính gồm: Kho kế hoạch nội dung Fanpage (D16), Kho bài viết & tài nguyên truyền thông (D17), và Kho chỉ số tương tác & hiệu suất nội dung (D18).   
-Câu hỏi 3: Luồng dữ liệu chính đi từ Nhân viên Marketing vào hệ thống trong quy trình này là gì?
-Trả lời: Kế hoạch nội dung định kỳ, ý tưởng, văn bản, hình ảnh/banner thiết kế, yêu cầu lên lịch đăng bài và các yêu cầu gỡ bài hoặc cập nhật phát sinh.   
-Câu hỏi 4: Nhiệm vụ của tiến trình theo dõi và đo lường hiệu suất trong mô hình là gì?
-Trả lời: Hệ thống tự động thu thập các chỉ số tương tác thực tế (lượt tiếp cận, thích, bình luận, chia sẻ) từ nền tảng Fanpage, ghi nhận vào kho dữ liệu hiệu suất để tổng hợp báo cáo gửi về cho nhân viên marketing và quản lý cửa hàng.
+1. **Nhiệm vụ của tiến trình theo dõi và đo lường hiệu suất trong mô hình là gì?**
+   Hệ thống tự động thu thập các chỉ số tương tác thực tế (lượt tiếp cận, thích, bình luận, chia sẻ) từ nền tảng Fanpage, ghi nhận vào kho dữ liệu hiệu suất để tổng hợp báo cáo gửi về cho nhân viên marketing và quản lý cửa hàng.
+2. **Mức 1 được phân rã thành những tiến trình nào?**
+   Có 4 tiến trình: 1.1 Lập kế hoạch nội dung; 1.2 Soạn thảo và kiểm duyệt nội dung; 1.3 Đăng tải và phân phối nội dung; 1.4 Theo dõi tương tác và đo lường hiệu suất.
+3. **Tiến trình 1.1 được phân rã thành những tiến trình nào?**
+   1.1.1 Xác định mục tiêu, chủ đề và đối tượng; 1.1.2 Xây dựng lịch và phân bổ nội dung; 1.1.3 Hoàn thiện và lưu kế hoạch.
+4. **Tiến trình 1.2 được phân rã thành những tiến trình nào?**
+   1.2.1 Tiếp nhận kế hoạch, ý tưởng và tài nguyên; 1.2.2 Soạn nội dung, thiết kế ấn phẩm; 1.2.3 Kiểm tra nội dung và gửi duyệt; 1.2.4 Tiếp nhận kết quả, cập nhật trạng thái.
+5. **Tiến trình 1.3 được phân rã thành những tiến trình nào?**
+   1.3.1 Kiểm tra bài đã duyệt và lịch đăng; 1.3.2 Đăng bài lên nền tảng Fanpage; 1.3.3 Ghi nhận kết quả và cập nhật trạng thái.
+6. **Tiến trình 1.4 được phân rã thành những tiến trình nào?**
+   1.4.1 Thu thập số liệu bài đăng; 1.4.2 Tổng hợp và đánh giá hiệu suất; 1.4.3 Lưu chỉ số và lập báo cáo.
+7. **Nếu quản lý yêu cầu chỉnh sửa bài viết thì tiến trình nào tiếp nhận kết quả?**
+   1.2.4 tiếp nhận trạng thái và nhận xét của quản lý, cập nhật trạng thái bài viết và trả kết quả duyệt, yêu cầu chỉnh sửa cho Nhân viên Marketing.
 
-#### Mô hình mức ngữ cảnh (Context Level)
-![DFD Mức ngữ cảnh - Quản lí nội dung Fanpage](./diagram_sketch/quan_li_noi_dung_fanpage/DFD_muc0_Quan_li_Fanpage.png)
-> [!NOTE]
-> **CHỜ BỔ SUNG**
->
-> Bổ sung sơ đồ DFD mức ngữ cảnh.
+##### **b. Danh sách câu hỏi và trả lời liên quan đến các dòng dữ liệu (Data Flow)**
 
-#### Mô hình mức đỉnh (Level 1)
-![DFD Mức 1 - Quản lí nội dung Fanpage](./diagram_sketch/quan_li_noi_dung_fanpage/DFD_muc1_Quan_li_Fanpage.png)
-> [!NOTE]
-> **CHỜ BỔ SUNG**
->
-> Bổ sung sơ đồ DFD mức đỉnh.
+1. **Luồng dữ liệu chính đi từ Nhân viên Marketing vào hệ thống trong quy trình này là gì?**
+   Kế hoạch nội dung định kỳ, ý tưởng, văn bản, hình ảnh/banner thiết kế, yêu cầu lên lịch đăng bài và các yêu cầu gỡ bài hoặc cập nhật phát sinh.
+2. **Quản lý cửa hàng gửi và nhận những dữ liệu gì?**
+   Quản lý nhận bài viết cần duyệt và báo cáo hiệu quả; gửi kết quả phê duyệt, trạng thái bài viết, nhận xét và yêu cầu chỉnh sửa.
+3. **Nền tảng Fanpage gửi và nhận những dữ liệu gì?**
+   Nền tảng nhận bài viết chính thức; gửi mã bài đăng, trạng thái đăng và số liệu tương tác gồm lượt tiếp cận, thích, bình luận, chia sẻ.
+4. **Luồng 1.2.2 → 1.2.3 mang dữ liệu gì?**
+   Bản nháp nội dung và ấn phẩm được chuyển sang bước kiểm tra nội dung và gửi duyệt.
+5. **Luồng 1.3.1 → 1.3.2 mang dữ liệu gì?**
+   Bài đã duyệt sau bước kiểm tra bài viết và lịch đăng, để tiến hành đăng lên nền tảng Fanpage.
+6. **Luồng 1.4.2 → 1.4.3 mang dữ liệu gì?**
+   Chỉ số tương tác đã tổng hợp và kết quả so sánh mục tiêu, phục vụ lưu chỉ số và lập báo cáo.
 
-#### Mô hình mức dưới đỉnh (Level 2)
+##### **c. Danh sách câu hỏi và trả lời liên quan đến các kho dữ liệu (Data Store)**
 
-> [!NOTE]
-> **CHỜ BỔ SUNG**
->
-> Bổ sung sơ đồ phân rã các tiến trình mức đỉnh.
-![DFD Mức 2 - 1.1 Lập kế hoạch nội dung](./diagram_sketch/quan_li_noi_dung_fanpage/DFD_muc2_1_LapKeHoach.svg)
+1. **Kho lưu trữ dữ liệu chính nào được sử dụng trong quá trình quản lý nội dung Fanpage?**
+   Các kho dữ liệu chính gồm: Kho kế hoạch nội dung Fanpage (D16), Kho bài viết & tài nguyên truyền thông (D17), và Kho chỉ số tương tác & hiệu suất nội dung (D18).
+2. **D16 cung cấp dữ liệu cho tiến trình nào?**
+   1.1.3 ghi kế hoạch vào D16; 1.2.1 đọc kế hoạch nội dung từ D16 để tiếp nhận và chuẩn bị soạn thảo.
+3. **D17 được đọc và cập nhật ở những bước nào?**
+   1.2.4 ghi bài viết và trạng thái vào D17; 1.3.1 đọc bài viết đã duyệt và yêu cầu gỡ bài từ D17; 1.3.3 cập nhật trạng thái đăng vào D17.
+4. **D18 được đọc và cập nhật ở những bước nào?**
+   1.4.3 ghi dữ liệu thống kê tổng hợp vào D18; 1.4.2 đọc dữ liệu tương tác đã lưu để tổng hợp và đánh giá hiệu suất.
+5. **D17 và D18 khác nhau thế nào?**
+   D17 lưu bài viết, tài nguyên truyền thông và trạng thái bài viết; D18 lưu số liệu tương tác và hiệu suất để phục vụ đánh giá, báo cáo.
 
-![DFD Mức 2 - 1.2 Soạn thảo và kiểm duyệt nội dung](./diagram_sketch/quan_li_noi_dung_fanpage/DFD_muc2_2_SoanThaoKiemDuyet.svg)
+##### **d. Danh sách câu hỏi và trả lời liên quan đến các thực thể ngoài (External Entity)**
 
-![DFD Mức 2 - 1.3 Đăng tải và phân phối nội dung](./diagram_sketch/quan_li_noi_dung_fanpage/DFD_muc2_3_DangTaiPhanPhoi.svg)
-
-![DFD Mức 2 - 1.4 Theo dõi tương tác và đo lường hiệu suất](./diagram_sketch/quan_li_noi_dung_fanpage/DFD_muc2_4_TheoDoiTuongTac.svg)
----
-
-### Chức năng: Quản lý order nước ngoài
-
-> [!NOTE]
-> **CHƯA HOÀN THIỆN**
->
-> Chưa bổ sung mô hình DFD.
-
-#### Bảng danh sách câu hỏi và trả lời
-
-> [!NOTE]
-> **CHỜ BỔ SUNG**
->
-> Bổ sung câu hỏi và trả lời về tiến trình, luồng dữ liệu, kho dữ liệu và thực thể ngoài; xác định cách biểu diễn các sàn Mercari, Taobao trong thực thể chung Sàn thương mại điện tử nước ngoài.
+1. **Xác định các tác nhân ngoài tương tác trực tiếp với chức năng "Quản lý nội dung Fanpage"?**
+   Các tác nhân ngoài bao gồm: Nhân viên Marketing (lên kế hoạch, soạn thảo và gửi yêu cầu đăng bài), Quản lý cửa hàng (kiểm duyệt, phê duyệt hoặc yêu cầu chỉnh sửa nội dung), và Nền tảng Fanpage (môi trường mạng xã hội nhận bài viết hiển thị và trả về dữ liệu tương tác).
+2. **Nhân viên Marketing nhận những kết quả gì từ hệ thống?**
+   Kết quả duyệt, yêu cầu chỉnh sửa hoặc gỡ bài, cùng báo cáo hiệu quả nội dung.
+3. **Những tác nhân nào nhận báo cáo hiệu quả nội dung?**
+   Quản lý cửa hàng và Nhân viên Marketing nhận báo cáo do tiến trình 1.4.3 lập.
 
 #### Mô hình mức ngữ cảnh (Context Level)
 
-> [!NOTE]
-> **CHỜ BỔ SUNG**
->
-> Bổ sung sơ đồ DFD mức ngữ cảnh.
+![DFD Mức ngữ cảnh - Quản lí nội dung Fanpage](./images/quanlyfanpage/DFD_muc0.png)
 
 #### Mô hình mức đỉnh (Level 1)
 
-> [!NOTE]
-> **CHỜ BỔ SUNG**
->
-> Bổ sung sơ đồ DFD mức đỉnh.
+![DFD Mức 1 - Quản lí nội dung Fanpage](./images/quanlyfanpage/DFD_muc1.png)
 
 #### Mô hình mức dưới đỉnh (Level 2)
 
-> [!NOTE]
-> **CHỜ BỔ SUNG**
->
-> Bổ sung sơ đồ phân rã các tiến trình mức đỉnh.
+![DFD Mức 2 - 1.1 Lập kế hoạch nội dung](./images/quanlyfanpage/DFD_muc2_1_LapKeHoach.png)
+
+![DFD Mức 2 - 1.2 Soạn thảo và kiểm duyệt nội dung](./images/quanlyfanpage/DFD_muc2_2_SoanThaoKiemDuyet.png)
+
+![DFD Mức 2 - 1.3 Đăng tải và phân phối nội dung](./images/quanlyfanpage/DFD_muc2_3_DangTaiPhanPhoi.png)
+
+![DFD Mức 2 - 1.4 Theo dõi tương tác và đo lường hiệu suất](./images/quanlyfanpage/DFD_muc2_4_TheoDoiTuongTac.png)
 ---
