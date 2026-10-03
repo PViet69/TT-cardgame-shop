@@ -112,7 +112,38 @@ Dự án hướng đến việc quản lý tập trung thông tin hàng hóa, đ
 > Bổ sung kho dữ liệu cho Quản lý nội dung Fanpage và Quản lý order nước ngoài sau khi hoàn thiện đặc tả; dùng lại kho dùng chung phù hợp và cấp mã mới không trùng các mã hiện có.
 
 
-> Cứ ghi thẳng kho dữ liệu vào đây, nếu hợp lý ,sẽ sửa lại sau mỗi lần merge PR 
+> Cứ ghi thẳng kho dữ liệu vào đây, nếu hợp lý ,sẽ sửa lại sau mỗi lần merge PR
+
+Kho dữ liệu:
+
+D1: Hồ sơ nhân viên & CTV.
+D2: Lịch làm việc & chấm công.
+D3: Bảng lương & hoa hồng.
+
+2. Các tiến trình chính tra cứu/cập nhật những kho nào?
+
+4.1 ghi kho D1.
+4.2 đọc kho D1 và ghi kho D2.
+4.3 đọc kho D1, kho D2 và ghi kho D3.
+4.4 đọc kho D2 và kho D3.
+
+3. Kho D1 nhận và trả dữ liệu gì?
+
+Kho D1 nhận "Thông tin nhân viên & CTV" từ 4.1; trả "Danh sách nhân viên" cho 4.2 và "Mức lương, Tỉ lệ hoa hồng" cho 4.3.
+
+4. Kho D2 nhận và trả dữ liệu gì?
+
+Kho D2 nhận "Lịch làm việc" và "Dữ liệu chấm công" từ 4.2; trả "Giờ công" cho 4.3 và "Dữ liệu chấm công" cho 4.4.
+
+5. Kho D3 nhận và trả dữ liệu gì?
+
+Kho D3 nhận "Bảng lương, Hoa hồng" từ 4.3; trả "Dữ liệu lương, Hoa hồng" cho 4.4.
+
+6. Các kho dữ liệu được đọc và ghi bởi tiến trình con nào?
+
+Kho D1: ghi bởi 4.1.2; đọc bởi 4.2.3 và 4.3.2.
+Kho D2: ghi bởi 4.2.3 và 4.2.4; đọc bởi 4.3.1 và 4.4.1.
+Kho D3: ghi bởi 4.3.3; đọc bởi 4.4.1.
 ---
 
 ## 3. Phân tích những hạn chế đang tồn tại trong hệ thống và đề xuất giải pháp cải tiến
@@ -506,36 +537,8 @@ c. Các kho dữ liệu (Data Store)
 
 1. Các kho dữ liệu nào xuất hiện trong sơ đồ?
 
-D1: Hồ sơ nhân viên & CTV.
-D2: Lịch làm việc & chấm công.
-D3: Bảng lương & hoa hồng.
 
-2. Các tiến trình chính tra cứu/cập nhật những kho nào?
-
-4.1 ghi kho D1.
-4.2 đọc kho D1 và ghi kho D2.
-4.3 đọc kho D1, kho D2 và ghi kho D3.
-4.4 đọc kho D2 và kho D3.
-
-3. Kho D1 nhận và trả dữ liệu gì?
-
-Kho D1 nhận "Thông tin nhân viên & CTV" từ 4.1; trả "Danh sách nhân viên" cho 4.2 và "Mức lương, Tỉ lệ hoa hồng" cho 4.3.
-
-4. Kho D2 nhận và trả dữ liệu gì?
-
-Kho D2 nhận "Lịch làm việc" và "Dữ liệu chấm công" từ 4.2; trả "Giờ công" cho 4.3 và "Dữ liệu chấm công" cho 4.4.
-
-5. Kho D3 nhận và trả dữ liệu gì?
-
-Kho D3 nhận "Bảng lương, Hoa hồng" từ 4.3; trả "Dữ liệu lương, Hoa hồng" cho 4.4.
-
-6. Các kho dữ liệu được đọc và ghi bởi tiến trình con nào?
-
-Kho D1: ghi bởi 4.1.2; đọc bởi 4.2.3 và 4.3.2.
-Kho D2: ghi bởi 4.2.3 và 4.2.4; đọc bởi 4.3.1 và 4.4.1.
-Kho D3: ghi bởi 4.3.3; đọc bởi 4.4.1.
-
-d. Cơ sở dữ liệu (Database)
+c. Cơ sở dữ liệu (Database)
 
 1. Cơ sở dữ liệu (database) là gì và dùng để làm gì trong hệ thống?
 
@@ -559,7 +562,7 @@ Cơ sở dữ liệu gồm 6 bảng: NHAN_VIEN, CONG_TAC_VIEN, LICH_LAM_VIEC, CH
 Một nhân viên có nhiều dòng lịch làm việc, chấm công và bảng lương. Một cộng tác viên có nhiều dòng hoa hồng. Thuộc tính và kiểu dữ liệu chi tiết của từng bảng xem mục IV.
 
 
-e. Các thực thể ngoài (External Entity)
+d. Các thực thể ngoài (External Entity)
 
 1. Các thực thể ngoài của hệ thống là ai?
 
