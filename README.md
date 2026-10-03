@@ -564,7 +564,7 @@ e. Các thực thể ngoài (External Entity)
 1. Các thực thể ngoài của hệ thống là ai?
 
 Nhân viên.
-Cộng tác viên (được xem là đã xác thực).
+Cộng tác viên.
 Quản lí cửa hàng.
 
 2. Vai trò và dữ liệu trao đổi của từng thực thể là gì?
