@@ -553,16 +553,8 @@ Kho D3 gồm bảng BANG_LUONG và HOA_HONG.
 
 Cơ sở dữ liệu gồm 6 bảng: NHAN_VIEN, CONG_TAC_VIEN, LICH_LAM_VIEC, CHAM_CONG, BANG_LUONG và HOA_HONG.
 
-4. Khóa chính và khóa ngoại của các bảng là gì?
 
-NHAN_VIEN: khóa chính MaNV.
-CONG_TAC_VIEN: khóa chính MaCTV.
-LICH_LAM_VIEC: khóa chính MaLich; khóa ngoại MaNV tham chiếu NHAN_VIEN.
-CHAM_CONG: khóa chính MaCC; khóa ngoại MaNV tham chiếu NHAN_VIEN.
-BANG_LUONG: khóa chính MaBL; khóa ngoại MaNV tham chiếu NHAN_VIEN.
-HOA_HONG: khóa chính MaHH; khóa ngoại MaCTV tham chiếu CONG_TAC_VIEN.
-
-5. Các bảng quan hệ với nhau như thế nào?
+4. Các bảng quan hệ với nhau như thế nào?
 
 Một nhân viên có nhiều dòng lịch làm việc, chấm công và bảng lương. Một cộng tác viên có nhiều dòng hoa hồng. Thuộc tính và kiểu dữ liệu chi tiết của từng bảng xem mục IV.
 
