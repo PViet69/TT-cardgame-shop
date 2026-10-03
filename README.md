@@ -113,7 +113,7 @@ Dự án hướng đến việc quản lý tập trung thông tin hàng hóa, đ
 
 
 > Cứ ghi thẳng kho dữ liệu vào đây, nếu hợp lý ,sẽ sửa lại sau mỗi lần merge PR
-> **1. D1: Danh mục Hàng hóa & Vị trí (Products & Locations Master Data)**
+**1. D1: Danh mục Hàng hóa & Vị trí (Products & Locations Master Data)**
 Mô tả: Đây là kho dữ liệu gốc (Master Data) lưu trữ các thông tin tĩnh và quy hoạch không gian của kho.
 
 Dữ liệu lưu trữ:
