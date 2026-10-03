@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1450" height="720" viewBox="0 0 1450 720">
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto"><path d="M0,0 L10,4 L0,8 Z" fill="#1769aa"/></marker>
+    <style>
+      text{font-family:Arial,"DejaVu Sans",sans-serif;fill:#183047}.title{font-size:23px;font-weight:bold}.label{font-size:14px}.small{font-size:12px}.process{fill:#e5f5fb;stroke:#2384a8;stroke-width:2}.entity{fill:#e8edff;stroke:#596fb4;stroke-width:2}.store{fill:#fff2c9;stroke:#b88b22;stroke-width:2}.flow{fill:none;stroke:#1769aa;stroke-width:2;marker-end:url(#arrow)}.boundary{fill:#f0f8fc;stroke:#1769aa;stroke-width:1.5;stroke-dasharray:6 4}
+    </style>
+  </defs>
+  <rect width="1450" height="720" fill="#fff"/>
+  <text x="725" y="42" text-anchor="middle" class="title">DFD mức 2 - 1.2 Soạn thảo và kiểm duyệt nội dung</text>
+  <rect x="20" y="320" width="165" height="80" rx="4" class="entity"/><text x="102" y="353" text-anchor="middle" class="label"><tspan x="102">Nhân viên</tspan><tspan x="102" dy="20">Marketing</tspan></text>
+  <rect x="1040" y="70" width="165" height="78" rx="4" class="entity"/><text x="1122" y="102" text-anchor="middle" class="label"><tspan x="1122">Quản lí</tspan><tspan x="1122" dy="20">cửa hàng</tspan></text>
+  <rect x="270" y="545" width="240" height="78" class="store"/><rect x="270" y="545" width="52" height="78" fill="#f1d985" stroke="#b88b22" stroke-width="2"/><text x="296" y="589" text-anchor="middle" class="label">D16</text><text x="416" y="579" text-anchor="middle" class="small"><tspan x="416">Kế hoạch</tspan><tspan x="416" dy="18">nội dung</tspan></text>
+  <rect x="1120" y="545" width="240" height="78" class="store"/><rect x="1120" y="545" width="52" height="78" fill="#f1d985" stroke="#b88b22" stroke-width="2"/><text x="1146" y="589" text-anchor="middle" class="label">D17</text><text x="1266" y="579" text-anchor="middle" class="small"><tspan x="1266">Bài viết &amp;</tspan><tspan x="1266" dy="18">tài nguyên</tspan></text>
+  <rect x="260" y="110" width="200" height="90" rx="18" class="process"/><text x="360" y="145" text-anchor="middle" class="label"><tspan x="360">1.2.1 Tiếp nhận kế hoạch,</tspan><tspan x="360" dy="20">ý tưởng và tài nguyên</tspan></text>
+  <rect x="530" y="110" width="200" height="90" rx="18" class="process"/><text x="630" y="145" text-anchor="middle" class="label"><tspan x="630">1.2.2 Soạn nội dung,</tspan><tspan x="630" dy="20">thiết kế ấn phẩm</tspan></text>
+  <rect x="530" y="340" width="200" height="90" rx="18" class="process"/><text x="630" y="375" text-anchor="middle" class="label"><tspan x="630">1.2.3 Kiểm tra nội dung</tspan><tspan x="630" dy="20">và gửi duyệt</tspan></text>
+  <rect x="820" y="340" width="200" height="90" rx="18" class="process"/><text x="920" y="375" text-anchor="middle" class="label"><tspan x="920">1.2.4 Tiếp nhận kết quả,</tspan><tspan x="920" dy="20">cập nhật trạng thái</tspan></text>
+  <path d="M185 340 H225 V155 H260" class="flow"/><text x="35" y="260" class="small"><tspan x="35">Ý tưởng, text, banner,</tspan><tspan x="35" dy="17">yêu cầu gỡ bài</tspan></text>
+  <path d="M390 545 V250 H360 V200" class="flow"/><text x="400" y="242" class="small">Kế hoạch nội dung</text>
+  <path d="M460 155 H530" class="flow"/><text x="495" y="137" text-anchor="middle" class="small">Kế hoạch và tài nguyên</text>
+  <path d="M630 200 V340" class="flow"/><text x="641" y="280" class="small">Bản nháp</text>
+  <path d="M730 385 H820" class="flow"/><text x="775" y="367" text-anchor="middle" class="small">Bài cần duyệt</text>
+  <path d="M700 340 V230 H1122 V148" class="flow"/><text x="910" y="220" text-anchor="middle" class="small">Bài viết cần duyệt</text>
+  <path d="M1205 110 H1240 V310 H920 V340" class="flow"/><text x="1075" y="300" text-anchor="middle" class="small">Trạng thái, nhận xét</text>
+  <path d="M1020 385 H1070 V584 H1120" class="flow"/><text x="1080" y="485" class="small">Bài viết, trạng thái</text>
+  <path d="M920 430 V660 H10 V420 H102 V400" class="flow"/><text x="500" y="650" text-anchor="middle" class="small">Kết quả duyệt, yêu cầu chỉnh sửa / gỡ bài</text>
+</svg>

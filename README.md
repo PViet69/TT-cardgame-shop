@@ -63,11 +63,15 @@ Dự án hướng đến việc quản lý tập trung thông tin hàng hóa, đ
 
 
 - **Mục đích:** **[TODO]** Bổ sung mục đích quản lý nội dung Fanpage.
-
+   Hoạch định chiến lược, lên lịch, biên soạn, kiểm duyệt và đăng tải các nội dung truyền thông, thông tin sản phẩm, sự kiện giải đấu, chương trình khuyến mãi lên trang mạng xã hội (Fanpage) nhằm thu hút khách hàng, tăng nhận diện thương hiệu và thúc đẩy doanh số bán hàng đa kênh.
 - **Đối tượng thực hiện:** **[TODO]** Xác định người soạn, duyệt và đăng nội dung.
-
+   Nhân viên Marketing, Quản lý cửa hàng, Nền tảng Fanpage.
 - **Quy trình hoạt động & xử lý:** **[TODO]** Đặc tả quy trình soạn, duyệt, đăng, cập nhật và gỡ nội dung.
-
+   Quy trình quản lý nội dung Fanpage bắt đầu từ việc Nhân viên Marketing tiến hành lập kế hoạch nội dung định kỳ (tuần/tháng) dựa trên lịch sự kiện giải đấu, các đợt nhập hàng mới hoặc chương trình khuyến mãi. Nhân viên tiến hành soạn thảo nội dung (bài viết, hình ảnh, video ngắn, thiết kế banner) và tạo yêu cầu đăng bài trên hệ thống.
+   Sau khi hoàn tất, yêu cầu sẽ được chuyển đến Quản lý cửa hàng để kiểm tra chất lượng, tính chính xác về thông tin sản phẩm/giá bán và thuần phong mỹ tục:
+      - Nếu bài viết đạt yêu cầu, Quản lý tiến hành phê duyệt và hệ thống sẽ tự động đăng tải theo lịch hẹn (hoặc đăng ngay lập tức).
+      - Nếu bài viết chưa đạt, hệ thống trả về trạng thái yêu cầu chỉnh sửa kèm theo nhận xét của quản lý để nhân viên cập nhật lại.
+   Sau khi bài viết được phát hành, hệ thống ghi nhận các chỉ số tương tác ban đầu (lượt thích, bình luận, chia sẻ) để phục vụ công tác đánh giá hiệu quả chiến dịch truyền thông. Trường hợp phát sinh thông tin sai lệch hoặc cần gỡ bỏ, quản lý hoặc nhân viên có quyền thực hiện thao tác cập nhật hoặc ẩn/gỡ bài viết trên hệ thống.
 ---
 
 #### Chức năng: Quản lý order nước ngoài
@@ -111,6 +115,9 @@ Dự án hướng đến việc quản lý tập trung thông tin hàng hóa, đ
 >
 > Bổ sung kho dữ liệu cho Quản lý nội dung Fanpage và Quản lý order nước ngoài sau khi hoàn thiện đặc tả; dùng lại kho dùng chung phù hợp và cấp mã mới không trùng các mã hiện có.
 
+| D16 | Kế hoạch nội dung Fanpage | Lưu trữ lịch trình, kế hoạch nội dung tổng thể, mục tiêu chiến dịch và phân công nhân sự thực hiện. |
+| D17 | Kho lưu trữ bài viết & tài nguyên truyền thông | Lưu trữ nội dung chi tiết các bài viết, trạng thái bài viết. |
+| D18 | Chỉ số tương tác & hiệu suất nội dung | Lưu trữ dữ liệu về lượt tiếp cận, tương tác (like, share, comment) và hiệu quả chuyển đổi từ các bài đăng trên Fanpage. |
 
 > Cứ ghi thẳng kho dữ liệu vào đây, nếu hợp lý ,sẽ sửa lại sau mỗi lần merge PR 
 ---
@@ -423,15 +430,24 @@ Trả lời: Hệ thống tự động tổng kết bảng xếp hạng chung cu
 >
 > Bổ sung câu hỏi và trả lời về tiến trình, luồng dữ liệu, kho dữ liệu và thực thể ngoài.
 
-#### Mô hình mức ngữ cảnh (Context Level)
+Câu hỏi 1: Xác định các tác nhân ngoài tương tác trực tiếp với chức năng "Quản lý nội dung Fanpage"?
+Trả lời: Các tác nhân ngoài bao gồm: Nhân viên Marketing (lên kế hoạch, soạn thảo và gửi yêu cầu đăng bài), Quản lý cửa hàng (kiểm duyệt, phê duyệt hoặc yêu cầu chỉnh sửa nội dung), và Nền tảng Fanpage (môi trường mạng xã hội nhận bài viết hiển thị và trả về dữ liệu tương tác).   
+Câu hỏi 2: Kho lưu trữ dữ liệu chính nào được sử dụng trong quá trình quản lý nội dung Fanpage?
+Trả lời: Các kho dữ liệu chính gồm: Kho kế hoạch nội dung Fanpage (D16), Kho bài viết & tài nguyên truyền thông (D17), và Kho chỉ số tương tác & hiệu suất nội dung (D18).   
+Câu hỏi 3: Luồng dữ liệu chính đi từ Nhân viên Marketing vào hệ thống trong quy trình này là gì?
+Trả lời: Kế hoạch nội dung định kỳ, ý tưởng, văn bản, hình ảnh/banner thiết kế, yêu cầu lên lịch đăng bài và các yêu cầu gỡ bài hoặc cập nhật phát sinh.   
+Câu hỏi 4: Nhiệm vụ của tiến trình theo dõi và đo lường hiệu suất trong mô hình là gì?
+Trả lời: Hệ thống tự động thu thập các chỉ số tương tác thực tế (lượt tiếp cận, thích, bình luận, chia sẻ) từ nền tảng Fanpage, ghi nhận vào kho dữ liệu hiệu suất để tổng hợp báo cáo gửi về cho nhân viên marketing và quản lý cửa hàng.
 
+#### Mô hình mức ngữ cảnh (Context Level)
+![DFD Mức ngữ cảnh - Quản lí nội dung Fanpage](./diagram_sketch/quan_li_noi_dung_fanpage/DFD_muc0_Quan_li_Fanpage.png)
 > [!NOTE]
 > **CHỜ BỔ SUNG**
 >
 > Bổ sung sơ đồ DFD mức ngữ cảnh.
 
 #### Mô hình mức đỉnh (Level 1)
-
+![DFD Mức 1 - Quản lí nội dung Fanpage](./diagram_sketch/quan_li_noi_dung_fanpage/DFD_muc1_Quan_li_Fanpage.png)
 > [!NOTE]
 > **CHỜ BỔ SUNG**
 >
@@ -443,7 +459,13 @@ Trả lời: Hệ thống tự động tổng kết bảng xếp hạng chung cu
 > **CHỜ BỔ SUNG**
 >
 > Bổ sung sơ đồ phân rã các tiến trình mức đỉnh.
+![DFD Mức 2 - 1.1 Lập kế hoạch nội dung](./diagram_sketch/quan_li_noi_dung_fanpage/DFD_muc2_1_LapKeHoach.svg)
 
+![DFD Mức 2 - 1.2 Soạn thảo và kiểm duyệt nội dung](./diagram_sketch/quan_li_noi_dung_fanpage/DFD_muc2_2_SoanThaoKiemDuyet.svg)
+
+![DFD Mức 2 - 1.3 Đăng tải và phân phối nội dung](./diagram_sketch/quan_li_noi_dung_fanpage/DFD_muc2_3_DangTaiPhanPhoi.svg)
+
+![DFD Mức 2 - 1.4 Theo dõi tương tác và đo lường hiệu suất](./diagram_sketch/quan_li_noi_dung_fanpage/DFD_muc2_4_TheoDoiTuongTac.svg)
 ---
 
 ### Chức năng: Quản lý order nước ngoài
