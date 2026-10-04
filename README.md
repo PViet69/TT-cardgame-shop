@@ -89,39 +89,24 @@ Dự án hướng đến việc quản lý tập trung thông tin hàng hóa, đ
 | D16 | Kế hoạch nội dung Fanpage | Lưu trữ lịch trình, kế hoạch nội dung tổng thể, mục tiêu chiến dịch và phân công nhân sự thực hiện. |
 | D17 | Kho lưu trữ bài viết & tài nguyên truyền thông | Lưu trữ nội dung chi tiết các bài viết, trạng thái bài viết. |
 | D18 | Chỉ số tương tác & hiệu suất nội dung | Lưu trữ dữ liệu về lượt tiếp cận, tương tác (like, share, comment) và hiệu quả chuyển đổi từ các bài đăng trên Fanpage. |
+| D19 | Hồ sơ nhân viên & CTV | Lưu thông tin nhân viên, cộng tác viên, mức lương và tỉ lệ hoa hồng. |
+| D20 | Lịch làm việc | Lưu ca làm việc đã xếp và kết quả duyệt ca, nghỉ. |
+| D21 | Chấm công | Lưu dữ liệu chấm công, giờ công thực tế để tính lương và đánh giá. |
+| D22 | Bảng lương & hoa hồng | Lưu bảng lương nhân viên và kết quả tính hoa hồng cộng tác viên. |
 
-> Cứ ghi thẳng kho dữ liệu vào đây, nếu hợp lý ,sẽ sửa lại sau mỗi lần merge PR
+### Kho dữ liệu nhân viên và cộng tác viên
 
-Kho dữ liệu:
+Ảnh phác thảo dùng D1–D3 cục bộ; mô hình hiện tại dùng D19–D22 để tiếp nối danh mục chung. Kho D2 cũ được tách thành D20 (Lịch làm việc) và D21 (Chấm công).
 
-D1: Hồ sơ nhân viên & CTV.
-D2: Lịch làm việc & chấm công.
-D3: Bảng lương & hoa hồng.
+| Tiến trình | Đọc | Ghi |
+| --- | --- | --- |
+| 4.1 Quản lý hồ sơ | — | D19: Thông tin nhân viên & CTV |
+| 4.2 Phân ca & Chấm công | D19: Danh sách nhân viên | D20: Lịch làm việc; D21: Dữ liệu chấm công |
+| 4.3 Tính lương & Hoa hồng | D19: Mức lương, Tỉ lệ hoa hồng; D21: Giờ công | D22: Bảng lương, Hoa hồng |
+| 4.4 Đánh giá & Báo cáo nhân sự | D21: Dữ liệu chấm công; D22: Dữ liệu lương, Hoa hồng | — |
 
-2. Các tiến trình chính tra cứu/cập nhật những kho nào?
+Ở mức 2: 4.1.2 ghi D19; 4.2.3 đọc D19 và ghi D20; 4.2.4 ghi D21; 4.3.1 đọc D21; 4.3.2 đọc D19; 4.3.3 ghi D22; 4.4.1 đọc D21 và D22.
 
-4.1 ghi kho D1.
-4.2 đọc kho D1 và ghi kho D2.
-4.3 đọc kho D1, kho D2 và ghi kho D3.
-4.4 đọc kho D2 và kho D3.
-
-3. Kho D1 nhận và trả dữ liệu gì?
-
-Kho D1 nhận "Thông tin nhân viên & CTV" từ 4.1; trả "Danh sách nhân viên" cho 4.2 và "Mức lương, Tỉ lệ hoa hồng" cho 4.3.
-
-4. Kho D2 nhận và trả dữ liệu gì?
-
-Kho D2 nhận "Lịch làm việc" và "Dữ liệu chấm công" từ 4.2; trả "Giờ công" cho 4.3 và "Dữ liệu chấm công" cho 4.4.
-
-5. Kho D3 nhận và trả dữ liệu gì?
-
-Kho D3 nhận "Bảng lương, Hoa hồng" từ 4.3; trả "Dữ liệu lương, Hoa hồng" cho 4.4.
-
-6. Các kho dữ liệu được đọc và ghi bởi tiến trình con nào?
-
-Kho D1: ghi bởi 4.1.2; đọc bởi 4.2.3 và 4.3.2.
-Kho D2: ghi bởi 4.2.3 và 4.2.4; đọc bởi 4.3.1 và 4.4.1.
-Kho D3: ghi bởi 4.3.3; đọc bởi 4.4.1.
 ---
 
 ## 3. Phân tích những hạn chế đang tồn tại trong hệ thống và đề xuất giải pháp cải tiến
@@ -384,202 +369,118 @@ Trả lời: Hệ thống tự động tổng kết bảng xếp hạng chung cu
 ### Chức năng: Quản lý Nhân Viên và Cộng Tác Viên
 
 > [!NOTE]
-> **CHƯA HOÀN THIỆN**
->
-> Chưa bổ sung mô hình DFD.
+> Đã bổ sung sơ đồ mức ngữ cảnh, mức 1 và bốn phân rã mức 2. Ảnh của cả bốn phân rã mức 2 (4.1–4.4) đã cập nhật theo ảnh do người dùng cung cấp, dùng D19–D22.
 
 #### Bảng danh sách câu hỏi và trả lời
 
-a. Các ô xử lý (Process)
+##### **a. Danh sách câu hỏi và trả lời liên quan đến các ô xử lý (Process)**
+
+1. **Mức ngữ cảnh có bao nhiêu tiến trình và được phân rã như thế nào ở mức 1?**
+   Mức ngữ cảnh có một tiến trình: 4 — Hệ thống Quản lý Nhân viên và Cộng tác viên. Mức 1 phân rã thành bốn tiến trình: 4.1 Quản lý hồ sơ nhân viên & CTV; 4.2 Phân ca & Chấm công; 4.3 Tính lương & Hoa hồng; 4.4 Đánh giá & Báo cáo nhân sự.
+2. **Tiến trình 4.1 có nhiệm vụ gì và được phân rã thành những tiến trình nào?**
+   4.1 tiếp nhận thông tin cá nhân của Nhân viên và CTV, kiểm tra rồi lưu hồ sơ vào D19. Mức 2 gồm 4.1.1 Tiếp nhận & Kiểm tra thông tin và 4.1.2 Lưu hồ sơ nhân viên & CTV. Sơ đồ hiện không có bước phê duyệt hồ sơ.
+3. **Tiến trình 4.2 được phân rã thành những tiến trình nào?**
+   Có bốn tiến trình: 4.2.1 Tiếp nhận đăng kí ca; 4.2.2 Tiếp nhận yêu cầu nghỉ; 4.2.3 Xếp lịch & Xử lý duyệt ca, nghỉ; 4.2.4 Ghi nhận chấm công.
+4. **Ai quyết định duyệt ca, duyệt nghỉ và tiến trình nào xử lý quyết định đó?**
+   Quản lí cửa hàng quyết định duyệt. 4.2.3 tổng hợp yêu cầu ca, nghỉ và danh sách nhân viên, gửi yêu cầu cần duyệt cho Quản lí, nhận kết quả duyệt, thông báo cho Nhân viên và ghi lịch làm việc vào D20.
+5. **Nếu Nhân viên xin nghỉ thì yêu cầu được xử lý như thế nào?**
+   4.2.2 tiếp nhận yêu cầu nghỉ và chuyển cho 4.2.3. Sau khi nhận quyết định từ Quản lí, 4.2.3 gửi lịch làm việc, thông báo duyệt nghỉ cho Nhân viên và cập nhật D20.
+6. **Tiến trình 4.2.4 thực hiện việc gì?**
+   4.2.4 nhận dữ liệu chấm công từ Nhân viên và ghi vào D21. Sơ đồ hiện chỉ thể hiện ghi nhận chấm công, chưa có luồng đọc D20 để đối chiếu với lịch làm việc.
+7. **Tiến trình 4.3 được phân rã như thế nào?**
+   4.3.1 Tổng hợp giờ công & Doanh số nhận giờ công từ D21 và báo cáo doanh số từ CTV. 4.3.2 Tính lương & Hoa hồng sử dụng dữ liệu tổng hợp, mức lương và tỉ lệ hoa hồng từ D19, cùng mức hoa hồng từ Quản lí. 4.3.3 Lập phiếu lương & Ghi nhận hoa hồng gửi kết quả cho Nhân viên, CTV và lưu bảng lương, hoa hồng vào D22.
+8. **Tiến trình 4.4 được phân rã như thế nào?**
+   4.4.1 Tổng hợp dữ liệu nhân sự đọc dữ liệu chấm công từ D21 và dữ liệu lương, hoa hồng từ D22. 4.4.2 Đánh giá hiệu suất tạo kết quả đánh giá cho Nhân viên và chuyển kết quả đánh giá hiệu suất cho 4.4.3 Lập báo cáo nhân sự. 4.4.3 gửi báo cáo cho Quản lí cửa hàng.
+9. **Sơ đồ hiện có đủ dữ liệu để đánh giá đi muộn hoặc nghỉ không đúng lịch không?**
+   Chưa thể hiện đủ: 4.4 chỉ đọc D21 và D22, chưa đọc lịch làm việc từ D20. Nếu bổ sung đối chiếu công thực tế với lịch dự kiến, cần cập nhật luồng dữ liệu ở cả mức 1 và mức 2.
+
+##### **b. Danh sách câu hỏi và trả lời liên quan đến các dòng dữ liệu (Data Flow)**
+
+1. **Nhân viên gửi những dữ liệu gì vào hệ thống?**
+   Thông tin cá nhân vào 4.1; đăng kí ca, yêu cầu nghỉ và dữ liệu chấm công vào 4.2. Ở mức 2, các luồng lần lượt vào 4.1.1, 4.2.1, 4.2.2 và 4.2.4.
+2. **Hệ thống trả những dữ liệu gì cho Nhân viên?**
+   Lịch làm việc, thông báo duyệt nghỉ từ 4.2; phiếu lương từ 4.3; kết quả đánh giá từ 4.4. Ở mức 2, các luồng lần lượt do 4.2.3, 4.3.3 và 4.4.2 cung cấp.
+3. **CTV gửi và nhận những dữ liệu gì?**
+   CTV gửi thông tin cá nhân vào 4.1.1 và báo cáo doanh số vào 4.3.1; nhận mức hoa hồng từ 4.3.3. Theo nghiệp vụ đã mô tả, CTV dùng mức hoa hồng để tự trừ khi chuyển tiền lại cho cửa hàng; sơ đồ không biểu diễn việc chuyển tiền thực tế.
+4. **Quản lí cửa hàng gửi và nhận những dữ liệu gì?**
+   Quản lí gửi duyệt ca, duyệt nghỉ vào 4.2.3 và mức hoa hồng vào 4.3.2; nhận ca, nghỉ cần duyệt từ 4.2.3 và báo cáo nhân sự từ 4.4.3.
+5. **Các luồng nội bộ trong phân rã 4.1 và 4.2 là gì?**
+   4.1.1 → 4.1.2: “Thông tin đã kiểm tra”; 4.2.1 → 4.2.3: “Yêu cầu ca”; 4.2.2 → 4.2.3: “Yêu cầu nghỉ”.
+6. **Các luồng nội bộ trong phân rã 4.3 và 4.4 là gì?**
+   4.3.1 → 4.3.2: “Giờ công và doanh số tổng hợp”; 4.3.2 → 4.3.3: “Kết quả tính lương, hoa hồng”; 4.4.1 → 4.4.2: “Dữ liệu nhân sự tổng hợp”; 4.4.2 → 4.4.3: “Kết quả đánh giá hiệu suất”.
+7. **Lịch làm việc và dữ liệu chấm công được ghi theo những luồng nào?**
+   Ở mức 1, 4.2 ghi “Lịch làm việc” vào D20 và “Dữ liệu chấm công” vào D21. Ở mức 2, hai luồng tương ứng do 4.2.3 và 4.2.4 thực hiện.
+8. **Các luồng giữa mức ngữ cảnh, mức 1 và mức 2 được cân bằng như thế nào?**
+   Các luồng vào, ra với từng thực thể ở mức ngữ cảnh được phân bổ cho các tiến trình tương ứng ở mức 1. Khi phân rã mức 2, giữ nguyên dữ liệu trao đổi qua ranh giới tiến trình cha; chỉ thêm luồng nội bộ giữa các tiến trình con. Ví dụ, “Đăng kí ca, Yêu cầu nghỉ” vào 4.2 được tách thành hai luồng vào 4.2.1 và 4.2.2.
+9. **Luồng “Mức hoa hồng” từ Quản lí và luồng cùng tên gửi cho CTV có vai trò gì?**
+   Luồng Quản lí → 4.3.2 cung cấp mức hoa hồng dùng khi tính; luồng 4.3.3 → CTV thông báo mức hoa hồng sau xử lý. Các sơ đồ hiện giữ tên “Mức hoa hồng”; cần phân biệt vai trò hai luồng khi đặc tả chi tiết công thức tính.
+
+##### **c. Danh sách câu hỏi và trả lời liên quan đến các kho dữ liệu (Data Store)**
+
+1. **Chức năng sử dụng những kho dữ liệu nào?**
+   D19 Hồ sơ nhân viên & CTV; D20 Lịch làm việc; D21 Chấm công; D22 Bảng lương & hoa hồng. Các mã này tiếp nối danh mục kho dữ liệu chung D1–D18 của hệ thống.
+2. **D19 nhận và cung cấp những dữ liệu gì?**
+   4.1.2 ghi “Thông tin nhân viên & CTV” vào D19. D19 cung cấp “Danh sách nhân viên” cho 4.2.3 và “Mức lương, Tỉ lệ hoa hồng” cho 4.3.2.
+3. **D20 lưu dữ liệu gì và được cập nhật bởi tiến trình nào?**
+   D20 lưu lịch làm việc do 4.2.3 ghi sau xử lý xếp lịch, duyệt ca và nghỉ. Các sơ đồ hiện chưa thể hiện luồng đọc từ D20.
+4. **D21 được ghi và đọc bởi những tiến trình nào?**
+   4.2.4 ghi “Dữ liệu chấm công” vào D21. 4.3.1 đọc “Giờ công” để tính lương; 4.4.1 đọc “Dữ liệu chấm công” để tổng hợp dữ liệu nhân sự.
+5. **D22 được ghi và đọc bởi những tiến trình nào?**
+   4.3.3 ghi “Bảng lương, Hoa hồng” vào D22; 4.4.1 đọc “Dữ liệu lương, Hoa hồng” để tổng hợp và đánh giá nhân sự.
+6. **Vì sao lịch làm việc và chấm công được tách thành hai kho?**
+   D20 lưu lịch dự kiến, còn D21 lưu công thực tế. Hai loại dữ liệu có mục đích khác nhau; việc tách kho giúp phân biệt rõ luồng xếp lịch với luồng ghi nhận chấm công.
+7. **Kho dữ liệu trong DFD có phải là một cơ sở dữ liệu riêng không?**
+   Không bắt buộc. Kho dữ liệu là nơi lưu trữ logic trong DFD. Khi triển khai, D19 có thể ánh xạ vào các bảng NHAN_VIEN và CONG_TAC_VIEN; D20 vào LICH_LAM_VIEC; D21 vào CHAM_CONG; D22 vào BANG_LUONG và HOA_HONG. Các nhóm bảng có thể cùng nằm trong một cơ sở dữ liệu; sơ đồ DFD không quyết định số cơ sở dữ liệu vật lý.
+
+##### **d. Danh sách câu hỏi và trả lời liên quan đến các thực thể ngoài (External Entity)**
+
+1. **Các thực thể ngoài tương tác với chức năng này là ai?**
+   Nhân viên, Cộng tác viên và Quản lí cửa hàng.
+2. **Vai trò của Nhân viên trong chức năng này là gì?**
+   Nhân viên cung cấp thông tin cá nhân, đăng kí ca, yêu cầu nghỉ và dữ liệu chấm công; nhận lịch làm việc, thông báo duyệt nghỉ, phiếu lương và kết quả đánh giá.
+3. **Vai trò của CTV trong chức năng này là gì?**
+   CTV cung cấp thông tin cá nhân và báo cáo doanh số; nhận mức hoa hồng. CTV được quản lý qua mã định danh, không có tài khoản đăng nhập hệ thống theo đặc tả nghiệp vụ.
+4. **Vai trò của Quản lí cửa hàng trong chức năng này là gì?**
+   Quản lí duyệt ca, duyệt nghỉ và cung cấp mức hoa hồng; nhận yêu cầu ca, nghỉ cần duyệt và báo cáo nhân sự.
 
-
-1. Mức ngữ cảnh có bao nhiêu tiến trình, được phân rã thành bao nhiêu tiến trình ở Level 1?
-
-Mức ngữ cảnh có 1 tiến trình: 4 -- Hệ thống Quản lý Nhân viên và Cộng tác viên. Level 1 phân rã thành 4 tiến trình:
-
-4.1 Quản lý hồ sơ nhân viên & CTV
-4.2 Phân ca & Chấm công
-4.3 Tính lương & Hoa hồng
-4.4 Đánh giá & Báo cáo nhân sự
-
-2. Tiến trình nào quản lý hồ sơ nhân viên và CTV?
-
-4.1 -- Quản lý hồ sơ nhân viên & CTV nhận "Thông tin cá nhân" từ Nhân viên và từ Cộng tác viên, rồi ghi "Thông tin nhân viên & CTV" vào kho D1. Hồ sơ không cần phê duyệt; Cộng tác viên được xem là đã xác thực nên không có bước đăng kí.
-
-3. Tiến trình nào phân ca và chấm công?
-
-4.2 -- Phân ca & Chấm công nhận "Danh sách nhân viên" từ kho D1; "Đăng kí ca, Yêu cầu nghỉ" và "Dữ liệu chấm công" từ Nhân viên; "Duyệt ca, Duyệt nghỉ" từ Quản lí cửa hàng. Tiến trình gửi "Lịch làm việc, Thông báo duyệt nghỉ" cho Nhân viên, gửi "Ca, Nghỉ cần duyệt" cho Quản lí cửa hàng và ghi "Lịch làm việc, Dữ liệu chấm công" vào kho D2.
-
-4. Tiến trình nào tính lương và hoa hồng?
-
-4.3 -- Tính lương & Hoa hồng nhận "Giờ công" từ kho D2, "Mức lương, Tỉ lệ hoa hồng" từ kho D1, "Mức hoa hồng" từ Quản lí cửa hàng và "Báo cáo doanh số" từ Cộng tác viên. Tiến trình gửi "Phiếu lương" cho Nhân viên, gửi "Mức hoa hồng" cho Cộng tác viên và ghi "Bảng lương, Hoa hồng" vào kho D3. Cộng tác viên không nhận hoa hồng trực tiếp từ chủ shop mà dựa vào "Mức hoa hồng" để tự trừ khi chuyển tiền lại cho chủ shop.
-
-5. Tiến trình nào đánh giá và lập báo cáo nhân sự?
-
-4.4 -- Đánh giá & Báo cáo nhân sự nhận "Dữ liệu lương, Hoa hồng" từ kho D3 và "Dữ liệu chấm công" từ kho D2; gửi "Báo cáo nhân sự" cho Quản lí cửa hàng và "Kết quả đánh giá" cho Nhân viên.
-
-6. Nếu Nhân viên xin nghỉ thì tiến trình nào xử lý?
-
-Tiến trình 4.2 -- Phân ca & Chấm công xử lý, cụ thể là tiến trình con 4.2.2 tiếp nhận yêu cầu nghỉ. Yêu cầu được chuyển sang 4.2.3 để gửi "Ca, Nghỉ cần duyệt" cho Quản lí cửa hàng, nhận "Duyệt ca, Duyệt nghỉ", sau đó gửi "Lịch làm việc, Thông báo duyệt nghỉ" cho Nhân viên và cập nhật lịch làm việc vào kho D2.
-
-7. 4.1 được phân rã thành những tiến trình nào?
-
-4.1.1 Tiếp nhận & Kiểm tra thông tin
-4.1.2 Lưu thông tin nhân viên & CTV
-
-8. 4.2 được phân rã thành những tiến trình nào?
-
-4.2.1 Tiếp nhận đăng kí ca
-4.2.2 Tiếp nhận yêu cầu nghỉ
-4.2.3 Xếp lịch & Duyệt ca, nghỉ
-4.2.4 Ghi nhận chấm công
-
-9. 4.3 được phân rã thành những tiến trình nào?
-
-4.3.1 Tổng hợp giờ công & doanh số
-4.3.2 Tính lương & hoa hồng
-4.3.3 Lập phiếu lương & Ghi nhận hoa hồng
-
-10. 4.4 được phân rã thành những tiến trình nào?
-
-4.4.1 Tổng hợp dữ liệu nhân sự
-4.4.2 Đánh giá hiệu suất
-4.4.3 Lập báo cáo nhân sự
-
-11. Các tiến trình con của 4.1 nhận và trả dữ liệu gì?
-
-4.1.1 nhận "Thông tin cá nhân" từ Nhân viên và từ Cộng tác viên; gửi "Thông tin đã kiểm tra" cho 4.1.2.
-4.1.2 nhận "Thông tin đã kiểm tra" từ 4.1.1; ghi "Thông tin nhân viên & CTV" vào kho D1.
-
-12. Các tiến trình con của 4.2 nhận và trả dữ liệu gì?
-
-4.2.1 nhận "Đăng kí ca" từ Nhân viên; gửi "Yêu cầu ca" cho 4.2.3.
-4.2.2 nhận "Yêu cầu nghỉ" từ Nhân viên; gửi "Yêu cầu nghỉ" cho 4.2.3.
-4.2.3 nhận "Yêu cầu ca" từ 4.2.1, "Yêu cầu nghỉ" từ 4.2.2 và "Danh sách nhân viên" từ kho D1; gửi "Ca, Nghỉ cần duyệt" cho Quản lí cửa hàng; nhận "Duyệt ca, Duyệt nghỉ" từ Quản lí cửa hàng; gửi "Lịch làm việc, Thông báo duyệt nghỉ" cho Nhân viên và ghi "Lịch làm việc" vào kho D2.
-4.2.4 nhận "Dữ liệu chấm công" từ Nhân viên và ghi "Dữ liệu chấm công" vào kho D2.
-
-13. Các tiến trình con của 4.3 nhận và trả dữ liệu gì?
-
-4.3.1 nhận "Giờ công" từ kho D2 và "Báo cáo doanh số" từ Cộng tác viên; gửi "Giờ công & doanh số" cho 4.3.2.
-4.3.2 nhận "Giờ công & doanh số" từ 4.3.1, "Mức lương, Tỉ lệ hoa hồng" từ kho D1 và "Mức hoa hồng" từ Quản lí cửa hàng; gửi "Kết quả tính lương, hoa hồng" cho 4.3.3.
-4.3.3 nhận kết quả tính; gửi "Phiếu lương" cho Nhân viên, gửi "Mức hoa hồng" cho Cộng tác viên và ghi "Bảng lương, Hoa hồng" vào kho D3.
-
-14. Các tiến trình con của 4.4 nhận và trả dữ liệu gì?
-
-4.4.1 nhận "Dữ liệu lương, Hoa hồng" từ kho D3 và "Dữ liệu chấm công" từ kho D2; gửi "Dữ liệu nhân sự tổng hợp" cho 4.4.2.
-4.4.2 nhận dữ liệu tổng hợp; gửi "Kết quả đánh giá" cho Nhân viên và "Kết quả đánh giá hiệu suất" cho 4.4.3.
-4.4.3 nhận kết quả đánh giá hiệu suất; gửi "Báo cáo nhân sự" cho Quản lí cửa hàng.
-
-b. Các dòng dữ liệu (Data Flow)
-
-1. Nhân viên gửi những dữ liệu gì vào hệ thống?
-
-Ở mức ngữ cảnh, Nhân viên gửi "Thông tin cá nhân, Đăng kí ca, Yêu cầu nghỉ, Dữ liệu chấm công". Ở Level 1, các dữ liệu này được chuyển đến 4.1 và 4.2 theo chức năng tương ứng.
-
-2. Hệ thống trả dữ liệu gì cho Nhân viên?
-
-Ở mức ngữ cảnh, hệ thống trả "Lịch làm việc, Thông báo duyệt nghỉ, Phiếu lương, Kết quả đánh giá". Ở Level 1, các dữ liệu này lần lượt do 4.2, 4.3 và 4.4 cung cấp.
-
-3. Cộng tác viên gửi và nhận dữ liệu gì?
-
-Cộng tác viên gửi "Thông tin cá nhân" đến 4.1 và "Báo cáo doanh số" đến 4.3; nhận "Mức hoa hồng" từ 4.3 để tự trừ hoa hồng khi chuyển tiền lại cho chủ shop.
-
-4. Quản lí cửa hàng gửi và nhận dữ liệu gì?
-
-Quản lí cửa hàng gửi "Duyệt ca, Duyệt nghỉ" đến 4.2 và "Mức hoa hồng" đến 4.3; nhận "Ca, Nghỉ cần duyệt" từ 4.2 và "Báo cáo nhân sự" từ 4.4.
-
-5. Giữa mức ngữ cảnh và Level 1 các luồng được tổng hợp như thế nào?
-
-Các luồng của cùng một thực thể ngoài ở Level 1 được tổng hợp thành luồng vào/ra tương ứng ở mức ngữ cảnh. Ví dụ, các dữ liệu Nhân viên gửi đến 4.1 và 4.2 được gộp thành "Thông tin cá nhân, Đăng kí ca, Yêu cầu nghỉ, Dữ liệu chấm công".
-
-6. Giữa các tiến trình con có những luồng dữ liệu nào?
-
-Các luồng nội bộ gồm:
-
-4.1.1 → 4.1.2: "Thông tin đã kiểm tra".
-4.2.1 → 4.2.3: "Yêu cầu ca".
-4.2.2 → 4.2.3: "Yêu cầu nghỉ".
-4.3.1 → 4.3.2: "Giờ công & doanh số".
-4.3.2 → 4.3.3: "Kết quả tính lương, hoa hồng".
-4.4.1 → 4.4.2: "Dữ liệu nhân sự tổng hợp".
-4.4.2 → 4.4.3: "Kết quả đánh giá hiệu suất".
-
-7. Luồng "Lịch làm việc, Dữ liệu chấm công" ở Level 1 được tách như thế nào ở Level 2?
-
-Ở Level 2, luồng tổng hợp được tách thành:
-
-4.2.3 ghi "Lịch làm việc" vào kho D2.
-4.2.4 ghi "Dữ liệu chấm công" vào kho D2.
-
-c. Các kho dữ liệu (Data Store)
-
-1. Các kho dữ liệu nào xuất hiện trong sơ đồ?
-
-
-c. Cơ sở dữ liệu (Database)
-
-1. Cơ sở dữ liệu (database) là gì và dùng để làm gì trong hệ thống?
-
-Cơ sở dữ liệu là nơi lưu trữ có tổ chức các dữ liệu của hệ thống để tiến trình đọc hoặc ghi khi cần. Hệ thống dùng một cơ sở dữ liệu quan hệ duy nhất (CSDL Quản lý nhân sự) để lưu toàn bộ dữ liệu của nhân viên, cộng tác viên, lịch làm việc, chấm công, lương và hoa hồng.
-
-2. Các kho dữ liệu D1, D2, D3 được cài đặt thành cơ sở dữ liệu như thế nào?
-
-Ba kho D1, D2, D3 trong DFD cùng nằm trong CSDL Quản lý nhân sự. Mỗi kho tương ứng với một nhóm bảng:
-
-Kho D1 gồm bảng NHAN_VIEN và CONG_TAC_VIEN.
-Kho D2 gồm bảng LICH_LAM_VIEC và CHAM_CONG.
-Kho D3 gồm bảng BANG_LUONG và HOA_HONG.
-
-3. Cơ sở dữ liệu gồm bao nhiêu bảng?
-
-Cơ sở dữ liệu gồm 6 bảng: NHAN_VIEN, CONG_TAC_VIEN, LICH_LAM_VIEC, CHAM_CONG, BANG_LUONG và HOA_HONG.
-
-
-4. Các bảng quan hệ với nhau như thế nào?
-
-Một nhân viên có nhiều dòng lịch làm việc, chấm công và bảng lương. Một cộng tác viên có nhiều dòng hoa hồng. Thuộc tính và kiểu dữ liệu chi tiết của từng bảng xem mục IV.
-
-
-d. Các thực thể ngoài (External Entity)
-
-1. Các thực thể ngoài của hệ thống là ai?
-
-Nhân viên.
-Cộng tác viên.
-Quản lí cửa hàng.
-
-2. Vai trò và dữ liệu trao đổi của từng thực thể là gì?
-
-Nhân viên: gửi thông tin cá nhân, đăng kí ca, yêu cầu nghỉ và dữ liệu chấm công; nhận lịch làm việc, thông báo duyệt nghỉ, phiếu lương và kết quả đánh giá.
-Cộng tác viên: gửi thông tin cá nhân và báo cáo doanh số; nhận mức hoa hồng.
-Quản lí cửa hàng: gửi duyệt ca/nghỉ và chính sách lương & hoa hồng; nhận ca/nghỉ cần duyệt và báo cáo nhân sự.
-
-3. Mỗi thực thể ngoài xuất hiện ở những sơ đồ nào?
-
-Cả ba thực thể ngoài đều xuất hiện ở mức ngữ cảnh, Level 1 và các sơ đồ Level 2 có liên quan đến chức năng của họ.
-
-4. Thực thể nào nhận dữ liệu từ nhiều tiến trình nhất?
-
-Nhân viên nhận dữ liệu từ ba tiến trình chính: 4.2 (Lịch làm việc, Thông báo duyệt nghỉ), 4.3 (Phiếu lương) và 4.4 (Kết quả đánh giá).
 
 #### Mô hình mức ngữ cảnh (Context Level)
 
-<img width="2800" height="1068" alt="image" src="https://github.com/user-attachments/assets/280c0abb-82b8-4724-af95-491f419b3ad5" />
+![DFD mức ngữ cảnh — Nhân viên và CTV](./images/nhansu/DFD_muc0.png)
+
+Ảnh mức ngữ cảnh được thay bằng ảnh cập nhật do người dùng cung cấp.
 
 
 
 #### Mô hình mức đỉnh (Level 1)
 
-<img width="2840" height="3485" alt="image" src="https://github.com/user-attachments/assets/e807d646-d70f-4679-9aa7-0948e07a6a73" />
+![DFD mức 1 — Nhân viên và CTV, D19–D22](./images/nhansu/DFD_muc1.png)
+
+Ảnh mức 1 được cập nhật theo bố cục do người dùng cung cấp, làm cơ sở phân tích phân rã mức 2.
+
+Mỗi thực thể ngoài và mỗi kho dữ liệu chỉ xuất hiện một lần trong từng sơ đồ DFD. D20 chỉ lưu lịch; D21 lưu chấm công. [Ảnh phác thảo gốc](./diagram_sketch/2_Level_1%20%281%29.png) dùng D1–D3 cục bộ và chưa tách hai kho này.
 
 
 
 #### Mô hình mức dưới đỉnh (Level 2)
 
-<img width="4717" height="721" alt="3_Level_2_4 1" src="https://github.com/user-attachments/assets/c21f269a-4cc7-49af-831f-fbe9872fac2f" />
-<img width="3824" height="1020" alt="4_Level_2_4 2" src="https://github.com/user-attachments/assets/7e0f42e3-4770-4047-8558-9b6cc79b87bc" />
-<img width="4397" height="1080" alt="5_Level_2_4 3" src="https://github.com/user-attachments/assets/acc7d819-9aec-4a5f-bf62-90c4627424f2" />
-<img width="4804" height="548" alt="6_Level_2_4 4" src="https://github.com/user-attachments/assets/9f973d1b-7e73-401f-a0b4-e3426bbb6901" />
+**4.1 — Quản lý hồ sơ nhân viên & CTV**
+
+![DFD mức 2 — 4.1 Quản lý hồ sơ nhân viên & CTV](./images/nhansu/DFD_muc2_4_1_QuanLyHoSo.png)
+
+**4.2 — Phân ca & Chấm công**
+
+![DFD mức 2 — 4.2 Phân ca & Chấm công](./images/nhansu/DFD_muc2_4_2_PhanCaChamCong.png)
+
+**4.3 — Tính lương & Hoa hồng**
+
+![DFD mức 2 — 4.3 Tính lương & Hoa hồng](./images/nhansu/DFD_muc2_4_3_TinhLuongHoaHong.png)
+
+[Ảnh 4.3 được cung cấp trước đó](./images/nhansu/DFD_muc2_4_3_TinhLuongHoaHong_ban1.png)
+
+**4.4 — Đánh giá & Báo cáo nhân sự**
+
+![DFD mức 2 — 4.4 Đánh giá & Báo cáo nhân sự](./images/nhansu/DFD_muc2_4_4_DanhGiaBaoCao.png)
 
 
 ### Chức năng: Quản lý nội dung Fanpage
