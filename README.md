@@ -15,7 +15,6 @@ Dự án hướng đến việc quản lý tập trung thông tin hàng hóa, đ
 4. Chức năng Quản lý Nhân Viên và Cộng Tác Viên
 5. Chức năng Quản lý Giải Đấu và Tài Trợ Sự Kiện
 6. Chức năng quản lý nội dung Fanpage
-7. Chức năng quản lý order nước ngoài
 
 
 
@@ -56,36 +55,18 @@ Dự án hướng đến việc quản lý tập trung thông tin hàng hóa, đ
 
 #### Chức năng: Quản lý nội dung Fanpage
 
-> [!NOTE]
-> **CHƯA HOÀN THIỆN**
->
-> Chưa triển khai đặc tả — chờ bổ sung.
-
-
-- **Mục đích:** **[TODO]** Bổ sung mục đích quản lý nội dung Fanpage.
-
-- **Đối tượng thực hiện:** **[TODO]** Xác định người soạn, duyệt và đăng nội dung.
-
-- **Quy trình hoạt động & xử lý:** **[TODO]** Đặc tả quy trình soạn, duyệt, đăng, cập nhật và gỡ nội dung.
-
+- **Mục đích:**
+   Hoạch định chiến lược, lên lịch, biên soạn, kiểm duyệt và đăng tải các nội dung truyền thông, thông tin sản phẩm, sự kiện giải đấu, chương trình khuyến mãi lên trang mạng xã hội (Fanpage) nhằm thu hút khách hàng, tăng nhận diện thương hiệu và thúc đẩy doanh số bán hàng đa kênh.
+- **Đối tượng thực hiện:**
+   Nhân viên Marketing, Quản lý cửa hàng, Nền tảng Fanpage.
+- **Quy trình hoạt động & xử lý:**
+   Quy trình quản lý nội dung Fanpage bắt đầu từ việc Nhân viên Marketing tiến hành lập kế hoạch nội dung định kỳ (tuần/tháng) dựa trên lịch sự kiện giải đấu, các đợt nhập hàng mới hoặc chương trình khuyến mãi. Nhân viên tiến hành soạn thảo nội dung (bài viết, hình ảnh, video ngắn, thiết kế banner) và tạo yêu cầu đăng bài trên hệ thống.
+   Sau khi hoàn tất, yêu cầu sẽ được chuyển đến Quản lý cửa hàng để kiểm tra chất lượng, tính chính xác về thông tin sản phẩm/giá bán và thuần phong mỹ tục:
+      - Nếu bài viết đạt yêu cầu, Quản lý tiến hành phê duyệt và hệ thống sẽ tự động đăng tải theo lịch hẹn (hoặc đăng ngay lập tức).
+      - Nếu bài viết chưa đạt, hệ thống trả về trạng thái yêu cầu chỉnh sửa kèm theo nhận xét của quản lý để nhân viên cập nhật lại.
+   Sau khi bài viết được phát hành, hệ thống ghi nhận các chỉ số tương tác ban đầu (lượt thích, bình luận, chia sẻ) để phục vụ công tác đánh giá hiệu quả chiến dịch truyền thông. Trường hợp phát sinh thông tin sai lệch hoặc cần gỡ bỏ, quản lý hoặc nhân viên có quyền thực hiện thao tác cập nhật hoặc ẩn/gỡ bài viết trên hệ thống.
 ---
 
-#### Chức năng: Quản lý order nước ngoài
-
-> [!NOTE]
-> **CHƯA HOÀN THIỆN**
->
-> Chưa triển khai đặc tả — chờ bổ sung.
-
-
-- **Mục đích:** Quản lý đơn khách hàng nhờ cửa hàng mua hộ từ các sàn thương mại điện tử nước ngoài như Mercari, Taobao.
-
-- **Đối tượng thực hiện:** **[TODO]** Xác định người phụ trách tiếp nhận yêu cầu, báo giá, đặt mua và giao hàng.
-
-- **Quy trình hoạt động & xử lý:** **[TODO]** Đặc tả tiếp nhận đường dẫn sản phẩm, báo giá theo rate của đồng tiền tương ứng và phí vận chuyển, xác nhận/đặt cọc, đặt mua, theo dõi vận chuyển, quyết toán và bàn giao; bổ sung xử lý sự cố.
-
-
----
 ## 2. Mô tả các kho dữ liệu (Data Store)
 
 | Mã | Tên kho dữ liệu | Mô tả |
@@ -105,12 +86,17 @@ Dự án hướng đến việc quản lý tập trung thông tin hàng hóa, đ
 | D13 | Phiếu nhập kho | Lưu các lần nhập hàng vào kho. |
 | D14 | Công nợ nhà cung cấp | Lưu khoản phải trả và nợ còn lại của nhà cung cấp. |
 | D15 | Biên bản sự cố và đổi trả nhà cung cấp | Lưu sự cố nhập hàng và kết quả đổi trả. |
+| D16 | Kế hoạch nội dung Fanpage | Lưu trữ lịch trình, kế hoạch nội dung tổng thể, mục tiêu chiến dịch và phân công nhân sự thực hiện. |
+| D17 | Kho lưu trữ bài viết & tài nguyên truyền thông | Lưu trữ nội dung chi tiết các bài viết, trạng thái bài viết. |
+| D18 | Chỉ số tương tác & hiệu suất nội dung | Lưu trữ dữ liệu về lượt tiếp cận, tương tác (like, share, comment) và hiệu quả chuyển đổi từ các bài đăng trên Fanpage. |
 
-> [!NOTE]
-> **KHO DỮ LIỆU CHỜ BỔ SUNG**
->
-> Bổ sung kho dữ liệu cho Quản lý nội dung Fanpage và Quản lý order nước ngoài sau khi hoàn thiện đặc tả; dùng lại kho dùng chung phù hợp và cấp mã mới không trùng các mã hiện có.
+> Cứ ghi thẳng kho dữ liệu vào đây, nếu hợp lý ,sẽ sửa lại sau mỗi lần merge PR
 
+Kho dữ liệu:
+
+D1: Hồ sơ nhân viên & CTV.
+D2: Lịch làm việc & chấm công.
+D3: Bảng lương & hoa hồng.
 
 > Cứ ghi thẳng kho dữ liệu vào đây, nếu hợp lý ,sẽ sửa lại sau mỗi lần merge PR
 **1. D1: Danh mục Hàng hóa & Vị trí (Products & Locations Master Data)**
@@ -174,6 +160,30 @@ Tiến trình 3.0: Ghi nhận các chênh lệch ban đầu và cập nhật tì
 Tiến trình 4.0: Cập nhật phương án xử lý thất thoát sau khi có chỉ đạo từ Quản lý.
 
 Tiến trình 5.0: Đọc dữ liệu tổng hợp để xuất Báo cáo Thất thoát định kỳ cho Quản lý cửa hàng.
+2. Các tiến trình chính tra cứu/cập nhật những kho nào?
+
+4.1 ghi kho D1.
+4.2 đọc kho D1 và ghi kho D2.
+4.3 đọc kho D1, kho D2 và ghi kho D3.
+4.4 đọc kho D2 và kho D3.
+
+3. Kho D1 nhận và trả dữ liệu gì?
+
+Kho D1 nhận "Thông tin nhân viên & CTV" từ 4.1; trả "Danh sách nhân viên" cho 4.2 và "Mức lương, Tỉ lệ hoa hồng" cho 4.3.
+
+4. Kho D2 nhận và trả dữ liệu gì?
+
+Kho D2 nhận "Lịch làm việc" và "Dữ liệu chấm công" từ 4.2; trả "Giờ công" cho 4.3 và "Dữ liệu chấm công" cho 4.4.
+
+5. Kho D3 nhận và trả dữ liệu gì?
+
+Kho D3 nhận "Bảng lương, Hoa hồng" từ 4.3; trả "Dữ liệu lương, Hoa hồng" cho 4.4.
+
+6. Các kho dữ liệu được đọc và ghi bởi tiến trình con nào?
+
+Kho D1: ghi bởi 4.1.2; đọc bởi 4.2.3 và 4.3.2.
+Kho D2: ghi bởi 4.2.3 và 4.2.4; đọc bởi 4.3.1 và 4.4.1.
+Kho D3: ghi bởi 4.3.3; đọc bởi 4.4.1.
 ---
 
 ## 3. Phân tích những hạn chế đang tồn tại trong hệ thống và đề xuất giải pháp cải tiến
@@ -512,103 +522,271 @@ d. Danh sách câu hỏi và trả lời liên quan đến các thực thể ngo
 
 #### Bảng danh sách câu hỏi và trả lời
 
-> [!NOTE]
-> **CHỜ BỔ SUNG**
->
-> Bổ sung câu hỏi và trả lời về tiến trình, luồng dữ liệu, kho dữ liệu và thực thể ngoài.
+a. Các ô xử lý (Process)
+
+
+1. Mức ngữ cảnh có bao nhiêu tiến trình, được phân rã thành bao nhiêu tiến trình ở Level 1?
+
+Mức ngữ cảnh có 1 tiến trình: 4 -- Hệ thống Quản lý Nhân viên và Cộng tác viên. Level 1 phân rã thành 4 tiến trình:
+
+4.1 Quản lý hồ sơ nhân viên & CTV
+4.2 Phân ca & Chấm công
+4.3 Tính lương & Hoa hồng
+4.4 Đánh giá & Báo cáo nhân sự
+
+2. Tiến trình nào quản lý hồ sơ nhân viên và CTV?
+
+4.1 -- Quản lý hồ sơ nhân viên & CTV nhận "Thông tin cá nhân" từ Nhân viên và từ Cộng tác viên, rồi ghi "Thông tin nhân viên & CTV" vào kho D1. Hồ sơ không cần phê duyệt; Cộng tác viên được xem là đã xác thực nên không có bước đăng kí.
+
+3. Tiến trình nào phân ca và chấm công?
+
+4.2 -- Phân ca & Chấm công nhận "Danh sách nhân viên" từ kho D1; "Đăng kí ca, Yêu cầu nghỉ" và "Dữ liệu chấm công" từ Nhân viên; "Duyệt ca, Duyệt nghỉ" từ Quản lí cửa hàng. Tiến trình gửi "Lịch làm việc, Thông báo duyệt nghỉ" cho Nhân viên, gửi "Ca, Nghỉ cần duyệt" cho Quản lí cửa hàng và ghi "Lịch làm việc, Dữ liệu chấm công" vào kho D2.
+
+4. Tiến trình nào tính lương và hoa hồng?
+
+4.3 -- Tính lương & Hoa hồng nhận "Giờ công" từ kho D2, "Mức lương, Tỉ lệ hoa hồng" từ kho D1, "Mức hoa hồng" từ Quản lí cửa hàng và "Báo cáo doanh số" từ Cộng tác viên. Tiến trình gửi "Phiếu lương" cho Nhân viên, gửi "Mức hoa hồng" cho Cộng tác viên và ghi "Bảng lương, Hoa hồng" vào kho D3. Cộng tác viên không nhận hoa hồng trực tiếp từ chủ shop mà dựa vào "Mức hoa hồng" để tự trừ khi chuyển tiền lại cho chủ shop.
+
+5. Tiến trình nào đánh giá và lập báo cáo nhân sự?
+
+4.4 -- Đánh giá & Báo cáo nhân sự nhận "Dữ liệu lương, Hoa hồng" từ kho D3 và "Dữ liệu chấm công" từ kho D2; gửi "Báo cáo nhân sự" cho Quản lí cửa hàng và "Kết quả đánh giá" cho Nhân viên.
+
+6. Nếu Nhân viên xin nghỉ thì tiến trình nào xử lý?
+
+Tiến trình 4.2 -- Phân ca & Chấm công xử lý, cụ thể là tiến trình con 4.2.2 tiếp nhận yêu cầu nghỉ. Yêu cầu được chuyển sang 4.2.3 để gửi "Ca, Nghỉ cần duyệt" cho Quản lí cửa hàng, nhận "Duyệt ca, Duyệt nghỉ", sau đó gửi "Lịch làm việc, Thông báo duyệt nghỉ" cho Nhân viên và cập nhật lịch làm việc vào kho D2.
+
+7. 4.1 được phân rã thành những tiến trình nào?
+
+4.1.1 Tiếp nhận & Kiểm tra thông tin
+4.1.2 Lưu thông tin nhân viên & CTV
+
+8. 4.2 được phân rã thành những tiến trình nào?
+
+4.2.1 Tiếp nhận đăng kí ca
+4.2.2 Tiếp nhận yêu cầu nghỉ
+4.2.3 Xếp lịch & Duyệt ca, nghỉ
+4.2.4 Ghi nhận chấm công
+
+9. 4.3 được phân rã thành những tiến trình nào?
+
+4.3.1 Tổng hợp giờ công & doanh số
+4.3.2 Tính lương & hoa hồng
+4.3.3 Lập phiếu lương & Ghi nhận hoa hồng
+
+10. 4.4 được phân rã thành những tiến trình nào?
+
+4.4.1 Tổng hợp dữ liệu nhân sự
+4.4.2 Đánh giá hiệu suất
+4.4.3 Lập báo cáo nhân sự
+
+11. Các tiến trình con của 4.1 nhận và trả dữ liệu gì?
+
+4.1.1 nhận "Thông tin cá nhân" từ Nhân viên và từ Cộng tác viên; gửi "Thông tin đã kiểm tra" cho 4.1.2.
+4.1.2 nhận "Thông tin đã kiểm tra" từ 4.1.1; ghi "Thông tin nhân viên & CTV" vào kho D1.
+
+12. Các tiến trình con của 4.2 nhận và trả dữ liệu gì?
+
+4.2.1 nhận "Đăng kí ca" từ Nhân viên; gửi "Yêu cầu ca" cho 4.2.3.
+4.2.2 nhận "Yêu cầu nghỉ" từ Nhân viên; gửi "Yêu cầu nghỉ" cho 4.2.3.
+4.2.3 nhận "Yêu cầu ca" từ 4.2.1, "Yêu cầu nghỉ" từ 4.2.2 và "Danh sách nhân viên" từ kho D1; gửi "Ca, Nghỉ cần duyệt" cho Quản lí cửa hàng; nhận "Duyệt ca, Duyệt nghỉ" từ Quản lí cửa hàng; gửi "Lịch làm việc, Thông báo duyệt nghỉ" cho Nhân viên và ghi "Lịch làm việc" vào kho D2.
+4.2.4 nhận "Dữ liệu chấm công" từ Nhân viên và ghi "Dữ liệu chấm công" vào kho D2.
+
+13. Các tiến trình con của 4.3 nhận và trả dữ liệu gì?
+
+4.3.1 nhận "Giờ công" từ kho D2 và "Báo cáo doanh số" từ Cộng tác viên; gửi "Giờ công & doanh số" cho 4.3.2.
+4.3.2 nhận "Giờ công & doanh số" từ 4.3.1, "Mức lương, Tỉ lệ hoa hồng" từ kho D1 và "Mức hoa hồng" từ Quản lí cửa hàng; gửi "Kết quả tính lương, hoa hồng" cho 4.3.3.
+4.3.3 nhận kết quả tính; gửi "Phiếu lương" cho Nhân viên, gửi "Mức hoa hồng" cho Cộng tác viên và ghi "Bảng lương, Hoa hồng" vào kho D3.
+
+14. Các tiến trình con của 4.4 nhận và trả dữ liệu gì?
+
+4.4.1 nhận "Dữ liệu lương, Hoa hồng" từ kho D3 và "Dữ liệu chấm công" từ kho D2; gửi "Dữ liệu nhân sự tổng hợp" cho 4.4.2.
+4.4.2 nhận dữ liệu tổng hợp; gửi "Kết quả đánh giá" cho Nhân viên và "Kết quả đánh giá hiệu suất" cho 4.4.3.
+4.4.3 nhận kết quả đánh giá hiệu suất; gửi "Báo cáo nhân sự" cho Quản lí cửa hàng.
+
+b. Các dòng dữ liệu (Data Flow)
+
+1. Nhân viên gửi những dữ liệu gì vào hệ thống?
+
+Ở mức ngữ cảnh, Nhân viên gửi "Thông tin cá nhân, Đăng kí ca, Yêu cầu nghỉ, Dữ liệu chấm công". Ở Level 1, các dữ liệu này được chuyển đến 4.1 và 4.2 theo chức năng tương ứng.
+
+2. Hệ thống trả dữ liệu gì cho Nhân viên?
+
+Ở mức ngữ cảnh, hệ thống trả "Lịch làm việc, Thông báo duyệt nghỉ, Phiếu lương, Kết quả đánh giá". Ở Level 1, các dữ liệu này lần lượt do 4.2, 4.3 và 4.4 cung cấp.
+
+3. Cộng tác viên gửi và nhận dữ liệu gì?
+
+Cộng tác viên gửi "Thông tin cá nhân" đến 4.1 và "Báo cáo doanh số" đến 4.3; nhận "Mức hoa hồng" từ 4.3 để tự trừ hoa hồng khi chuyển tiền lại cho chủ shop.
+
+4. Quản lí cửa hàng gửi và nhận dữ liệu gì?
+
+Quản lí cửa hàng gửi "Duyệt ca, Duyệt nghỉ" đến 4.2 và "Mức hoa hồng" đến 4.3; nhận "Ca, Nghỉ cần duyệt" từ 4.2 và "Báo cáo nhân sự" từ 4.4.
+
+5. Giữa mức ngữ cảnh và Level 1 các luồng được tổng hợp như thế nào?
+
+Các luồng của cùng một thực thể ngoài ở Level 1 được tổng hợp thành luồng vào/ra tương ứng ở mức ngữ cảnh. Ví dụ, các dữ liệu Nhân viên gửi đến 4.1 và 4.2 được gộp thành "Thông tin cá nhân, Đăng kí ca, Yêu cầu nghỉ, Dữ liệu chấm công".
+
+6. Giữa các tiến trình con có những luồng dữ liệu nào?
+
+Các luồng nội bộ gồm:
+
+4.1.1 → 4.1.2: "Thông tin đã kiểm tra".
+4.2.1 → 4.2.3: "Yêu cầu ca".
+4.2.2 → 4.2.3: "Yêu cầu nghỉ".
+4.3.1 → 4.3.2: "Giờ công & doanh số".
+4.3.2 → 4.3.3: "Kết quả tính lương, hoa hồng".
+4.4.1 → 4.4.2: "Dữ liệu nhân sự tổng hợp".
+4.4.2 → 4.4.3: "Kết quả đánh giá hiệu suất".
+
+7. Luồng "Lịch làm việc, Dữ liệu chấm công" ở Level 1 được tách như thế nào ở Level 2?
+
+Ở Level 2, luồng tổng hợp được tách thành:
+
+4.2.3 ghi "Lịch làm việc" vào kho D2.
+4.2.4 ghi "Dữ liệu chấm công" vào kho D2.
+
+c. Các kho dữ liệu (Data Store)
+
+1. Các kho dữ liệu nào xuất hiện trong sơ đồ?
+
+
+c. Cơ sở dữ liệu (Database)
+
+1. Cơ sở dữ liệu (database) là gì và dùng để làm gì trong hệ thống?
+
+Cơ sở dữ liệu là nơi lưu trữ có tổ chức các dữ liệu của hệ thống để tiến trình đọc hoặc ghi khi cần. Hệ thống dùng một cơ sở dữ liệu quan hệ duy nhất (CSDL Quản lý nhân sự) để lưu toàn bộ dữ liệu của nhân viên, cộng tác viên, lịch làm việc, chấm công, lương và hoa hồng.
+
+2. Các kho dữ liệu D1, D2, D3 được cài đặt thành cơ sở dữ liệu như thế nào?
+
+Ba kho D1, D2, D3 trong DFD cùng nằm trong CSDL Quản lý nhân sự. Mỗi kho tương ứng với một nhóm bảng:
+
+Kho D1 gồm bảng NHAN_VIEN và CONG_TAC_VIEN.
+Kho D2 gồm bảng LICH_LAM_VIEC và CHAM_CONG.
+Kho D3 gồm bảng BANG_LUONG và HOA_HONG.
+
+3. Cơ sở dữ liệu gồm bao nhiêu bảng?
+
+Cơ sở dữ liệu gồm 6 bảng: NHAN_VIEN, CONG_TAC_VIEN, LICH_LAM_VIEC, CHAM_CONG, BANG_LUONG và HOA_HONG.
+
+
+4. Các bảng quan hệ với nhau như thế nào?
+
+Một nhân viên có nhiều dòng lịch làm việc, chấm công và bảng lương. Một cộng tác viên có nhiều dòng hoa hồng. Thuộc tính và kiểu dữ liệu chi tiết của từng bảng xem mục IV.
+
+
+d. Các thực thể ngoài (External Entity)
+
+1. Các thực thể ngoài của hệ thống là ai?
+
+Nhân viên.
+Cộng tác viên.
+Quản lí cửa hàng.
+
+2. Vai trò và dữ liệu trao đổi của từng thực thể là gì?
+
+Nhân viên: gửi thông tin cá nhân, đăng kí ca, yêu cầu nghỉ và dữ liệu chấm công; nhận lịch làm việc, thông báo duyệt nghỉ, phiếu lương và kết quả đánh giá.
+Cộng tác viên: gửi thông tin cá nhân và báo cáo doanh số; nhận mức hoa hồng.
+Quản lí cửa hàng: gửi duyệt ca/nghỉ và chính sách lương & hoa hồng; nhận ca/nghỉ cần duyệt và báo cáo nhân sự.
+
+3. Mỗi thực thể ngoài xuất hiện ở những sơ đồ nào?
+
+Cả ba thực thể ngoài đều xuất hiện ở mức ngữ cảnh, Level 1 và các sơ đồ Level 2 có liên quan đến chức năng của họ.
+
+4. Thực thể nào nhận dữ liệu từ nhiều tiến trình nhất?
+
+Nhân viên nhận dữ liệu từ ba tiến trình chính: 4.2 (Lịch làm việc, Thông báo duyệt nghỉ), 4.3 (Phiếu lương) và 4.4 (Kết quả đánh giá).
 
 #### Mô hình mức ngữ cảnh (Context Level)
 
-> [!NOTE]
-> **CHỜ BỔ SUNG**
->
-> Bổ sung sơ đồ DFD mức ngữ cảnh.
+<img width="2800" height="1068" alt="image" src="https://github.com/user-attachments/assets/280c0abb-82b8-4724-af95-491f419b3ad5" />
+
+
 
 #### Mô hình mức đỉnh (Level 1)
 
-> [!NOTE]
-> **CHỜ BỔ SUNG**
->
-> Bổ sung sơ đồ DFD mức đỉnh.
+<img width="2840" height="3485" alt="image" src="https://github.com/user-attachments/assets/e807d646-d70f-4679-9aa7-0948e07a6a73" />
+
+
 
 #### Mô hình mức dưới đỉnh (Level 2)
 
-> [!NOTE]
-> **CHỜ BỔ SUNG**
->
-> Bổ sung sơ đồ phân rã các tiến trình mức đỉnh.
+<img width="4717" height="721" alt="3_Level_2_4 1" src="https://github.com/user-attachments/assets/c21f269a-4cc7-49af-831f-fbe9872fac2f" />
+<img width="3824" height="1020" alt="4_Level_2_4 2" src="https://github.com/user-attachments/assets/7e0f42e3-4770-4047-8558-9b6cc79b87bc" />
+<img width="4397" height="1080" alt="5_Level_2_4 3" src="https://github.com/user-attachments/assets/acc7d819-9aec-4a5f-bf62-90c4627424f2" />
+<img width="4804" height="548" alt="6_Level_2_4 4" src="https://github.com/user-attachments/assets/9f973d1b-7e73-401f-a0b4-e3426bbb6901" />
 
----
 
 ### Chức năng: Quản lý nội dung Fanpage
 
-> [!NOTE]
-> **CHƯA HOÀN THIỆN**
->
-> Chưa bổ sung mô hình DFD.
-
 #### Bảng danh sách câu hỏi và trả lời
 
-> [!NOTE]
-> **CHỜ BỔ SUNG**
->
-> Bổ sung câu hỏi và trả lời về tiến trình, luồng dữ liệu, kho dữ liệu và thực thể ngoài.
+##### **a. Danh sách câu hỏi và trả lời liên quan đến các ô xử lý (Process)**
+
+1. **Nhiệm vụ của tiến trình theo dõi và đo lường hiệu suất trong mô hình là gì?**
+   Hệ thống tự động thu thập các chỉ số tương tác thực tế (lượt tiếp cận, thích, bình luận, chia sẻ) từ nền tảng Fanpage, ghi nhận vào kho dữ liệu hiệu suất để tổng hợp báo cáo gửi về cho nhân viên marketing và quản lý cửa hàng.
+2. **Mức 1 được phân rã thành những tiến trình nào?**
+   Có 4 tiến trình: 1.1 Lập kế hoạch nội dung; 1.2 Soạn thảo và kiểm duyệt nội dung; 1.3 Đăng tải và phân phối nội dung; 1.4 Theo dõi tương tác và đo lường hiệu suất.
+3. **Tiến trình 1.1 được phân rã thành những tiến trình nào?**
+   1.1.1 Xác định mục tiêu, chủ đề và đối tượng; 1.1.2 Xây dựng lịch và phân bổ nội dung; 1.1.3 Hoàn thiện và lưu kế hoạch.
+4. **Tiến trình 1.2 được phân rã thành những tiến trình nào?**
+   1.2.1 Tiếp nhận kế hoạch, ý tưởng và tài nguyên; 1.2.2 Soạn nội dung, thiết kế ấn phẩm; 1.2.3 Kiểm tra nội dung và gửi duyệt; 1.2.4 Tiếp nhận kết quả, cập nhật trạng thái.
+5. **Tiến trình 1.3 được phân rã thành những tiến trình nào?**
+   1.3.1 Kiểm tra bài đã duyệt và lịch đăng; 1.3.2 Đăng bài lên nền tảng Fanpage; 1.3.3 Ghi nhận kết quả và cập nhật trạng thái.
+6. **Tiến trình 1.4 được phân rã thành những tiến trình nào?**
+   1.4.1 Thu thập số liệu bài đăng; 1.4.2 Tổng hợp và đánh giá hiệu suất; 1.4.3 Lưu chỉ số và lập báo cáo.
+7. **Nếu quản lý yêu cầu chỉnh sửa bài viết thì tiến trình nào tiếp nhận kết quả?**
+   1.2.4 tiếp nhận trạng thái và nhận xét của quản lý, cập nhật trạng thái bài viết và trả kết quả duyệt, yêu cầu chỉnh sửa cho Nhân viên Marketing.
+
+##### **b. Danh sách câu hỏi và trả lời liên quan đến các dòng dữ liệu (Data Flow)**
+
+1. **Luồng dữ liệu chính đi từ Nhân viên Marketing vào hệ thống trong quy trình này là gì?**
+   Kế hoạch nội dung định kỳ, ý tưởng, văn bản, hình ảnh/banner thiết kế, yêu cầu lên lịch đăng bài và các yêu cầu gỡ bài hoặc cập nhật phát sinh.
+2. **Quản lý cửa hàng gửi và nhận những dữ liệu gì?**
+   Quản lý nhận bài viết cần duyệt và báo cáo hiệu quả; gửi kết quả phê duyệt, trạng thái bài viết, nhận xét và yêu cầu chỉnh sửa.
+3. **Nền tảng Fanpage gửi và nhận những dữ liệu gì?**
+   Nền tảng nhận bài viết chính thức; gửi mã bài đăng, trạng thái đăng và số liệu tương tác gồm lượt tiếp cận, thích, bình luận, chia sẻ.
+4. **Luồng 1.2.2 → 1.2.3 mang dữ liệu gì?**
+   Bản nháp nội dung và ấn phẩm được chuyển sang bước kiểm tra nội dung và gửi duyệt.
+5. **Luồng 1.3.1 → 1.3.2 mang dữ liệu gì?**
+   Bài đã duyệt sau bước kiểm tra bài viết và lịch đăng, để tiến hành đăng lên nền tảng Fanpage.
+6. **Luồng 1.4.2 → 1.4.3 mang dữ liệu gì?**
+   Chỉ số tương tác đã tổng hợp và kết quả so sánh mục tiêu, phục vụ lưu chỉ số và lập báo cáo.
+
+##### **c. Danh sách câu hỏi và trả lời liên quan đến các kho dữ liệu (Data Store)**
+
+1. **Kho lưu trữ dữ liệu chính nào được sử dụng trong quá trình quản lý nội dung Fanpage?**
+   Các kho dữ liệu chính gồm: Kho kế hoạch nội dung Fanpage (D16), Kho bài viết & tài nguyên truyền thông (D17), và Kho chỉ số tương tác & hiệu suất nội dung (D18).
+2. **D16 cung cấp dữ liệu cho tiến trình nào?**
+   1.1.3 ghi kế hoạch vào D16; 1.2.1 đọc kế hoạch nội dung từ D16 để tiếp nhận và chuẩn bị soạn thảo.
+3. **D17 được đọc và cập nhật ở những bước nào?**
+   1.2.4 ghi bài viết và trạng thái vào D17; 1.3.1 đọc bài viết đã duyệt và yêu cầu gỡ bài từ D17; 1.3.3 cập nhật trạng thái đăng vào D17.
+4. **D18 được đọc và cập nhật ở những bước nào?**
+   1.4.3 ghi dữ liệu thống kê tổng hợp vào D18; 1.4.2 đọc dữ liệu tương tác đã lưu để tổng hợp và đánh giá hiệu suất.
+5. **D17 và D18 khác nhau thế nào?**
+   D17 lưu bài viết, tài nguyên truyền thông và trạng thái bài viết; D18 lưu số liệu tương tác và hiệu suất để phục vụ đánh giá, báo cáo.
+
+##### **d. Danh sách câu hỏi và trả lời liên quan đến các thực thể ngoài (External Entity)**
+
+1. **Xác định các tác nhân ngoài tương tác trực tiếp với chức năng "Quản lý nội dung Fanpage"?**
+   Các tác nhân ngoài bao gồm: Nhân viên Marketing (lên kế hoạch, soạn thảo và gửi yêu cầu đăng bài), Quản lý cửa hàng (kiểm duyệt, phê duyệt hoặc yêu cầu chỉnh sửa nội dung), và Nền tảng Fanpage (môi trường mạng xã hội nhận bài viết hiển thị và trả về dữ liệu tương tác).
+2. **Nhân viên Marketing nhận những kết quả gì từ hệ thống?**
+   Kết quả duyệt, yêu cầu chỉnh sửa hoặc gỡ bài, cùng báo cáo hiệu quả nội dung.
+3. **Những tác nhân nào nhận báo cáo hiệu quả nội dung?**
+   Quản lý cửa hàng và Nhân viên Marketing nhận báo cáo do tiến trình 1.4.3 lập.
 
 #### Mô hình mức ngữ cảnh (Context Level)
 
-> [!NOTE]
-> **CHỜ BỔ SUNG**
->
-> Bổ sung sơ đồ DFD mức ngữ cảnh.
+![DFD Mức ngữ cảnh - Quản lí nội dung Fanpage](./images/quanlyfanpage/DFD_muc0.png)
 
 #### Mô hình mức đỉnh (Level 1)
 
-> [!NOTE]
-> **CHỜ BỔ SUNG**
->
-> Bổ sung sơ đồ DFD mức đỉnh.
+![DFD Mức 1 - Quản lí nội dung Fanpage](./images/quanlyfanpage/DFD_muc1.png)
 
 #### Mô hình mức dưới đỉnh (Level 2)
 
-> [!NOTE]
-> **CHỜ BỔ SUNG**
->
-> Bổ sung sơ đồ phân rã các tiến trình mức đỉnh.
+![DFD Mức 2 - 1.1 Lập kế hoạch nội dung](./images/quanlyfanpage/DFD_muc2_1_LapKeHoach.png)
 
----
+![DFD Mức 2 - 1.2 Soạn thảo và kiểm duyệt nội dung](./images/quanlyfanpage/DFD_muc2_2_SoanThaoKiemDuyet.png)
 
-### Chức năng: Quản lý order nước ngoài
+![DFD Mức 2 - 1.3 Đăng tải và phân phối nội dung](./images/quanlyfanpage/DFD_muc2_3_DangTaiPhanPhoi.png)
 
-> [!NOTE]
-> **CHƯA HOÀN THIỆN**
->
-> Chưa bổ sung mô hình DFD.
-
-#### Bảng danh sách câu hỏi và trả lời
-
-> [!NOTE]
-> **CHỜ BỔ SUNG**
->
-> Bổ sung câu hỏi và trả lời về tiến trình, luồng dữ liệu, kho dữ liệu và thực thể ngoài; xác định cách biểu diễn các sàn Mercari, Taobao trong thực thể chung Sàn thương mại điện tử nước ngoài.
-
-#### Mô hình mức ngữ cảnh (Context Level)
-
-> [!NOTE]
-> **CHỜ BỔ SUNG**
->
-> Bổ sung sơ đồ DFD mức ngữ cảnh.
-
-#### Mô hình mức đỉnh (Level 1)
-
-> [!NOTE]
-> **CHỜ BỔ SUNG**
->
-> Bổ sung sơ đồ DFD mức đỉnh.
-
-#### Mô hình mức dưới đỉnh (Level 2)
-
-> [!NOTE]
-> **CHỜ BỔ SUNG**
->
-> Bổ sung sơ đồ phân rã các tiến trình mức đỉnh.
+![DFD Mức 2 - 1.4 Theo dõi tương tác và đo lường hiệu suất](./images/quanlyfanpage/DFD_muc2_4_TheoDoiTuongTac.png)
 ---
