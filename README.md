@@ -93,116 +93,12 @@ Dự án hướng đến việc quản lý tập trung thông tin hàng hóa, đ
 | D20 | Lịch làm việc | Lưu ca làm việc đã xếp và kết quả duyệt ca, nghỉ. |
 | D21 | Chấm công | Lưu dữ liệu chấm công, giờ công thực tế để tính lương và đánh giá. |
 | D22 | Bảng lương & hoa hồng | Lưu bảng lương nhân viên và kết quả tính hoa hồng cộng tác viên. |
+| D23 | Vị trí lưu trữ | Lưu thông tin khu vực, kệ, ngăn và vị trí lưu trữ hợp lệ. |
+| D24 | Sổ Nhật ký Phiếu kho | Lưu lịch sử nhập, xuất và điều chỉnh hàng hóa. |
+| D25 | Sổ Kiểm kê và Thất thoát | Lưu kết quả kiểm kê, chênh lệch và xử lý thất thoát. |
 
-### Kho dữ liệu nhân viên và cộng tác viên
 
-Ảnh phác thảo dùng D1–D3 cục bộ; mô hình hiện tại dùng D19–D22 để tiếp nối danh mục chung. Kho D2 cũ được tách thành D20 (Lịch làm việc) và D21 (Chấm công).
-
-D1: Hồ sơ nhân viên & CTV.
-D2: Lịch làm việc & chấm công.
-D3: Bảng lương & hoa hồng.
-
-> Cứ ghi thẳng kho dữ liệu vào đây, nếu hợp lý ,sẽ sửa lại sau mỗi lần merge PR
-**1. D1: Danh mục Hàng hóa & Vị trí (Products & Locations Master Data)**
-Mô tả: Đây là kho dữ liệu gốc (Master Data) lưu trữ các thông tin tĩnh và quy hoạch không gian của kho.
-
-Dữ liệu lưu trữ:
-
-Thông tin sản phẩm: Mã hàng (SKU), tên hàng, nhóm hàng, quy cách đóng gói, đơn vị tính, định mức tồn kho (Min/Max).
-
-Thông tin vị trí: Sơ đồ kho (Khu vực/Zone, Dãy/Aisle, Kệ/Rack, Tầng, Hộc/Bin) và vị trí lưu trữ mặc định của từng mã hàng.
-
-Tương tác Tiến trình:
-
-Tiến trình 1.0 (Nhập kho & Vị trí): Đọc để quyết định vị trí cất hàng (Put-away).
-
-Tiến trình 2.0 (Xuất kho Nội bộ): Đọc để in Lệnh lấy hàng (Pick-list) kèm chính xác vị trí cần lấy.
-
-**2. D2: Sổ Tồn kho Chính / Tồn kho Thực tế (Main Stock / On-hand Inventory)**
-Mô tả: Kho dữ liệu quan trọng nhất, phản ánh số lượng hàng hóa khả dụng thực tế tại kho theo thời gian thực (Real-time).
-
-Dữ liệu lưu trữ: Mã hàng hóa, Số lượng tồn sổ sách, Số lượng khả dụng (Available), Số lượng đang bị block (hàng lỗi đang chờ xử lý).
-
-Tương tác Tiến trình:
-
-Tiến trình 1.0: Ghi cộng (+) tồn kho sau khi hoàn tất cất hàng.
-
-Tiến trình 2.0: Ghi trừ (-) tồn kho sau khi xuất hàng hoàn tất theo Lệnh xuất nội bộ.
-
-Tiến trình 3.0: Đọc số liệu tồn sổ sách để đối chiếu với mã quét thực tế từ nhân viên.
-
-Tiến trình 4.0: Ghi cập nhật/hiệu chỉnh (=) lại tồn kho thực tế nếu có chênh lệch sau khi Quản lý phê duyệt.
-
-  **Các kho dữ liệu D3 - Ký gửi CTV và D11 - Đối soát CTV đã được xóa bỏ hoàn toàn để đảm bảo hệ thống quản lý kho chỉ tập trung vào nghiệp vụ "Kho nội bộ", đẩy phần thương mại lên Hệ thống Bán hàng xử lý**
-
-**3. D4: Sổ Nhật ký Phiếu kho (Inventory Transaction Log / Ledger)**
-Mô tả: Đóng vai trò như một "sổ cái" (Ledger) lưu vết toàn bộ lịch sử biến động của hàng hóa để phục vụ truy xuất, kiểm toán (Audit trail). Không bao giờ được xóa dữ liệu ở kho này.
-
-Dữ liệu lưu trữ: Mã giao dịch, Loại giao dịch (Nhập/Xuất/Điều chỉnh/Chuyển vị trí), Mã hàng, Số lượng thay đổi, Thời gian thực hiện, Nhân viên thực hiện, Tham chiếu đến chứng từ gốc (Mã Lệnh xuất nội bộ, Mã Packing list NCC).
-
-  Tương tác Tiến trình:
-
-Tiến trình 1.0 & 2.0: Tự động ghi (Insert) một dòng lịch sử giao dịch mỗi khi một lệnh nhập/xuất hoàn tất.
-
-Tiến trình 4.0: Ghi nhận lịch sử giao dịch "Điều chỉnh tồn kho" (Adjustment) khi xử lý chênh lệch.
-
-**4. D5: Sổ Kiểm kê & Thất thoát (Audit & Loss Records)**
-Mô tả: Kho dữ liệu chuyên biệt dùng để quản lý các rủi ro, sai lệch, tình trạng hàng hóa bất thường và kết quả của các kỳ kiểm kê định kỳ/đột xuất.
-
-  Dữ liệu lưu trữ:
-
-Dữ liệu kiểm kê: Mã kỳ kiểm kê, danh sách hàng đếm, số lượng đếm thực tế, số lượng lệch (thừa/thiếu).
-
-Dữ liệu tình trạng: Danh sách hàng lỗi, hư hỏng, hết hạn, cần bảo dưỡng.
-
-Quyết định xử lý: Phương án xử lý (hủy, đền bù, nhập lại), Trạng thái phê duyệt của Quản lý.
-
-  Tương tác Tiến trình:
-
-Tiến trình 3.0: Ghi nhận các chênh lệch ban đầu và cập nhật tình trạng hàng hóa lỗi/hư hỏng vào sổ.
-
-Tiến trình 4.0: Cập nhật phương án xử lý thất thoát sau khi có chỉ đạo từ Quản lý.
-
-Tiến trình 5.0: Đọc dữ liệu tổng hợp để xuất Báo cáo Thất thoát định kỳ cho Quản lý cửa hàng.
-2. Các tiến trình chính tra cứu/cập nhật những kho nào?
-
-4.1 ghi kho D1.
-4.2 đọc kho D1 và ghi kho D2.
-4.3 đọc kho D1, kho D2 và ghi kho D3.
-4.4 đọc kho D2 và kho D3.
-
-3. Kho D1 nhận và trả dữ liệu gì?
-
-Kho D1 nhận "Thông tin nhân viên & CTV" từ 4.1; trả "Danh sách nhân viên" cho 4.2 và "Mức lương, Tỉ lệ hoa hồng" cho 4.3.
-
-4. Kho D2 nhận và trả dữ liệu gì?
-
-Kho D2 nhận "Lịch làm việc" và "Dữ liệu chấm công" từ 4.2; trả "Giờ công" cho 4.3 và "Dữ liệu chấm công" cho 4.4.
-
-5. Kho D3 nhận và trả dữ liệu gì?
-
-Kho D3 nhận "Bảng lương, Hoa hồng" từ 4.3; trả "Dữ liệu lương, Hoa hồng" cho 4.4.
-| Tiến trình | Đọc | Ghi |
-| --- | --- | --- |
-| 4.1 Quản lý hồ sơ | — | D19: Thông tin nhân viên & CTV |
-| 4.2 Phân ca & Chấm công | D19: Danh sách nhân viên | D20: Lịch làm việc; D21: Dữ liệu chấm công |
-| 4.3 Tính lương & Hoa hồng | D19: Mức lương, Tỉ lệ hoa hồng; D21: Giờ công | D22: Bảng lương, Hoa hồng |
-| 4.4 Đánh giá & Báo cáo nhân sự | D21: Dữ liệu chấm công; D22: Dữ liệu lương, Hoa hồng | — |
-
-Ở mức 2: 4.1.2 ghi D19; 4.2.3 đọc D19 và ghi D20; 4.2.4 ghi D21; 4.3.1 đọc D21; 4.3.2 đọc D19; 4.3.3 ghi D22; 4.4.1 đọc D21 và D22.
-
----
-
-## 3. Phân tích những hạn chế đang tồn tại trong hệ thống và đề xuất giải pháp cải tiến
-
-> [!NOTE]
-> **CHỜ BỔ SUNG**
->
-> Phân tích những hạn chế đang tồn tại và đề xuất giải pháp cải tiến.
-
----
-
-## 4. Xây dựng mô hình DFD cho từng chức năng
+## 3. Xây dựng mô hình DFD cho từng chức năng
 
 ### Chức năng: Nhập Hàng
 
@@ -415,115 +311,112 @@ Trả lời: Hệ thống tự động tổng kết bảng xếp hạng chung cu
 
 ### Chức năng: Quản lý Kho
 
-> [!NOTE]
-> **CHƯA HOÀN THIỆN**
->
-> Chưa bổ sung mô hình DFD.
-
-#### Bảng danh sách câu hỏi và trả lời
-
-> [!NOTE]
-> **CHỜ BỔ SUNG**
->
-> Bổ sung câu hỏi và trả lời về tiến trình, luồng dữ liệu, kho dữ liệu và thực thể ngoài.
-
-a. Danh sách câu hỏi và trả lời liên quan đến các ô xử lý (Process)
-    Câu hỏi 1 : Các tiến trình 1.0, 3.0 và 5.0 đảm nhận những nhiệm vụ cốt lõi gì?
-  Trả lời : 
-+ 1.0: Tiếp nhận hàng hóa/chứng từ nhập từ Nhà cung cấp hoặc thu hồi hàng nhập hoàn từ CTV.   
-+ 3.0: Xử lý xuất hàng đóng gói (Pick/Pack) cho các giao dịch bán lẻ và nhu cầu xuất thưởng giải đấu.   
-+ 5.0: Tổng hợp số liệu từ các kho dữ liệu để lập báo cáo tồn kho, ký gửi và thất thoát trình Quản lý cửa hàng.
-    Câu hỏi 2 : Nếu lượng tồn kho chính không đủ khi CTV gửi yêu cầu lấy hàng, tiến trình nào xử lý?
-  Trả lời : 
-- Tiến trình 2.1 (Kiểm tra tồn kho & Xác thực CTV) sẽ kiểm tra tồn khả dụng tại D4. Nếu thiếu hàng, tiến trình sẽ phát thông báo từ chối hoặc yêu cầu điều chỉnh số lượng trước khi chuyển sang bước phê duyệt 2.2.
-    Câu hỏi 3 : Nếu phát hiện chênh lệch giữa thực tế và sổ sách khi kiểm kê, tiến trình nào thực hiện cân bằng kho?
-  Trả lời : 
-- Tiến trình 4.1 (kiểm kê quầy) và 4.2 (đối soát CTV) ghi nhận chênh lệch. Sau đó, 4.3 trình báo cáo lên Quản lý cửa hàng; khi nhận phản hồi phê duyệt, 4.3 sẽ trực tiếp ghi điều chỉnh cân bằng lại kho D4 và D11.
-    Câu hỏi 4 : Khi CTV không bán hết hàng hoặc trả lại hàng lỗi, tiến trình nào thu hồi về kho chính?
-  Trả lời : 
-- Tiến trình 1.0 (Xử lý Ghi nhận Nhập kho & Hoàn kho) tiếp nhận yêu cầu nhập hoàn, kiểm tra hàng hóa, lập phiếu nhập hoàn, ghi tăng lại tồn kho chính D4 và giảm tồn ký gửi CTV tại D11. 
-
-b. Danh sách câu hỏi và trả lời liên quan đến các dòng dữ liệu (Data Flow)
-    Câu hỏi 1 : Nhân viên kho gửi và nhận những dữ liệu gì với hệ thống kho?
-  Trả lời : 
-- Gửi: Lập phiếu nhập kho, yêu cầu Pick/Pack xuất hàng, dữ liệu quét mã kiểm kê thực tế.   
-- Nhận: Xác nhận nhập kho, thông tin xuất hàng confirm, kết quả đối chiếu kiểm kê.
-    Câu hỏi 2 : Cộng tác viên (CTV) trao đổi những dữ liệu gì với phân hệ Quản lý Kho?
-  Trả lời : 
-- Gửi: Yêu cầu lấy hàng (gắn mã CTV), yêu cầu trả hàng/nhập hoàn, số liệu báo cáo tồn kho từ xa.   
-- Nhận: Phiếu xuất kho chuyển hàng, xác nhận phiếu nhập hoàn, kết quả đối soát ký gửi.
-    Câu hỏi 3 : Dữ liệu trao đổi giữa Hệ thống Bán lẻ / Giải đấu và Phân hệ Quản lý Kho gồm những gì?
-  Trả lời :
-- Gửi vào Kho: Thông tin giao dịch bán lẻ, yêu cầu xuất thưởng giải đấu.   
-- Nhận từ Kho: Xác nhận Fulfill (hoàn tất xuất kho/trừ tồn thời gian thực).
-    Câu hỏi 4 : Nhà cung cấp (NCC) và Hệ thống Kho trao đổi những thông tin nào?
-  Trả lời : 
-- NCC gửi: Thông tin hàng hóa incoming, Packing list / Hóa đơn nhập hàng.   
-- Kho gửi NCC: Biên bản sự cố hư hỏng & yêu cầu đổi trả (khi phát hiện hàng lỗi lúc nhập kiểm).
-    Câu hỏi 5 : Luồng dữ liệu báo cáo và phê duyệt giữa Quản lý cửa hàng và Kho diễn ra như thế nào?
-  Trả lời : 
-- Kho gửi: Báo cáo tồn kho tổng hợp, báo cáo thất thoát/hư hỏng.
-- Quản lý gửi: Phê duyệt hiệu chỉnh tồn kho, chỉ đạo xử lý thất thoát.
-    Câu hỏi 6 : Nếu số liệu quét mã kiểm kê thực tế bị lệch so với sổ sách, luồng dữ liệu đi ra sao?
-  Trả lời : 
-- Từ 4.1/4.2 gửi luồng Chênh lệch tồn kho sang 4.3.
-- Từ 4.3 gửi luồng Báo cáo thất thoát tổng hợp tới Quản lý cửa hàng.
-- Quản lý trả lại luồng Phê duyệt hiệu chỉnh & Xử lý, từ đó 4.3 gửi luồng Điều chỉnh tồn kho cập nhật vào D4/D11. 
-
-c. Danh sách câu hỏi và trả lời liên quan đến các kho dữ liệu (Data Store)
-    Câu hỏi 1 : Kho D11 (Đối soát CTV) lưu trữ thông tin gì và tương tác với tiến trình nào? Lưu số lượng hàng ký gửi, lịch sử xuất/hoàn và dư nợ hàng hóa của từng CTV.
-  Trả lời : 
-- Tiến trình 2.3 ghi tăng kho ký gửi CTV khi xuất hàng.   
-- Tiến trình 4.2 đọc đối chiếu và 4.3 ghi điều chỉnh lại số dư ký gửi thực tế.
-    Câu hỏi 2 : Dữ liệu trong D13 (Phiếu nhập kho) và D15 (Biên bản thất thoát) phục vụ mục đích gì?
-  Trả lời : 
-- D13: Lưu trữ lịch sử chi tiết từng lần nhập kho (từ NCC hoặc CTV nhập hoàn) phục vụ truy xuất nguồn gốc.
-- D15: Đăng ký số biên bản, lưu vết thông tin thất thoát, hư hỏng, lệch kho và các yêu cầu khiếu nại/đổi trả NCC.
-    Câu hỏi 3 : Thời điểm nào kho D4 và D11 đồng thời được cập nhật trong quy trình Ký gửi CTV?
-  Trả lời : 
-- Ngay khi tiến trình 2.2 phê duyệt đơn và 2.3 ghi nhận giao dịch, hệ thống tự động chạy đồng thời: giảm số lượng tồn kho chính tại D4 và tăng tương ứng số lượng tồn ký gửi tại D11 của CTV đó.
-    Câu hỏi 4 : Khi phát hiện hàng hư hỏng do nhà cung cấp lúc nhập hàng, CSDL ghi nhận ra sao?
-  Trả lời : 
-- Tiến trình 1.0 ghi nhận phiếu nhập cho phần đạt chuẩn vào D13 và tăng tồn D4, đồng thời đẩy dữ liệu lô bị lỗi sang D15 (Biên bản sự cố và đổi trả NCC) để lưu vết xử lý.
-
-d. Danh sách câu hỏi và trả lời liên quan đến các thực thể ngoài (External Entity)
-    Câu hỏi 1 : Thực thể Quản lý cửa hàng đóng vai trò quyết định nào trong luồng thông tin kho?
-  Trả lời : 
--Đóng vai trò phê duyệt cuối cùng (Approval Boundary). Hệ thống cung cấp báo cáo thất thoát/chênh lệch cho Quản lý, và Quản lý phát ra các chỉ đạo xử lý, cho phép hệ thống cập nhật điều chỉnh CSDL.
-    Câu hỏi 2 : Mối quan hệ giữa thực thể Hệ thống Bán lẻ / Giải đấu với phân hệ Kho là gì?
-  Trẳ lời : 
--Đóng vai trò là các nguồn phát sinh nhu cầu xuất kho tự động. Khi có giao dịch bán lẻ hoặc phát giải thưởng, thực thể này gửi thông tin giao dịch đến Kho để tiến hành trừ tồn kho theo thời gian thực.
-    Câu hỏi 3 : Nếu CTV gửi yêu cầu lấy hàng nhưng thông tin mã CTV không hợp lệ thì xử lý ra sao?
-  Trả lời : 
-- Tại tiến trình 2.1 (Kiểm tra tồn kho & Xác thực CTV), hệ thống đối chiếu mã CTV. Nếu không hợp lệ, luồng dữ liệu sẽ phát tín hiệu từ chối phản hồi lại cho CTV mà không tạo đơn Pick/Pack hay làm thay đổi CSDL.
-
 #### Mô hình mức ngữ cảnh (Context Level)
 
-> [!NOTE]
-> **CHỜ BỔ SUNG**
-> diagram_sketch/docs/Quanlykho/QuanLyKho_context.png
-> Bổ sung sơ đồ DFD mức ngữ cảnh.
+![DFD mức ngữ cảnh — Quản lý Kho nội bộ](./images/quanlykho/DFD_muc0.png)
 
 #### Mô hình mức đỉnh (Level 1)
 
-> [!NOTE]
-> **CHỜ BỔ SUNG**
-> diagram_sketch/docs/Quanlykho/QuanLyKho_level1.png
-> Bổ sung sơ đồ DFD mức đỉnh.
+![DFD mức 1 — Quản lý Kho nội bộ](./images/quanlykho/DFD_muc1.png)
 
 #### Mô hình mức dưới đỉnh (Level 2)
 
-> [!NOTE]
-> **CHỜ BỔ SUNG**
-> diagram_sketch/docs/Quanlykho/QuanLyKho_level2(2.0&4.0).png
-> Bổ sung sơ đồ phân rã các tiến trình mức đỉnh.
+**1.0 — Tiếp nhận và bố trí hàng**
+
+![DFD mức 2 — 1.0 Tiếp nhận và bố trí hàng](./images/quanlykho/DFD_muc2_1_TiepNhanBoTriHang.png)
+
+**2.0 — Thực hiện xuất kho**
+
+![DFD mức 2 — 2.0 Thực hiện xuất kho](./images/quanlykho/DFD_muc2_2_XuatKho.png)
+
+**3.0 — Kiểm kê và điều chỉnh**
+
+![DFD mức 2 — 3.0 Kiểm kê và điều chỉnh](./images/quanlykho/DFD_muc2_3_KiemKeDieuChinh.png)
+
+**4.0 — Theo dõi tồn và báo cáo kho**
+
+![DFD mức 2 — 4.0 Theo dõi tồn và báo cáo kho](./images/quanlykho/DFD_muc2_4_TheoDoiBaoCao.png)
+
+#### Bảng danh sách câu hỏi và trả lời
+
+##### **a. Danh sách câu hỏi và trả lời liên quan đến các ô xử lý (Process)**
+
+1. **Mức 1 gồm những tiến trình nào?**
+   1.0 Tiếp nhận và bố trí hàng; 2.0 Thực hiện xuất kho; 3.0 Kiểm kê và điều chỉnh; 4.0 Theo dõi tồn và báo cáo kho.
+
+2. **Tiến trình 1.0 được phân rã như thế nào?**
+   1.1 Tiếp nhận và xác định vị trí; 1.2 Xác minh xếp hàng thực tế; 1.3 Ghi nhận nhập và phản hồi.
+
+3. **Tiến trình 2.0 được phân rã như thế nào?**
+   2.1 Kiểm tra lệnh xuất và tồn; 2.2 Hướng dẫn và xác minh xuất; 2.3 Ghi nhận xuất và phản hồi.
+
+4. **Khi lệnh xuất bị từ chối hoặc chưa đủ hàng, tiến trình nào phản hồi?**
+   2.1 chuyển “Kết quả từ chối / chưa đủ hàng” cho 2.3 để trả “Kết quả xử lý xuất kho” về Phân hệ Bán hàng / Giải đấu.
+
+5. **Tiến trình 3.0 xử lý kiểm kê và điều chỉnh như thế nào?**
+   3.1 Đối chiếu kiểm kê; 3.2 Lập và cập nhật biên bản; 3.3 Tiếp nhận quyết định xử lý; 3.4 Thực hiện xử lý được duyệt.
+
+6. **Tiến trình 4.0 được phân rã như thế nào?**
+   4.1 Tổng hợp tồn theo vị trí; 4.2 Tổng hợp biến động và kiểm kê; 4.3 Lập báo cáo theo yêu cầu.
+
+##### **b. Danh sách câu hỏi và trả lời liên quan đến các dòng dữ liệu (Data Flow)**
+
+1. **Phân hệ Nhập hàng trao đổi dữ liệu gì với Kho?**
+   Gửi “Thông tin hàng đã kiểm nhận” vào 1.1; nhận “Kết quả nhập kho” từ 1.3.
+
+2. **Các luồng nội bộ trong phân rã 1.0 là gì?**
+   1.1 → 1.2: “Thông tin nhập và vị trí đề xuất”; 1.2 → 1.3: “Kết quả xác minh, Số lượng và vị trí thực tế”.
+
+3. **Phân hệ Bán hàng / Giải đấu trao đổi dữ liệu gì với Kho?**
+   Gửi “Lệnh xuất kho đã duyệt” vào 2.1; nhận “Kết quả xử lý xuất kho” từ 2.3.
+
+4. **Các luồng nội bộ trong phân rã 2.0 là gì?**
+   2.1 → 2.2: “Lệnh đủ hàng và vị trí lấy hàng”; 2.2 → 2.3: “Kết quả xác minh xuất thực tế”; 2.1 → 2.3: “Kết quả từ chối / chưa đủ hàng”.
+
+5. **Nhân viên kho gửi và nhận những dữ liệu gì?**
+   Gửi “Xác nhận xếp hàng thực tế” vào 1.2, “Xác nhận xuất hàng thực tế” vào 2.2 và “Số lượng và tình trạng hàng” vào 3.1. Nhận “Hướng dẫn xếp hàng” từ 1.1, “Hướng dẫn lấy hàng” từ 2.2, “Kết quả đối chiếu” từ 3.1 và “Thông tin số lượng hàng” từ 4.1.
+
+6. **Quản lý cửa hàng gửi và nhận những dữ liệu gì?**
+   Nhận “Yêu cầu xử lý” từ 3.2 và “Báo cáo số lượng hàng và biến động” từ 4.3; gửi “Quyết định xử lý” vào 3.3 và “Yêu cầu báo cáo kho” vào 4.3.
+
+7. **Các luồng nội bộ trong phân rã 3.0 là gì?**
+   3.1 → 3.2: “Số đếm, tình trạng và chênh lệch”; 3.2 → 3.3: “Hồ sơ đề nghị xử lý”; 3.3 → 3.4: “Quyết định đã đối chiếu với hồ sơ chênh lệch”; 3.4 → 3.2: “Kết quả xử lý và trạng thái duyệt”.
+
+8. **Tiến trình lập báo cáo nhận dữ liệu tổng hợp nào?**
+   4.3 nhận “Số lượng hàng đã tổng hợp” từ 4.1 và “Biến động và kết quả kiểm kê đã tổng hợp” từ 4.2 để lập báo cáo theo yêu cầu của quản lý.
+
+##### **c. Danh sách câu hỏi và trả lời liên quan đến các kho dữ liệu (Data Store)**
+
+1. **D4 (Hàng hóa và tồn kho) nhận và cung cấp dữ liệu gì?**
+   Nhận “Số lượng và vị trí sau nhập” từ 1.3, “Số lượng còn lại sau xuất” từ 2.3 và “Số lượng sau điều chỉnh được duyệt” từ 3.4. Cung cấp “Số lượng có thể xuất và vị trí hàng” cho 2.1, “Số lượng ghi nhận theo vị trí” cho 3.1 và “Số lượng hàng theo mặt hàng và vị trí” cho 4.1.
+
+2. **D23 (Vị trí lưu trữ) cung cấp dữ liệu gì?**
+   Cung cấp “Vị trí lưu trữ hợp lệ” cho 1.1 để xác định vị trí bố trí hàng.
+
+3. **D24 (Sổ Nhật ký Phiếu kho) nhận và cung cấp dữ liệu gì?**
+   Nhận “Nhật ký nhập” từ 1.3, “Nhật ký xuất” từ 2.3 và “Nhật ký điều chỉnh” từ 3.4; cung cấp “Lịch sử biến động kho” cho 4.2.
+
+4. **D25 (Sổ Kiểm kê và Thất thoát) nhận và cung cấp dữ liệu gì?**
+   Nhận “Biên bản, chênh lệch, Kết quả và trạng thái duyệt” từ 3.2; cung cấp “Hồ sơ chênh lệch chờ xử lý” cho 3.3 và “Kết quả kiểm kê và thất thoát” cho 4.2.
+
+##### **d. Danh sách câu hỏi và trả lời liên quan đến các thực thể ngoài (External Entity)**
+
+1. **Sơ đồ kho nội bộ có những thực thể ngoài nào?**
+   Nhân viên kho, Quản lý cửa hàng, Phân hệ Nhập hàng và Phân hệ Bán hàng / Giải đấu.
+
+2. **Vì sao Phân hệ Nhập hàng và Phân hệ Bán hàng / Giải đấu là thực thể ngoài?**
+   Hai phân hệ nằm ngoài phạm vi quản lý kho nội bộ, cung cấp thông tin hàng đã kiểm nhận hoặc lệnh xuất kho đã duyệt và nhận kết quả xử lý.
+
+3. **Nhân viên kho có vai trò gì?**
+   Thực hiện xếp, lấy hàng theo hướng dẫn; xác nhận thao tác thực tế và cung cấp số lượng, tình trạng hàng để đối chiếu kiểm kê.
+
+4. **Quản lý cửa hàng có vai trò gì?**
+   Quyết định xử lý chênh lệch và yêu cầu báo cáo kho; nhận yêu cầu xử lý cùng báo cáo số lượng hàng và biến động.
 
 ---
 
-### Chức năng: Quản lý Nhân Viên và Cộng Tác Viên
 
-> [!NOTE]
-> Đã bổ sung sơ đồ mức ngữ cảnh, mức 1 và bốn phân rã mức 2. Ảnh của cả bốn phân rã mức 2 (4.1–4.4) đã cập nhật theo ảnh do người dùng cung cấp, dùng D19–D22.
+### Chức năng: Quản lý Nhân Viên và Cộng Tác Viên
 
 #### Bảng danh sách câu hỏi và trả lời
 
