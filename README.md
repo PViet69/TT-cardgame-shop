@@ -76,10 +76,17 @@ Dự án hướng đến việc quản lý tập trung thông tin hàng hóa, đ
 - **Khuyến mãi và điểm tích lũy:** Không áp dụng cộng dồn ưu đãi khuyến mãi với ưu đãi sử dụng điểm tích lũy trong cùng giao dịch; nhân viên thông báo phương án áp dụng để khách xác nhận trước khi thanh toán. Khi hủy đơn hoặc trả toàn bộ đơn, hoàn nguyên tác động của giao dịch đến điểm: hoàn lại điểm đã sử dụng và thu hồi điểm được cộng từ giao dịch đó, đưa số điểm về mức trước khi mua. Việc hoàn nguyên chỉ tác động đến giao dịch bị hủy/trả, không ghi đè các biến động điểm từ giao dịch khác.
 
 #### Chức năng: Quản Lý Nhân Viên và Cộng Tác Viên
-- **Mục đích:** Quản lý hồ sơ, phân quyền tài khoản, theo dõi ca làm việc và đánh giá hiệu suất bán hàng của nhân viên chính thức; đồng thời quản lý thông tin, cấp mã số định danh, theo dõi danh mục hàng hóa cấp phát, kiểm soát công nợ sản phẩm và thanh toán hoa hồng cho cộng tác viên tại các khu vực xa (cộng tác viên không có tài khoản đăng nhập hệ thống).
-- **Đối tượng thực hiện:** Quản lý cửa hàng, Nhân viên bán hàng (Cộng tác viên được quản lý qua mã số định danh, không có tài khoản đăng nhập).
+- **Mục đích:** Quản lý hồ sơ, theo dõi ca làm việc và đánh giá hiệu suất bán hàng của nhân viên chính thức; đồng thời quản lý thông tin, cấp mã số định danh, theo dõi danh mục hàng hóa cấp phát, kiểm soát công nợ sản phẩm và thanh toán hoa hồng cho cộng tác viên tại các khu vực xa.
+- **Đối tượng thực hiện:** Quản lý cửa hàng, Nhân viên bán hàng (Cộng tác viên được quản lý qua hồ sơ và mã số định danh).
 - **Quy trình hoạt động & xử lý:**  
-  Quy trình quản lý nhân sự tập trung vào việc điều phối nhân lực và quản lý hoạt động phân phối hàng hóa của cộng tác viên. Quản lý thực hiện cấp tài khoản cho nhân viên làm việc tại quầy để xếp ca, chấm công và theo dõi doanh thu ca trực. Riêng đội ngũ cộng tác viên tại các khu vực xa không được cấp tài khoản truy cập hệ thống mà chỉ được cấp một mã số cộng tác viên định danh. Khi cộng tác viên nhập hàng từ kho về bán, hệ thống sẽ ghi nhận danh mục và số lượng sản phẩm cấp phát theo mã số tương ứng để theo dõi công nợ hàng hóa. Đến kỳ đối soát, quản lý cập nhật số lượng hàng cộng tác viên đã bán thực tế và số tiền nộp về để hệ thống tự động tính toán theo tỷ lệ hoa hồng chiết khấu, đồng thời kiểm soát lượng hàng còn tồn đọng hoặc hư hỏng tại từng khu vực.
+  Quy trình quản lý nhân sự tập trung vào việc điều phối nhân lực và quản lý hoạt động phân phối hàng hóa của cộng tác viên. Quản lý tạo và cập nhật hồ sơ nhân viên để phục vụ xếp ca, tổng hợp chấm công và theo dõi doanh thu ca trực. Đội ngũ cộng tác viên tại các khu vực xa được quản lý bằng hồ sơ và mã số cộng tác viên định danh. Khi cộng tác viên nhập hàng từ kho về bán, hệ thống sẽ ghi nhận danh mục và số lượng sản phẩm cấp phát theo mã số tương ứng để theo dõi công nợ hàng hóa. Đến kỳ đối soát, quản lý cập nhật số lượng hàng cộng tác viên đã bán thực tế và số tiền nộp về để hệ thống tự động tính toán theo tỷ lệ hoa hồng chiết khấu, đồng thời kiểm soát lượng hàng còn tồn đọng hoặc hư hỏng tại từng khu vực.
+
+- **Tạo và xóa hồ sơ:** Quản lý cửa hàng tạo hồ sơ nhân viên; tạo hồ sơ và mã định danh cho CTV. Khi nhân viên nghỉ việc, quản lý xóa hồ sơ nhân viên; khi CTV ngừng hợp tác, quản lý xóa hồ sơ CTV.
+- **Đăng ký và sắp xếp ca:** Nhân viên đăng ký lịch theo tuần qua ứng dụng nhắn tin Zalo, trong khoảng **07:00 thứ Năm đến 15:00 Chủ Nhật**. Quản lý cửa hàng tổng hợp lịch đăng ký, thông báo lại khi trùng ca hoặc linh hoạt bố trí nhân sự, sau đó duyệt và cập nhật lịch làm việc vào D20. Việc nhân viên tự thỏa thuận đổi ca nằm ngoài phạm vi quản lý của hệ thống. Nếu nghỉ đột xuất, nhân viên báo quản lý; quản lý quyết định duyệt và bố trí nhân viên bổ sung, cập nhật lịch liên quan.
+- **Chấm công:** Nhân viên chấm công bằng máy chấm công. Dữ liệu từ máy được tổng hợp vào D21 để đối chiếu với lịch làm việc đã duyệt. Khi nhân viên quên chấm công, Quản lý cửa hàng kiểm tra thời gian làm việc thực tế và xác nhận bổ sung vào bảng chấm công. Quản lý cảnh cáo nếu nhân viên quên chấm công quá nhiều lần; số lần cụ thể chưa được quy định.
+- **Tính lương và duyệt bảng lương:** Lương tính theo tháng, với công thức **Lương = Số giờ làm trong tháng × Mức lương theo giờ × Hệ số**. Hệ số dùng cho khoản thưởng khi làm lễ, Tết hoặc OT qua đêm nếu có, do quản lý xác định. Khi trong tháng có các mức hệ số khác nhau, tính riêng từng nhóm giờ theo công thức trên rồi cộng lại; giờ làm thông thường áp dụng hệ số 1. Quản lý cửa hàng đối chiếu số giờ được xác nhận, mức lương và hệ số, duyệt bảng lương trước khi gửi kết quả cho nhân viên và lưu vào D22. Giá trị hệ số thưởng, ngày chốt công và ngày trả lương chưa được quy định cụ thể.
+- **Hoa hồng CTV:** Quản lý cửa hàng cung cấp tỷ lệ hoa hồng và xác nhận kết quả tính theo doanh số đối soát. CTV **tự giữ lại hoa hồng khi nộp tiền**, shop không chi trả riêng khoản hoa hồng đã được giữ lại. Số tiền CTV phải nộp được xác định từ tiền bán hàng phải đối soát sau khi trừ hoa hồng được xác nhận và các điều chỉnh liên quan, nếu có; lưu kết quả để tránh tính hoặc chi hoa hồng hai lần.
+- **Báo cáo và nộp tiền CTV:** Kỳ báo cáo là **ngày 15 hằng tháng**, hạn nộp tiền **ngay trong ngày 15**. CTV gửi báo cáo doanh số, hàng còn lại, hàng hoàn trả và thông tin nộp tiền qua kênh liên lạc Facebook với cửa hàng. Quản lý cửa hàng tiếp nhận, đối chiếu và cập nhật dữ liệu lên hệ thống, xác nhận số phải nộp, số thực nhận và chênh lệch. Nếu CTV nộp thiếu, quản lý ghi nhận khoản thiếu và quyết định cảnh cáo hoặc chấm dứt hợp tác; nếu chấm dứt thì thực hiện xóa hồ sơ CTV theo quy tắc quản lý hồ sơ.
 
 #### Chức năng: Quản Lý Giải Đấu và Tài Trợ Sự Kiện
 - **Mục đích:** 
@@ -470,7 +477,7 @@ Trả lời: Hệ thống tự động tổng kết bảng xếp hạng chung cu
 5. **Nếu Nhân viên xin nghỉ thì yêu cầu được xử lý như thế nào?**
    4.2.2 tiếp nhận yêu cầu nghỉ và chuyển cho 4.2.3. Sau khi nhận quyết định từ Quản lí, 4.2.3 gửi lịch làm việc, thông báo duyệt nghỉ cho Nhân viên và cập nhật D20.
 6. **Tiến trình 4.2.4 thực hiện việc gì?**
-   4.2.4 nhận dữ liệu chấm công từ Nhân viên và ghi vào D21. Sơ đồ hiện chỉ thể hiện ghi nhận chấm công, chưa có luồng đọc D20 để đối chiếu với lịch làm việc.
+   4.2.4 tổng hợp dữ liệu từ máy chấm công, đối chiếu lịch làm việc ở D20 và ghi công thực tế vào D21. Trường hợp quên chấm công được Quản lý cửa hàng xác nhận bổ sung; quên quá nhiều lần bị cảnh cáo. DFD hiện cần bổ sung nguồn dữ liệu máy chấm công, luồng đọc D20 và xác nhận sửa công của quản lý.
 7. **Tiến trình 4.3 được phân rã như thế nào?**
    4.3.1 Tổng hợp giờ công & Doanh số nhận giờ công từ D21 và báo cáo doanh số từ CTV. 4.3.2 Tính lương & Hoa hồng sử dụng dữ liệu tổng hợp, mức lương và tỉ lệ hoa hồng từ D19, cùng mức hoa hồng từ Quản lí. 4.3.3 Lập phiếu lương & Ghi nhận hoa hồng gửi kết quả cho Nhân viên, CTV và lưu bảng lương, hoa hồng vào D22.
 8. **Tiến trình 4.4 được phân rã như thế nào?**
@@ -481,11 +488,11 @@ Trả lời: Hệ thống tự động tổng kết bảng xếp hạng chung cu
 ##### **b. Danh sách câu hỏi và trả lời liên quan đến các dòng dữ liệu (Data Flow)**
 
 1. **Nhân viên gửi những dữ liệu gì vào hệ thống?**
-   Thông tin cá nhân vào 4.1; đăng kí ca, yêu cầu nghỉ và dữ liệu chấm công vào 4.2. Ở mức 2, các luồng lần lượt vào 4.1.1, 4.2.1, 4.2.2 và 4.2.4.
+   Thông tin cá nhân vào 4.1; đăng ký ca theo tuần qua ứng dụng nhắn tin Zalo, yêu cầu nghỉ gửi quản lý và dữ liệu từ máy chấm công phục vụ 4.2. Quản lý tổng hợp lịch gửi trong khoảng 07:00 thứ Năm đến 15:00 Chủ Nhật và cập nhật lịch đã duyệt lên hệ thống. Ở mức 2, các luồng lần lượt vào 4.1.1, 4.2.1, 4.2.2 và 4.2.4.
 2. **Hệ thống trả những dữ liệu gì cho Nhân viên?**
    Lịch làm việc, thông báo duyệt nghỉ từ 4.2; phiếu lương từ 4.3; kết quả đánh giá từ 4.4. Ở mức 2, các luồng lần lượt do 4.2.3, 4.3.3 và 4.4.2 cung cấp.
 3. **CTV gửi và nhận những dữ liệu gì?**
-   CTV gửi thông tin cá nhân vào 4.1.1 và báo cáo doanh số vào 4.3.1; nhận mức hoa hồng từ 4.3.3. Theo nghiệp vụ đã mô tả, CTV dùng mức hoa hồng để tự trừ khi chuyển tiền lại cho cửa hàng; sơ đồ không biểu diễn việc chuyển tiền thực tế.
+   CTV gửi thông tin cá nhân để quản lý cập nhật vào 4.1.1; ngày 15 hằng tháng gửi báo cáo doanh số và thông tin nộp tiền qua Facebook để quản lý cập nhật, phục vụ 4.3.1 và đối soát. CTV nhận kết quả hoa hồng từ 4.3.3 qua quản lý, tự giữ lại hoa hồng và nộp số tiền còn phải nộp ngay trong ngày 15. Sơ đồ không biểu diễn việc chuyển tiền thực tế.
 4. **Quản lí cửa hàng gửi và nhận những dữ liệu gì?**
    Quản lí gửi duyệt ca, duyệt nghỉ vào 4.2.3 và mức hoa hồng vào 4.3.2; nhận ca, nghỉ cần duyệt từ 4.2.3 và báo cáo nhân sự từ 4.4.3.
 5. **Các luồng nội bộ trong phân rã 4.1 và 4.2 là gì?**
@@ -523,9 +530,9 @@ Trả lời: Hệ thống tự động tổng kết bảng xếp hạng chung cu
 2. **Vai trò của Nhân viên trong chức năng này là gì?**
    Nhân viên cung cấp thông tin cá nhân, đăng kí ca, yêu cầu nghỉ và dữ liệu chấm công; nhận lịch làm việc, thông báo duyệt nghỉ, phiếu lương và kết quả đánh giá.
 3. **Vai trò của CTV trong chức năng này là gì?**
-   CTV cung cấp thông tin cá nhân và báo cáo doanh số; nhận mức hoa hồng. CTV được quản lý qua mã định danh, không có tài khoản đăng nhập hệ thống theo đặc tả nghiệp vụ.
+   CTV cung cấp thông tin cá nhân và báo cáo doanh số; nhận mức hoa hồng. CTV được quản lý qua hồ sơ và mã định danh theo đặc tả nghiệp vụ.
 4. **Vai trò của Quản lí cửa hàng trong chức năng này là gì?**
-   Quản lí duyệt ca, duyệt nghỉ và cung cấp mức hoa hồng; nhận yêu cầu ca, nghỉ cần duyệt và báo cáo nhân sự.
+   Quản lý tạo và xóa hồ sơ nhân viên; tạo và xóa hồ sơ CTV; duyệt ca, nghỉ đột xuất, bổ sung nhân sự, xác nhận sửa công và duyệt bảng lương. Quản lý cung cấp tỷ lệ hoa hồng, tiếp nhận báo cáo CTV qua Facebook ngày 15, đối chiếu tiền nộp trong ngày và quyết định cảnh cáo hoặc chấm dứt hợp tác khi nộp thiếu; nhận báo cáo nhân sự.
 
 
 #### Mô hình mức ngữ cảnh (Context Level)
@@ -648,20 +655,20 @@ Mỗi thực thể ngoài và mỗi kho dữ liệu chỉ xuất hiện một l�
 
 ### 4.1. Hạn chế trong quản lý cộng tác viên
 
-Quản lý cộng tác viên (CTV) vẫn nằm ngoài phạm vi triển khai hiện tại của hệ thống (out of scope). Mặc dù các phần đặc tả nghiệp vụ và DFD đã đề cập đến hồ sơ CTV, cấp hàng, đối soát và tính hoa hồng, các nội dung này mới mô tả nhu cầu nghiệp vụ và hướng mở rộng, chưa đồng nghĩa với việc hệ thống đã hỗ trợ đầy đủ quy trình quản lý CTV.
+Phạm vi đặc tả bao gồm quản lý hồ sơ, mã định danh, doanh số, đối soát và hoa hồng CTV do Quản lý cửa hàng cập nhật. Việc trao đổi báo cáo và thông tin nộp tiền với CTV diễn ra qua Facebook. Mô tả này xác định phạm vi nghiệp vụ, không khẳng định các chức năng đã được triển khai thành phần mềm.
 
-CTV không có tài khoản đăng nhập mà được quản lý thông qua mã định danh. Thông tin hàng đã bán, hàng còn tồn và số tiền nộp về phụ thuộc vào báo cáo của CTV và việc cập nhật của quản lý. Cách làm này có các hạn chế:
+CTV được quản lý thông qua hồ sơ và mã định danh. Thông tin hàng đã bán, hàng còn tồn và số tiền nộp về phụ thuộc vào báo cáo của CTV và việc cập nhật của quản lý. Cách làm này có các hạn chế:
 
 - **Dữ liệu cập nhật chậm:** Cửa hàng khó nắm bắt kịp thời lượng hàng thực tế tại từng CTV khi chưa nhận được báo cáo.
 - **Đối soát phụ thuộc vào thao tác thủ công:** Việc tổng hợp hàng đã cấp, hàng đã bán, hàng hoàn trả và tiền đã nộp dễ xảy ra sai sót hoặc bỏ sót chứng từ.
 - **Khó kiểm soát công nợ và thất thoát:** Báo cáo chậm hoặc thiếu thông tin khiến việc xác định khoản còn phải nộp, hàng hư hỏng và trách nhiệm xử lý chênh lệch gặp khó khăn.
-- **Thiếu quy trình xử lý ngoại lệ:** Việc nhắc báo cáo quá hạn, xử lý nộp thiếu tiền và giải quyết chênh lệch chưa được đặc tả đầy đủ; thông tin tính hoa hồng cũng cần được đối chiếu thống nhất với kết quả bán hàng và thanh toán.
+- **Còn quy tắc ngoại lệ cần cụ thể hóa:** Đã quy định báo cáo và nộp tiền ngày 15, nộp thiếu có thể bị cảnh cáo hoặc chấm dứt hợp tác. Tuy nhiên, chưa chốt cách xử lý báo cáo quá hạn, tiêu chí lựa chọn hình thức xử lý và căn cứ doanh số dùng tính hoa hồng khi có hàng trả.
 
 ### 4.2. Đề xuất giải pháp cải tiến
 
 Trong phạm vi hiện tại, cửa hàng có thể chuẩn hóa biểu mẫu báo cáo và quy trình đối soát bên ngoài hệ thống. Mỗi báo cáo cần ghi mã CTV, kỳ đối soát, số lượng hàng nhận, hàng bán, hàng hoàn trả, hàng còn tồn, hàng hư hỏng và chứng từ nộp tiền. Quản lý quy định thời hạn gửi báo cáo, người kiểm tra và cách xử lý chênh lệch để giảm sai sót khi tổng hợp.
 
-Ở giai đoạn mở rộng, đề xuất bổ sung chức năng quản lý CTV với các nội dung:
+Để hoàn thiện các chức năng quản lý CTV trong phạm vi đã mô tả, đề xuất các nội dung:
 
 1. **Quản lý hồ sơ và hàng ký gửi theo mã CTV:** Liên kết hồ sơ CTV với phiếu cấp hàng, phiếu nhập hoàn và số lượng tồn tại từng CTV để theo dõi xuyên suốt quá trình giao nhận.
 2. **Chuẩn hóa đối soát hàng và tiền:** Tổng hợp dữ liệu theo kỳ, đối chiếu hàng đã cấp với hàng bán, hàng hoàn và hàng còn tồn; xác định số tiền phải nộp sau khi trừ hoa hồng theo chính sách đã thống nhất, so sánh với số tiền thực nộp và ghi nhận chênh lệch.
