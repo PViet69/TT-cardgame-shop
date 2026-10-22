@@ -23,26 +23,70 @@ Dự án hướng đến việc quản lý tập trung thông tin hàng hóa, đ
 #### Chức năng: Nhập hàng
 - **Mục đích:** Quản lý quy trình mua hàng từ nhà cung cấp, kiểm đếm số lượng, chất lượng và cập nhật dữ liệu nhập kho vào hệ thống.
 - **Đối tượng thực hiện:** Quản lý cửa hàng, Nhân viên mua/nhập hàng.
+- **Mức tồn kho tối thiểu:** Được xét riêng cho từng mặt hàng. Khi số lượng tồn kho của một mặt hàng dưới 20 sản phẩm, nhân viên xác định nhu cầu nhập thêm và lập đơn đặt hàng gửi nhà cung cấp.
 - **Quy trình hoạt động & xử lý:**  
-  Quy trình nhập hàng bắt đầu khi nhân viên kiểm tra lượng tồn kho và nhận thấy các mặt hàng phụ kiện  chạm mức tối thiểu, từ đó tiến hành lập đơn đặt hàng  gửi đến nhà cung cấp. Khi nhận được hàng bàn giao, nhân viên kho cùng quản lý tiến hành đối chiếu với hóa đơn chứng từ, kiểm tra thực tế số lượng, chất lượng bao bì và tính toàn vẹn của từng sản phẩm. Nếu lô hàng đạt chuẩn, nhân viên tạo phiếu nhập kho trên hệ thống để ghi nhận công nợ và tự động cập nhật tăng số lượng tồn kho theo thời gian thực. Trường hợp phát hiện hàng hóa không đạt chuẩn hoặc thiếu hụt số lượng, nhân viên sẽ lập biên bản sự cố ngay tại chỗ để từ chối nhận hoặc yêu cầu nhà cung cấp thực hiện đổi trả.
+  Quy trình nhập hàng bắt đầu khi nhân viên kiểm tra lượng tồn kho và nhận thấy một mặt hàng phụ kiện có số lượng tồn kho dưới 20 sản phẩm, từ đó tiến hành lập đơn đặt hàng gửi đến nhà cung cấp. Khi nhận được hàng bàn giao, nhân viên kho cùng quản lý tiến hành đối chiếu với hóa đơn chứng từ, kiểm tra thực tế số lượng, chất lượng bao bì và tính toàn vẹn của từng sản phẩm. Nếu lô hàng đạt chuẩn, nhân viên tạo phiếu nhập kho trên hệ thống để ghi nhận công nợ và tự động cập nhật tăng số lượng tồn kho theo thời gian thực. Trường hợp phát hiện hàng hóa không đạt chuẩn hoặc thiếu hụt số lượng, nhân viên sẽ lập biên bản sự cố ngay tại chỗ để từ chối nhận hoặc yêu cầu nhà cung cấp thực hiện đổi trả.
 
 #### Chức năng: Quản lý Kho
 - **Mục đích:** Theo dõi chính xác lượng hàng tồn kho tại cửa hàng và các điểm phân phối, quản lý vị trí lưu trữ, điều phối xuất chuyển hàng cho cộng tác viên ở các khu vực và kiểm soát thất thoát hàng hóa.
 - **Đối tượng thực hiện:** Nhân viên kho, Quản lý cửa hàng.
 - **Quy trình hoạt động & xử lý:**  
-  Quy trình quản lý kho vận hành liên tục nhằm kiểm soát biến động hàng hóa tại kho chính và các điểm lưu trữ của cộng tác viên ở xa. Mỗi khi phát sinh giao dịch nhập hàng, bán lẻ, xuất chuyển cho cộng tác viên hoặc xuất thưởng giải đấu, hệ thống sẽ tự động cập nhật số lượng tồn kho theo thời gian thực. Khi cộng tác viên tại các khu vực khác có nhu cầu lấy hàng về bán, nhân viên kho lập phiếu xuất kho chuyển hàng gắn theo mã số của cộng tác viên đó, hệ thống sẽ tự động trừ lượng tồn tại kho chính và ghi nhận số lượng chuyển vào kho ký gửi của cộng tác viên. Định kỳ, nhân viên thực hiện quét mã kiểm kê thực tế tại quầy và đối chiếu số lượng hàng ký gửi từ xa để phát hiện sai lệch, hàng hư hỏng nhằm xử lý thất thoát. Trường hợp cộng tác viên không bán hết hoặc đổi trả, kho sẽ lập phiếu nhập hoàn để thu hồi hàng về kho chính.
+  Quy trình quản lý kho vận hành liên tục nhằm kiểm soát biến động hàng hóa tại kho chính và các điểm lưu trữ của cộng tác viên ở xa. Số lượng tồn kho được cập nhật sau khi hoàn tất nhập hàng, bán hàng hoặc kiểm hàng (kiểm kê); việc lập đơn hoặc bắt đầu xử lý chưa làm thay đổi số lượng tồn kho. Hàng chờ đổi trả được dán tem để nhận diện, theo dõi riêng và không tính vào số lượng tồn kho thực tế, kể cả khi còn được lưu giữ tại cửa hàng. Khi cộng tác viên tại các khu vực khác có nhu cầu lấy hàng về bán, nhân viên kho lập phiếu xuất kho chuyển hàng gắn theo mã số của cộng tác viên đó, hệ thống sẽ tự động trừ lượng tồn tại kho chính và ghi nhận số lượng chuyển vào kho ký gửi của cộng tác viên. Hai tuần một lần, vào ngày thứ Ba, Nhân viên kho hoặc Quản lý cửa hàng thực hiện quét mã kiểm kê thực tế tại quầy và đối chiếu số lượng hàng ký gửi từ xa để phát hiện sai lệch, hàng hư hỏng nhằm xử lý thất thoát. Số liệu tồn kho được chốt sau khi hoàn tất quy trình kiểm kê và xử lý điều chỉnh được duyệt. Trường hợp cộng tác viên không bán hết hoặc đổi trả, kho sẽ lập phiếu nhập hoàn để thu hồi hàng về kho chính.
+
+
+- **Quy tắc quản lý hàng chờ đổi trả:** Nhân viên dán tem nhận diện hàng chờ đổi trả để phân biệt với hàng trong kho thực tế. Đề xuất thông tin trên tem gồm mã mặt hàng, số lượng, lý do đổi trả, ngày ghi nhận và mã chứng từ liên quan. Khi kiểm hàng, nhân viên đối chiếu riêng hàng có tem chờ đổi trả và loại số lượng này khỏi số đếm tồn kho thực tế. Hàng chỉ được tính trở lại vào tồn kho sau khi đã xử lý đổi trả, kiểm tra đạt yêu cầu và hoàn tất nhập kho.
+- **Thời điểm cập nhật tồn kho:**
+  - **Sau nhập hàng:** Tăng tồn theo số lượng thực nhận đã kiểm tra đạt yêu cầu và hoàn tất ghi nhận nhập kho; không cộng hàng chờ đổi trả.
+  - **Sau bán hàng:** Giảm tồn theo số lượng hàng của giao dịch bán đã hoàn tất; việc chỉ lập hoặc duyệt đơn chưa làm giảm tồn kho thực tế.
+  - **Sau kiểm hàng:** Đối chiếu số lượng trên hệ thống với số đếm thực tế, không tính hàng dán tem chờ đổi trả. Nếu có chênh lệch, lập biên bản và cập nhật tồn sau khi có quyết định điều chỉnh được duyệt.
+
+
+- **Bố trí hàng theo nhóm sản phẩm (category):** Hàng hóa được sắp xếp tại các khu vực riêng theo nhóm như bọc bài, deckbox, playmat, móc khóa, figure và các nhóm sản phẩm khác. Nhân viên kho bố trí hàng vào khu vực tương ứng, ghi nhận vị trí lưu trữ và cập nhật vị trí khi di chuyển hàng để thuận tiện tra cứu, lấy hàng và kiểm kê. Việc chuyển vị trí trong cùng kho không làm thay đổi tổng số lượng tồn kho. Hàng chờ đổi trả và hàng hỏng chờ duyệt loại bỏ được dán tem, để riêng khỏi hàng có thể bán.
+
+- **Xử lý hàng hỏng phát hiện trong kho:** Khi phát hiện hàng rách, hỏng, móp méo hoặc không đạt tiêu chuẩn bán trong lúc kiểm kê hay thao tác kho, Nhân viên kho hoặc Quản lý cửa hàng ghi nhận mặt hàng, số lượng, vị trí, tình trạng và lý do đề nghị loại bỏ vào D25 — Sổ Kiểm kê và Thất thoát. Hàng được dán tem, tách riêng và không tiếp tục xuất bán trong thời gian chờ xử lý. **Chỉ được loại bỏ sau khi Quản lý cửa hàng phê duyệt.** Sau khi được duyệt, Nhân viên kho thực hiện loại bỏ, ghi nhận số lượng và thời điểm thực hiện, cập nhật giảm tồn đối với số lượng hàng hỏng còn được tính trong tồn kho và lưu nhật ký tại D24 — Sổ Nhật ký Phiếu kho. Nếu số lượng đó đã được trừ qua điều chỉnh kiểm kê được duyệt thì không trừ thêm lần nữa. Trường hợp chưa được duyệt, tiếp tục giữ riêng hàng có tem để chờ quyết định.
+
+- **Lịch kiểm kê, người thực hiện và thời điểm chốt:** Kiểm kê hai tuần một lần, vào ngày thứ Ba, do **Nhân viên kho** hoặc **Quản lý cửa hàng** . Người thực hiện ghi nhận số đếm theo từng mặt hàng và vị trí, loại hàng có tem chờ đổi trả khỏi tồn kho thực tế. Số liệu được chốt sau khi hoàn tất kiểm kê, đối chiếu và cập nhật các điều chỉnh được duyệt. Nếu có giao dịch nhập hoặc xuất trong thời gian kiểm kê, phải đối chiếu các giao dịch đó với thời điểm đếm để tránh tính thiếu hoặc tính trùng khi chốt.
+
+- **Quy trình xử lý chênh lệch kiểm kê:**
+  1. **Đối chiếu:** Nhân viên kho hoặc Quản lý cửa hàng so sánh số đếm thực tế với số lượng trên hệ thống theo từng mặt hàng và vị trí; xác định số thừa hoặc thiếu. Hàng chờ đổi trả được kiểm tra riêng theo tem và không đưa vào số đếm tồn kho thực tế.
+  2. **Kiểm tra lại:** Đếm lại mặt hàng có chênh lệch, kiểm tra vị trí lưu trữ, phiếu nhập, giao dịch bán, phiếu xuất và các điều chỉnh liên quan. Đối chiếu cả giao dịch phát sinh trong thời gian kiểm kê để xác định nguyên nhân; không tự kết luận mọi khoản thiếu là thất thoát.
+  3. **Lập biên bản:** Ghi mã mặt hàng, vị trí, số lượng trên hệ thống, số đếm thực tế, mức chênh lệch, tình trạng hàng, nguyên nhân đã xác minh hoặc nội dung chưa làm rõ, chứng từ liên quan và người kiểm kê vào D25 — Sổ Kiểm kê và Thất thoát.
+  4. **Quyết định xử lý:** Quản lý cửa hàng xem xét biên bản và căn cứ đối chiếu để duyệt điều chỉnh, yêu cầu kiểm tra bổ sung hoặc từ chối đề nghị. Nếu nguyên nhân là chứng từ sai hoặc chưa được ghi nhận, xử lý chứng từ liên quan và kiểm tra lại số dư, tránh vừa sửa chứng từ vừa điều chỉnh cùng một chênh lệch.
+  5. **Cập nhật và chốt:** Sau khi được duyệt, thực hiện điều chỉnh tại tiến trình 3.4, cập nhật D4 — Hàng hóa và tồn kho, ghi nhật ký vào D24 — Sổ Nhật ký Phiếu kho và cập nhật kết quả xử lý trong D25. Kiểm tra lại số dư rồi chốt kỳ kiểm kê; hồ sơ còn chờ xác minh tiếp tục được theo dõi, không tự điều chỉnh khi chưa có quyết định.
+
+- **Quy trình tiếp nhận và nhập lại hàng đổi trả của khách hàng và CTV:**
+  1. **Tiếp nhận yêu cầu:** Nhân viên bán tại quầy tiếp nhận yêu cầu đổi trả trực tiếp; Nhân viên bán online (Nhân viên xử lý đơn trực tuyến) tiếp nhận yêu cầu qua tin nhắn. Nhân viên ghi nhận mặt hàng, số lượng, lý do đổi trả và đối chiếu với giao dịch bán của khách hàng hoặc phiếu cấp hàng theo mã CTV. Phạm vi quy trình này là hàng khách hàng và CTV trả về cửa hàng.
+  2. **Kiểm tra chất lượng và điều kiện đổi trả:** Nhân viên bán tại quầy trực tiếp kiểm tra mã hàng, bao bì, số lượng và tình trạng sản phẩm được mang đến. Nhân viên bán online kiểm tra, đối chiếu tình trạng hàng qua nội dung tin nhắn và hình ảnh hoặc video do khách hàng cung cấp, đồng thời đối chiếu thông tin đơn hàng. Với hàng CTV trả về, nhân viên phụ trách tiếp nhận kiểm tra theo cách giao nhận tương ứng và đối chiếu phiếu cấp hàng. Nhân viên lưu kết quả kiểm tra, nội dung trao đổi và căn cứ đánh giá vào hồ sơ đổi trả, sau đó chuyển Quản lý cửa hàng xem xét và xác nhận. Nếu chưa đủ thông tin, Quản lý cửa hàng yêu cầu kiểm tra bổ sung trước khi quyết định.
+  3. **Nhận hàng, dán tem và theo dõi riêng:** Khi hàng được trả về cửa hàng, Nhân viên kho tiếp nhận theo hồ sơ đổi trả và dán tem nhận diện để theo dõi riêng; hàng chờ xử lý không tính vào tồn kho thực tế. Đối với yêu cầu online, nhân viên bán phụ trách đối chiếu hàng nhận được với tình trạng đã trao đổi qua tin nhắn và chuyển kết quả cho Quản lý cửa hàng xác nhận cuối cùng. Việc chấp nhận yêu cầu qua tin nhắn chưa làm tăng tồn kho khi hàng chưa được nhận về.
+  4. **Quản lý xác nhận và quyết định xử lý:** Quản lý cửa hàng xem xét kết quả kiểm tra của nhân viên bán phụ trách và xác nhận phương án xử lý hàng khách hàng hoặc CTV trả về. Hàng đạt tiêu chuẩn bán lại được chuyển cho Nhân viên kho lập phiếu nhập hoàn. Hàng không đạt tiêu chuẩn bán lại, như rách, hỏng, móp méo hoặc có tình trạng khác không bảo đảm chất lượng bán, được Quản lý cửa hàng xác nhận loại bỏ; Nhân viên kho thực hiện loại bỏ và ghi nhận mặt hàng, số lượng, tình trạng, lý do, người xác nhận và thời điểm xử lý vào hồ sơ đổi trả. Hàng còn chờ quyết định tiếp tục được dán tem và theo dõi riêng. Hàng bị loại bỏ không được nhập lại hoặc cộng vào tồn kho thực tế; việc loại bỏ không làm giảm tồn thêm nếu hàng đã được loại khỏi số lượng tồn trước đó.
+  5. **Hoàn tất nhập lại:** Sau khi hàng thực nhận được Quản lý cửa hàng xác nhận đạt tiêu chuẩn bán lại và hoàn tất nhập kho, Nhân viên kho cập nhật tăng tồn một lần theo số lượng đủ điều kiện, ghi nhật ký phiếu kho và cập nhật trạng thái hồ sơ đổi trả. Kết thúc trạng thái chờ đổi trả, gỡ hoặc thay tem phù hợp rồi bố trí hàng về vị trí lưu trữ. Việc đổi sản phẩm, hoàn tiền cho khách hàng hoặc điều chỉnh công nợ CTV được ghi nhận theo quy trình liên quan; không dùng riêng trạng thái hoàn tiền hoặc đối soát làm căn cứ tăng tồn.
 
 #### Chức năng: Bán Hàng
 - **Mục đích:** Quản lý và xử lý toàn diện quy trình bán hàng đa kênh bao gồm bán trực tiếp tại quầy và bán hàng trực tuyến (qua trang mạng, kênh bán hàng); tính tiền, áp dụng ưu đãi, xác nhận thanh toán, đóng gói giao vận và in hóa đơn cho khách hàng.
-- **Đối tượng thực hiện:** Thu ngân, Nhân viên xử lý đơn trực tuyến, Khách hàng (tại quầy và mua từ xa), Đơn vị vận chuyển.
+- **Đối tượng thực hiện:** Thu ngân, Nhân viên xử lý đơn trực tuyến, Quản lý cửa hàng, Khách hàng (tại quầy và mua từ xa), Đơn vị vận chuyển.
 - **Quy trình hoạt động & xử lý:**  
-  Quy trình bán hàng tiếp nhận và xử lý đơn hàng linh hoạt qua cả hai kênh trực tiếp tại quầy và bán hàng trực tuyến. Đối với khách mua tại quầy, nhân viên thu ngân quét mã vạch sản phẩm; đối với đơn hàng mua từ xa, nhân viên tiếp nhận thông tin từ hệ thống để xác nhận đơn và tạo phiếu đặt hàng. Hệ thống tự động kiểm tra lượng hàng tồn sẵn sàng bán, áp dụng phiếu giảm giá, tích điểm thành viên và tính toán phí vận chuyển. Khách hàng lựa chọn các phương thức thanh toán linh hoạt như tiền mặt, chuyển khoản qua mã phản hồi nhanh, thẻ ngân hàng hoặc thanh toán khi nhận hàng. Ngay khi thanh toán thành công hoặc đơn hàng từ xa được duyệt, hệ thống tự động trừ kho tức thời, in hóa đơn và phiếu gửi hàng để giao cho đơn vị vận chuyển hoặc đưa trực tiếp cho khách, đồng thời ghi nhận doanh thu vào hệ thống. Quy trình cũng hỗ trợ tiếp nhận đổi trả cho cả hai kênh nếu sản phẩm còn nguyên bao bì và có hóa đơn hợp lệ.
+  Quy trình bán hàng tiếp nhận và xử lý đơn hàng linh hoạt qua cả hai kênh trực tiếp tại quầy và bán hàng trực tuyến. Đối với khách mua tại quầy, nhân viên thu ngân quét mã vạch sản phẩm; đối với đơn hàng mua từ xa, nhân viên tiếp nhận thông tin từ hệ thống để xác nhận đơn và tạo phiếu đặt hàng. Hệ thống tự động kiểm tra lượng hàng tồn sẵn sàng bán, áp dụng phiếu giảm giá, tích điểm thành viên và tính toán phí vận chuyển. Khách hàng lựa chọn các phương thức thanh toán linh hoạt như tiền mặt, chuyển khoản qua mã phản hồi nhanh, thẻ ngân hàng hoặc thanh toán khi nhận hàng. Sau khi giao dịch bán hàng hoàn tất, hệ thống cập nhật giảm tồn kho theo số lượng thực bán. Nhân viên in hóa đơn và phiếu gửi hàng để giao cho đơn vị vận chuyển hoặc đưa trực tiếp cho khách; việc ghi nhận doanh thu thực hiện theo trạng thái giao dịch. Việc chỉ lập hoặc duyệt đơn hàng từ xa chưa làm giảm tồn kho thực tế. Quy trình hỗ trợ tiếp nhận yêu cầu đổi trả trong vòng 24 giờ sau khi khách nhận hàng, đối chiếu với giao dịch mua. Khách được đổi hàng khi giao sai màu/mẫu mã hoặc sản phẩm có lỗi không do khách hàng gây ra; được trả hàng khi sản phẩm có lỗi không do khách hàng gây ra. Nhân viên bán phụ trách kiểm tra và chuyển Quản lý cửa hàng xác nhận theo quy trình đổi trả đã mô tả ở phần quản lý kho.
+
+
+- **Xử lý thiếu hoặc hết hàng khi bán online:** Nhân viên xử lý đơn trực tuyến kiểm tra lượng hàng đáp ứng đơn. Nếu thiếu hoặc hết bất kỳ mặt hàng nào trong đơn, nhân viên thông báo tình trạng và đề nghị khách hủy đơn; ghi nhận kết quả hủy, không tự tách giao hoặc chuyển sang chờ nhập hàng.
+- **Xác nhận thanh toán:** Quản lý cửa hàng là người xác nhận đã nhận tiền. Với chuyển khoản, quản lý đối chiếu bill chuyển khoản của khách với thông tin đơn hàng và khoản tiền thực nhận. Nếu khách chuyển thiếu, nhân viên thông báo số tiền còn thiếu để khách tiếp tục chuyển khoản đến khi đủ; lưu các bill và tổng số tiền đã nhận theo cùng đơn hàng. Chỉ ghi nhận thanh toán hoàn tất sau khi quản lý xác nhận đã nhận đủ số tiền phải thanh toán; không ghi nhận hoàn tất chỉ dựa vào việc khách gửi bill.
+- **Điều kiện hoàn tất đơn:** Đơn hàng hoàn tất khi đã ghi nhận thanh toán hoàn tất. Sau thời điểm này, cập nhật giảm tồn theo số lượng thực bán. Trạng thái giao hàng được theo dõi riêng, vì đơn hoàn tất thanh toán có thể chưa được bàn giao hoặc giao đến khách.
+- **Hủy đơn và phí vận chuyển:** Khách được hủy đơn trước khi hàng được bàn giao cho đơn vị vận chuyển. Nếu mới tạo yêu cầu giao nhưng chưa bàn giao hàng, nhân viên hủy yêu cầu giao và cập nhật trạng thái đơn. Sau khi đã bàn giao, không xử lý theo quy trình hủy đơn; yêu cầu trả hàng được xét theo điều kiện đổi trả. Shop chịu phí giao hàng; khách hàng chịu phí hoàn hàng. Nếu đơn hủy đã thanh toán, ghi nhận khoản cần hoàn và theo dõi kết quả hoàn tiền. Nếu tồn đã giảm khi thanh toán hoàn tất mà hàng chưa được giao, đối chiếu và hoàn lại số lượng của đơn đã hủy một lần, không lập thêm phiếu nhập trùng.
+- **Thời hạn và điều kiện đổi trả:** Khách gửi yêu cầu trong vòng **24 giờ kể từ khi nhận hàng**. Được đổi hàng nếu giao sai màu/mẫu mã hoặc sản phẩm có lỗi không phải do khách hàng gây ra; được trả hàng nếu sản phẩm có lỗi không phải do khách hàng gây ra. Nhân viên bán tại quầy kiểm tra trực tiếp; nhân viên bán online đối chiếu tin nhắn và hình ảnh/video khách cung cấp. Quản lý cửa hàng xác nhận kết quả trước khi xử lý đổi hàng hoặc hoàn tiền. Hàng trả về được dán tem và xử lý theo quy trình quản lý kho; việc nhận yêu cầu không tự làm tăng tồn.
+- **Khuyến mãi và điểm tích lũy:** Không áp dụng cộng dồn ưu đãi khuyến mãi với ưu đãi sử dụng điểm tích lũy trong cùng giao dịch; nhân viên thông báo phương án áp dụng để khách xác nhận trước khi thanh toán. Khi hủy đơn hoặc trả toàn bộ đơn, hoàn nguyên tác động của giao dịch đến điểm: hoàn lại điểm đã sử dụng và thu hồi điểm được cộng từ giao dịch đó, đưa số điểm về mức trước khi mua. Việc hoàn nguyên chỉ tác động đến giao dịch bị hủy/trả, không ghi đè các biến động điểm từ giao dịch khác.
 
 #### Chức năng: Quản Lý Nhân Viên và Cộng Tác Viên
-- **Mục đích:** Quản lý hồ sơ, phân quyền tài khoản, theo dõi ca làm việc và đánh giá hiệu suất bán hàng của nhân viên chính thức; đồng thời quản lý thông tin, cấp mã số định danh, theo dõi danh mục hàng hóa cấp phát, kiểm soát công nợ sản phẩm và thanh toán hoa hồng cho cộng tác viên tại các khu vực xa (cộng tác viên không có tài khoản đăng nhập hệ thống).
-- **Đối tượng thực hiện:** Quản lý cửa hàng, Nhân viên bán hàng (Cộng tác viên được quản lý qua mã số định danh, không có tài khoản đăng nhập).
+- **Mục đích:** Quản lý hồ sơ, theo dõi ca làm việc và đánh giá hiệu suất bán hàng của nhân viên chính thức; đồng thời quản lý thông tin, cấp mã số định danh, theo dõi danh mục hàng hóa cấp phát, kiểm soát công nợ sản phẩm và thanh toán hoa hồng cho cộng tác viên tại các khu vực xa.
+- **Đối tượng thực hiện:** Quản lý cửa hàng, Nhân viên bán hàng (Cộng tác viên được quản lý qua hồ sơ và mã số định danh).
 - **Quy trình hoạt động & xử lý:**  
-  Quy trình quản lý nhân sự tập trung vào việc điều phối nhân lực và quản lý hoạt động phân phối hàng hóa của cộng tác viên. Quản lý thực hiện cấp tài khoản cho nhân viên làm việc tại quầy để xếp ca, chấm công và theo dõi doanh thu ca trực. Riêng đội ngũ cộng tác viên tại các khu vực xa không được cấp tài khoản truy cập hệ thống mà chỉ được cấp một mã số cộng tác viên định danh. Khi cộng tác viên nhập hàng từ kho về bán, hệ thống sẽ ghi nhận danh mục và số lượng sản phẩm cấp phát theo mã số tương ứng để theo dõi công nợ hàng hóa. Đến kỳ đối soát, quản lý cập nhật số lượng hàng cộng tác viên đã bán thực tế và số tiền nộp về để hệ thống tự động tính toán theo tỷ lệ hoa hồng chiết khấu, đồng thời kiểm soát lượng hàng còn tồn đọng hoặc hư hỏng tại từng khu vực.
+  Quy trình quản lý nhân sự tập trung vào việc điều phối nhân lực và quản lý hoạt động phân phối hàng hóa của cộng tác viên. Quản lý tạo và cập nhật hồ sơ nhân viên để phục vụ xếp ca, tổng hợp chấm công và theo dõi doanh thu ca trực. Đội ngũ cộng tác viên tại các khu vực xa được quản lý bằng hồ sơ và mã số cộng tác viên định danh. Khi cộng tác viên nhập hàng từ kho về bán, hệ thống sẽ ghi nhận danh mục và số lượng sản phẩm cấp phát theo mã số tương ứng để theo dõi công nợ hàng hóa. Đến kỳ đối soát, quản lý cập nhật số lượng hàng cộng tác viên đã bán thực tế và số tiền nộp về để hệ thống tự động tính toán theo tỷ lệ hoa hồng chiết khấu, đồng thời kiểm soát lượng hàng còn tồn đọng hoặc hư hỏng tại từng khu vực.
+
+- **Tạo và xóa hồ sơ:** Quản lý cửa hàng tạo hồ sơ nhân viên; tạo hồ sơ và mã định danh cho CTV. Khi nhân viên nghỉ việc, quản lý xóa hồ sơ nhân viên; khi CTV ngừng hợp tác, quản lý xóa hồ sơ CTV.
+- **Đăng ký và sắp xếp ca:** Nhân viên đăng ký lịch theo tuần qua ứng dụng nhắn tin Zalo, trong khoảng **07:00 thứ Năm đến 15:00 Chủ Nhật**. Quản lý cửa hàng tổng hợp lịch đăng ký, thông báo lại khi trùng ca hoặc linh hoạt bố trí nhân sự, sau đó duyệt và cập nhật lịch làm việc vào D20. Việc nhân viên tự thỏa thuận đổi ca nằm ngoài phạm vi quản lý của hệ thống. Nếu nghỉ đột xuất, nhân viên báo quản lý; quản lý quyết định duyệt và bố trí nhân viên bổ sung, cập nhật lịch liên quan.
+- **Chấm công:** Nhân viên chấm công bằng máy chấm công. Dữ liệu từ máy được tổng hợp vào D21 để đối chiếu với lịch làm việc đã duyệt. Khi nhân viên quên chấm công, Quản lý cửa hàng kiểm tra thời gian làm việc thực tế và xác nhận bổ sung vào bảng chấm công. Quản lý cảnh cáo nếu nhân viên quên chấm công quá nhiều lần; số lần cụ thể chưa được quy định.
+- **Tính lương và duyệt bảng lương:** Lương tính theo tháng, với công thức **Lương = Số giờ làm trong tháng × Mức lương theo giờ × Hệ số**. Hệ số dùng cho khoản thưởng khi làm lễ, Tết hoặc OT qua đêm nếu có, do quản lý xác định. Khi trong tháng có các mức hệ số khác nhau, tính riêng từng nhóm giờ theo công thức trên rồi cộng lại; giờ làm thông thường áp dụng hệ số 1. Quản lý cửa hàng đối chiếu số giờ được xác nhận, mức lương và hệ số, duyệt bảng lương trước khi gửi kết quả cho nhân viên và lưu vào D22. Giá trị hệ số thưởng, ngày chốt công và ngày trả lương chưa được quy định cụ thể.
+- **Hoa hồng CTV:** Quản lý cửa hàng cung cấp tỷ lệ hoa hồng và xác nhận kết quả tính theo doanh số đối soát. CTV **tự giữ lại hoa hồng khi nộp tiền**, shop không chi trả riêng khoản hoa hồng đã được giữ lại. Số tiền CTV phải nộp được xác định từ tiền bán hàng phải đối soát sau khi trừ hoa hồng được xác nhận và các điều chỉnh liên quan, nếu có; lưu kết quả để tránh tính hoặc chi hoa hồng hai lần.
+- **Báo cáo và nộp tiền CTV:** Kỳ báo cáo là **ngày 15 hằng tháng**, hạn nộp tiền **ngay trong ngày 15**. CTV gửi báo cáo doanh số, hàng còn lại, hàng hoàn trả và thông tin nộp tiền qua kênh liên lạc Facebook với cửa hàng. Quản lý cửa hàng tiếp nhận, đối chiếu và cập nhật dữ liệu lên hệ thống, xác nhận số phải nộp, số thực nhận và chênh lệch. Nếu CTV nộp thiếu, quản lý ghi nhận khoản thiếu và quyết định cảnh cáo hoặc chấm dứt hợp tác; nếu chấm dứt thì thực hiện xóa hồ sơ CTV theo quy tắc quản lý hồ sơ.
 
 #### Chức năng: Quản Lý Giải Đấu và Tài Trợ Sự Kiện
 - **Mục đích:** 
@@ -51,7 +95,7 @@ Dự án hướng đến việc quản lý tập trung thông tin hàng hóa, đ
   - Tối ưu hóa lợi nhuận, thúc đẩy doanh số bán lẻ phụ kiện thi đấu (bọc bài, hộp đựng bài, thảm đấu) và gia tăng giá trị gắn bó dài lâu của khách hàng.
 - **Đối tượng thực hiện:** Quản lý giải đấu, Nhà tài trợ, Trọng tài sự kiện, Người tham gia.
 - **Quy trình hoạt động & xử lý:**  
-  Quy trình quản lý giải đấu và tài trợ bắt đầu khi ban tổ chức khởi tạo thông tin sự kiện trên hệ thống, xác định thể thức thi đấu, lệ phí tham gia và cơ cấu giải thưởng. Đồng thời, hệ thống tiếp nhận thông tin từ các nhà tài trợ (nếu có), ghi nhận gói tài trợ bằng hiện vật độc quyền (thảm đấu vô địch, bọc bài quảng bá, phụ kiện chính hãng) và cập nhật hiển thị quyền lợi biểu trưng, áp phích quảng bá trên trang sự kiện. Người chơi đăng ký thi đấu, nộp lệ phí trực tiếp hoặc thanh toán từ xa để hệ thống ghi nhận doanh thu và thực hiện điểm danh trước giờ khai mạc. Tiếp đó, hệ thống tự động chia cặp thi đấu theo từng vòng đấu và cho phép trọng tài cập nhật tỷ số trực tiếp. Khi giải đấu kết thúc, hệ thống tự động tổng kết bảng xếp hạng chung cuộc, đồng thời tạo phiếu xuất kho các phần quà tài trợ cùng vật phẩm của cửa hàng để trao thưởng cho đấu thủ chiến thắng.
+  Quy trình quản lý giải đấu và tài trợ bắt đầu khi ban tổ chức khởi tạo thông tin sự kiện trên hệ thống, xác định thể thức thi đấu, lệ phí tham gia và cơ cấu giải thưởng. Đồng thời, hệ thống tiếp nhận thông tin từ các nhà tài trợ (nếu có), ghi nhận gói tài trợ bằng hiện vật độc quyền (thảm đấu vô địch, bọc bài quảng bá, phụ kiện chính hãng) và cập nhật hiển thị quyền lợi biểu trưng, áp phích quảng bá trên trang sự kiện. Người chơi đăng ký thi đấu, nộp lệ phí trực tiếp hoặc thanh toán từ xa để hệ thống ghi nhận doanh thu và thực hiện điểm danh trước giờ khai mạc. Bộ môn được tổ chức thường xuyên nhất là Yu-Gi-Oh!. Ban tổ chức sử dụng Challonge để tạo và điều hành giải đấu theo thể thức Swiss, thiết lập số vòng, cách tính điểm, tiêu chí xếp hạng phụ và số người được chọn vào vòng top theo điều lệ đã công bố. Trọng tài xác nhận kết quả từng trận để ban tổ chức cập nhật trên Challonge trước khi tạo cặp đấu cho vòng tiếp theo. Sau vòng Swiss cuối cùng, ban tổ chức kiểm tra bảng xếp hạng, giải quyết khiếu nại và chốt danh sách cắt top; những người đủ điều kiện tiếp tục thi đấu loại trực tiếp để xác định kết quả chung cuộc. Hệ thống cửa hàng lưu đường dẫn giải đấu trên Challonge và kết quả đã được ban tổ chức xác nhận; nhân viên lập phiếu xuất kho các phần quà tài trợ cùng vật phẩm của cửa hàng để trao thưởng, ghi nhận người nhận và hoàn tất báo cáo sự kiện.
 
 #### Chức năng: Quản lý nội dung Fanpage
 
@@ -201,9 +245,9 @@ Dự án hướng đến việc quản lý tập trung thông tin hàng hóa, đ
 4. **2.3, 2.4 và 2.5 mỗi tiến trình có bao nhiêu tiến trình con?**
    Mỗi tiến trình có 4 tiến trình con. 2.3 gồm tiếp nhận đơn đã thanh toán, chuẩn bị/gửi yêu cầu giao, cập nhật mã vận đơn/trạng thái và thông báo tình trạng giao hàng. 2.4 gồm tiếp nhận yêu cầu đổi trả, kiểm tra điều kiện, ghi nhận đổi trả/yêu cầu hoàn tiền và xử lý hoàn tiền/thông báo kết quả. 2.5 gồm tiếp nhận yêu cầu cấp hàng, kiểm tra tồn kho/cấp hàng, đối chiếu báo cáo doanh số và ghi nhận chuyển tiền/kết quả đối soát.
 5. **Nếu sản phẩm hết hàng hoặc chỉ một phần đơn đủ hàng, tiến trình nào xử lý?**
-   2.1.3 kiểm tra tồn kho. Cần quyết định rõ là từ chối cả đơn, cho khách sửa đơn hay tách giao; sơ đồ hiện chưa thể hiện nhánh thiếu hàng.
+   2.1.3 kiểm tra tồn kho. Với đơn online thiếu hoặc hết hàng, Nhân viên xử lý đơn trực tuyến thông báo khách hủy đơn và ghi nhận kết quả; không tự tách giao hoặc cho chờ nhập hàng. DFD cần thể hiện luồng thông báo và kết quả hủy.
 6. **Nếu thanh toán thất bại, tiến trình nào trả kết quả và có chuyển đơn giao không?**
-   2.2.2 ghi nhận trạng thái giao dịch, 2.2.3 chỉ xác nhận khi thanh toán thành công và 2.2.4 trả kết quả. Đơn thất bại/đang chờ không nên chuyển sang 2.3; nhánh thất bại cần được vẽ rõ.
+   2.2.2 ghi nhận giao dịch và số tiền thực nhận; nếu chuyển thiếu, thông báo khách chuyển bổ sung và lưu các bill cùng đơn. Quản lý cửa hàng xác nhận đã nhận đủ tiền tại 2.2.3 trước khi ghi nhận thanh toán hoàn tất; 2.2.4 trả kết quả. Đơn thanh toán thất bại hoặc đang chờ không được ghi nhận hoàn tất thanh toán; DFD cần bổ sung nhánh chờ, chuyển thiếu và kết quả xác nhận của quản lý.
 7. **Nếu yêu cầu đổi trả không đủ điều kiện hoặc hoàn tiền lỗi thì xử lý ở đâu?**
    2.4.2 kiểm tra điều kiện; 2.4.4 xử lý hoàn tiền và thông báo. Cần bổ sung đầu ra từ chối có lý do và trạng thái hoàn tiền chờ/thất bại nếu hệ thống hỗ trợ xử lý lại.
 
@@ -224,7 +268,7 @@ Dự án hướng đến việc quản lý tập trung thông tin hàng hóa, đ
 7. **Nếu CTV nộp thiếu tiền so với doanh số đối chiếu thì dữ liệu chênh lệch đi đâu?**
    2.5.4 cần ghi nhận số phải nộp, số thực nhận, phần chênh lệch và trạng thái đối soát vào D11; cần có luồng thông báo/đề nghị bổ sung nếu quy trình yêu cầu.
 8. **Nếu khách hủy đơn sau khi đã gửi yêu cầu giao hàng thì cần trao đổi dữ liệu gì?**
-   Cần luồng yêu cầu hủy tới đơn vị vận chuyển, phản hồi khả năng hủy và cập nhật trạng thái đơn/giao hàng. Sơ đồ hiện chưa mô tả trường hợp này.
+   Nếu mới gửi yêu cầu giao nhưng chưa bàn giao hàng, nhân viên hủy yêu cầu giao và cập nhật trạng thái đơn/giao hàng. Khi hàng đã được bàn giao cho đơn vị vận chuyển, không chấp nhận hủy theo quy trình này; yêu cầu trả hàng được kiểm tra theo điều kiện đổi trả. Shop chịu phí giao; khách chịu phí hoàn hàng. DFD cần bổ sung các phản hồi tương ứng.
 
 ##### **c. Danh sách câu hỏi và trả lời liên quan đến các kho dữ liệu (Data Store)**
 
@@ -239,7 +283,7 @@ Dự án hướng đến việc quản lý tập trung thông tin hàng hóa, đ
 5. **D11 cần lưu gì khi số tiền CTV nộp không khớp?**
    Nên lưu doanh số báo cáo, số phải nộp, số thực nhận, chênh lệch, trạng thái và ghi chú xử lý để tiếp tục đối soát.
 6. **Khi hủy đơn hoặc nhận hàng đổi trả, lúc nào D4 được cập nhật?**
-   Cần quy định thời điểm nhả hàng đã giữ chỗ hoặc nhập lại hàng sau khi kiểm tra đủ điều kiện; không nên tăng tồn chỉ dựa trên yêu cầu đổi trả. Luồng cập nhật tồn trong các trường hợp này chưa được mô tả rõ.
+   Khi hủy đơn trước bàn giao, chỉ hoàn lại lượng tồn đã giảm từ đơn đó, sau khi đối chiếu hàng vẫn còn tại cửa hàng; không tăng tồn nếu đơn chưa từng làm giảm tồn. Với hàng đổi trả, chỉ tăng tồn sau khi nhận hàng thực tế, được Quản lý cửa hàng xác nhận đạt tiêu chuẩn bán lại và hoàn tất nhập kho. Hàng chờ xử lý hoặc bị loại bỏ không được cộng tồn; mỗi lần hoàn tồn chỉ ghi nhận một lần.
 
 ##### **d. Danh sách câu hỏi và trả lời liên quan đến các thực thể ngoài (External Entity)**
 
@@ -433,7 +477,7 @@ Trả lời: Hệ thống tự động tổng kết bảng xếp hạng chung cu
 5. **Nếu Nhân viên xin nghỉ thì yêu cầu được xử lý như thế nào?**
    4.2.2 tiếp nhận yêu cầu nghỉ và chuyển cho 4.2.3. Sau khi nhận quyết định từ Quản lí, 4.2.3 gửi lịch làm việc, thông báo duyệt nghỉ cho Nhân viên và cập nhật D20.
 6. **Tiến trình 4.2.4 thực hiện việc gì?**
-   4.2.4 nhận dữ liệu chấm công từ Nhân viên và ghi vào D21. Sơ đồ hiện chỉ thể hiện ghi nhận chấm công, chưa có luồng đọc D20 để đối chiếu với lịch làm việc.
+   4.2.4 tổng hợp dữ liệu từ máy chấm công, đối chiếu lịch làm việc ở D20 và ghi công thực tế vào D21. Trường hợp quên chấm công được Quản lý cửa hàng xác nhận bổ sung; quên quá nhiều lần bị cảnh cáo. DFD hiện cần bổ sung nguồn dữ liệu máy chấm công, luồng đọc D20 và xác nhận sửa công của quản lý.
 7. **Tiến trình 4.3 được phân rã như thế nào?**
    4.3.1 Tổng hợp giờ công & Doanh số nhận giờ công từ D21 và báo cáo doanh số từ CTV. 4.3.2 Tính lương & Hoa hồng sử dụng dữ liệu tổng hợp, mức lương và tỉ lệ hoa hồng từ D19, cùng mức hoa hồng từ Quản lí. 4.3.3 Lập phiếu lương & Ghi nhận hoa hồng gửi kết quả cho Nhân viên, CTV và lưu bảng lương, hoa hồng vào D22.
 8. **Tiến trình 4.4 được phân rã như thế nào?**
@@ -444,11 +488,11 @@ Trả lời: Hệ thống tự động tổng kết bảng xếp hạng chung cu
 ##### **b. Danh sách câu hỏi và trả lời liên quan đến các dòng dữ liệu (Data Flow)**
 
 1. **Nhân viên gửi những dữ liệu gì vào hệ thống?**
-   Thông tin cá nhân vào 4.1; đăng kí ca, yêu cầu nghỉ và dữ liệu chấm công vào 4.2. Ở mức 2, các luồng lần lượt vào 4.1.1, 4.2.1, 4.2.2 và 4.2.4.
+   Thông tin cá nhân vào 4.1; đăng ký ca theo tuần qua ứng dụng nhắn tin Zalo, yêu cầu nghỉ gửi quản lý và dữ liệu từ máy chấm công phục vụ 4.2. Quản lý tổng hợp lịch gửi trong khoảng 07:00 thứ Năm đến 15:00 Chủ Nhật và cập nhật lịch đã duyệt lên hệ thống. Ở mức 2, các luồng lần lượt vào 4.1.1, 4.2.1, 4.2.2 và 4.2.4.
 2. **Hệ thống trả những dữ liệu gì cho Nhân viên?**
    Lịch làm việc, thông báo duyệt nghỉ từ 4.2; phiếu lương từ 4.3; kết quả đánh giá từ 4.4. Ở mức 2, các luồng lần lượt do 4.2.3, 4.3.3 và 4.4.2 cung cấp.
 3. **CTV gửi và nhận những dữ liệu gì?**
-   CTV gửi thông tin cá nhân vào 4.1.1 và báo cáo doanh số vào 4.3.1; nhận mức hoa hồng từ 4.3.3. Theo nghiệp vụ đã mô tả, CTV dùng mức hoa hồng để tự trừ khi chuyển tiền lại cho cửa hàng; sơ đồ không biểu diễn việc chuyển tiền thực tế.
+   CTV gửi thông tin cá nhân để quản lý cập nhật vào 4.1.1; ngày 15 hằng tháng gửi báo cáo doanh số và thông tin nộp tiền qua Facebook để quản lý cập nhật, phục vụ 4.3.1 và đối soát. CTV nhận kết quả hoa hồng từ 4.3.3 qua quản lý, tự giữ lại hoa hồng và nộp số tiền còn phải nộp ngay trong ngày 15. Sơ đồ không biểu diễn việc chuyển tiền thực tế.
 4. **Quản lí cửa hàng gửi và nhận những dữ liệu gì?**
    Quản lí gửi duyệt ca, duyệt nghỉ vào 4.2.3 và mức hoa hồng vào 4.3.2; nhận ca, nghỉ cần duyệt từ 4.2.3 và báo cáo nhân sự từ 4.4.3.
 5. **Các luồng nội bộ trong phân rã 4.1 và 4.2 là gì?**
@@ -486,9 +530,9 @@ Trả lời: Hệ thống tự động tổng kết bảng xếp hạng chung cu
 2. **Vai trò của Nhân viên trong chức năng này là gì?**
    Nhân viên cung cấp thông tin cá nhân, đăng kí ca, yêu cầu nghỉ và dữ liệu chấm công; nhận lịch làm việc, thông báo duyệt nghỉ, phiếu lương và kết quả đánh giá.
 3. **Vai trò của CTV trong chức năng này là gì?**
-   CTV cung cấp thông tin cá nhân và báo cáo doanh số; nhận mức hoa hồng. CTV được quản lý qua mã định danh, không có tài khoản đăng nhập hệ thống theo đặc tả nghiệp vụ.
+   CTV cung cấp thông tin cá nhân và báo cáo doanh số; nhận mức hoa hồng. CTV được quản lý qua hồ sơ và mã định danh theo đặc tả nghiệp vụ.
 4. **Vai trò của Quản lí cửa hàng trong chức năng này là gì?**
-   Quản lí duyệt ca, duyệt nghỉ và cung cấp mức hoa hồng; nhận yêu cầu ca, nghỉ cần duyệt và báo cáo nhân sự.
+   Quản lý tạo và xóa hồ sơ nhân viên; tạo và xóa hồ sơ CTV; duyệt ca, nghỉ đột xuất, bổ sung nhân sự, xác nhận sửa công và duyệt bảng lương. Quản lý cung cấp tỷ lệ hoa hồng, tiếp nhận báo cáo CTV qua Facebook ngày 15, đối chiếu tiền nộp trong ngày và quyết định cảnh cáo hoặc chấm dứt hợp tác khi nộp thiếu; nhận báo cáo nhân sự.
 
 
 #### Mô hình mức ngữ cảnh (Context Level)
@@ -606,3 +650,89 @@ Mỗi thực thể ngoài và mỗi kho dữ liệu chỉ xuất hiện một l�
 
 ![DFD Mức 2 - 1.4 Theo dõi tương tác và đo lường hiệu suất](./images/quanlyfanpage/DFD_muc2_4_TheoDoiTuongTac.png)
 ---
+
+## 4. Phân tích những hạn chế đang tồn tại trong hệ thống và đề xuất các giải pháp cải tiến
+
+### 4.1. Hạn chế trong quản lý cộng tác viên
+
+Phạm vi đặc tả bao gồm quản lý hồ sơ, mã định danh, doanh số, đối soát và hoa hồng CTV do Quản lý cửa hàng cập nhật. Việc trao đổi báo cáo và thông tin nộp tiền với CTV diễn ra qua Facebook. Mô tả này xác định phạm vi nghiệp vụ, không khẳng định các chức năng đã được triển khai thành phần mềm.
+
+CTV được quản lý thông qua hồ sơ và mã định danh. Thông tin hàng đã bán, hàng còn tồn và số tiền nộp về phụ thuộc vào báo cáo của CTV và việc cập nhật của quản lý. Cách làm này có các hạn chế:
+
+- **Dữ liệu cập nhật chậm:** Cửa hàng khó nắm bắt kịp thời lượng hàng thực tế tại từng CTV khi chưa nhận được báo cáo.
+- **Đối soát phụ thuộc vào thao tác thủ công:** Việc tổng hợp hàng đã cấp, hàng đã bán, hàng hoàn trả và tiền đã nộp dễ xảy ra sai sót hoặc bỏ sót chứng từ.
+- **Khó kiểm soát công nợ và thất thoát:** Báo cáo chậm hoặc thiếu thông tin khiến việc xác định khoản còn phải nộp, hàng hư hỏng và trách nhiệm xử lý chênh lệch gặp khó khăn.
+- **Còn quy tắc ngoại lệ cần cụ thể hóa:** Đã quy định báo cáo và nộp tiền ngày 15, nộp thiếu có thể bị cảnh cáo hoặc chấm dứt hợp tác. Tuy nhiên, chưa chốt cách xử lý báo cáo quá hạn, tiêu chí lựa chọn hình thức xử lý và căn cứ doanh số dùng tính hoa hồng khi có hàng trả.
+
+### 4.2. Đề xuất giải pháp cải tiến
+
+Trong phạm vi hiện tại, cửa hàng có thể chuẩn hóa biểu mẫu báo cáo và quy trình đối soát bên ngoài hệ thống. Mỗi báo cáo cần ghi mã CTV, kỳ đối soát, số lượng hàng nhận, hàng bán, hàng hoàn trả, hàng còn tồn, hàng hư hỏng và chứng từ nộp tiền. Quản lý quy định thời hạn gửi báo cáo, người kiểm tra và cách xử lý chênh lệch để giảm sai sót khi tổng hợp.
+
+Để hoàn thiện các chức năng quản lý CTV trong phạm vi đã mô tả, đề xuất các nội dung:
+
+1. **Quản lý hồ sơ và hàng ký gửi theo mã CTV:** Liên kết hồ sơ CTV với phiếu cấp hàng, phiếu nhập hoàn và số lượng tồn tại từng CTV để theo dõi xuyên suốt quá trình giao nhận.
+2. **Chuẩn hóa đối soát hàng và tiền:** Tổng hợp dữ liệu theo kỳ, đối chiếu hàng đã cấp với hàng bán, hàng hoàn và hàng còn tồn; xác định số tiền phải nộp sau khi trừ hoa hồng theo chính sách đã thống nhất, so sánh với số tiền thực nộp và ghi nhận chênh lệch.
+3. **Bổ sung nhắc hạn và xử lý ngoại lệ:** Theo dõi báo cáo quá hạn, tiền chưa nộp, hàng hư hỏng hoặc thiếu hụt; ghi nhận người xác nhận, hướng xử lý và trạng thái giải quyết.
+4. **Lập báo cáo và lưu lịch sử thay đổi:** Cung cấp báo cáo doanh số, hoa hồng, công nợ và hàng tồn theo CTV; lưu lịch sử cập nhật để phục vụ kiểm tra và giải quyết sai lệch.
+
+
+### 4.3. Hạn chế trong quy trình tổ chức giải đấu và quản lý tài trợ
+
+Cửa hàng sử dụng Challonge để tạo và điều hành các giải đấu, trong đó Yu-Gi-Oh! là bộ môn được tổ chức thường xuyên nhất. Giải đấu áp dụng vòng Swiss, sau đó cắt top theo bảng xếp hạng và điều lệ giải để tổ chức vòng loại trực tiếp. Việc chia cặp và cập nhật kết quả được thực hiện trên Challonge; hệ thống cửa hàng quản lý thông tin sự kiện, đăng ký, lệ phí, tài trợ và trao thưởng.
+
+Phần đặc tả trước đây chưa làm rõ cách phối hợp giữa hai hệ thống và các quy tắc vận hành, dẫn đến những hạn chế cần giải quyết:
+
+- **Chưa quy định đầy đủ cấu hình giải:** Chưa xác định cách chốt số vòng Swiss, số người vào top, cách tính điểm và tiêu chí phân hạng khi bằng điểm. Swiss là thể thức thi đấu; số người được cắt top phải được xác định theo điều lệ áp dụng cho từng giải.
+- **Dễ lệch thông tin người tham gia:** Danh sách đăng ký, thanh toán và điểm danh tại cửa hàng cần được đối chiếu với danh sách thi đấu trên Challonge, đặc biệt khi có người bỏ cuộc hoặc đăng ký muộn.
+- **Chưa làm rõ trách nhiệm xác nhận kết quả:** Cần phân biệt người báo kết quả, trọng tài xác nhận và người cập nhật trên Challonge; kết quả nhập sai có thể ảnh hưởng đến cặp đấu vòng sau và danh sách cắt top.
+- **Chưa có bước chốt bảng xếp hạng trước khi cắt top:** Cần quy định thời hạn tiếp nhận khiếu nại và thẩm quyền sửa kết quả trước khi chuyển sang vòng loại trực tiếp.
+- **Chưa theo dõi đầy đủ tài trợ và trao thưởng:** Cần phân biệt khoản tài trợ đã cam kết với tiền hoặc hiện vật thực nhận, đồng thời đối chiếu phần thưởng đã công bố với số lượng thực tế có thể bàn giao.
+
+### 4.4. Đề xuất cải tiến quy trình tổ chức giải đấu và quản lý tài trợ
+
+#### 4.4.1. Chuẩn hóa điều lệ và khởi tạo giải đấu
+
+Quản lý giải đấu lập thông tin sự kiện trên hệ thống cửa hàng, gồm tên giải, bộ môn, thời gian, địa điểm, số người tối đa, hạn đăng ký, lệ phí và cơ cấu giải thưởng. Với Yu-Gi-Oh!, điều lệ phải ghi rõ định dạng thi đấu và bộ quy định áp dụng, gồm quy định về bộ bài, danh sách bài cấm/giới hạn, thời gian trận đấu và cách xử lý khi hết giờ.
+
+Ban tổ chức tạo giải Swiss trên Challonge, lưu mã hoặc đường dẫn giải vào hồ sơ sự kiện và kiểm tra cấu hình trước khi bắt đầu. Số vòng Swiss, điểm thắng/hòa/thua, cách xử lý lượt miễn đấu (bye), thứ tự tiêu chí phân hạng khi bằng điểm và số người vào top phải phù hợp với điều lệ đã công bố. Không mặc định cơ chế xếp hạng sẵn có của Challonge đáp ứng toàn bộ quy định Yu-Gi-Oh!; ban tổ chức phải đối chiếu và xác nhận cách tính được sử dụng.
+
+Số vòng và mức cắt top được xác định theo số người tham gia cùng quy định áp dụng cho loại giải. Điều lệ cần công bố rõ cách xử lý đăng ký muộn và ảnh hưởng đến số vòng hoặc mức cắt top; mọi thay đổi chỉ được thực hiện nếu quy định áp dụng cho phép. Với giải chính thức, sử dụng hướng dẫn của đơn vị tổ chức có thẩm quyền cho đúng khu vực và loại sự kiện.
+
+#### 4.4.2. Đăng ký, thu lệ phí và điểm danh
+
+Nhân viên tiếp nhận thông tin đăng ký, kiểm tra trùng người tham gia và ghi nhận trạng thái lệ phí. Trước giờ khai mạc, nhân viên điểm danh và đối chiếu danh sách đủ điều kiện thi đấu với danh sách trên Challonge bằng mã người tham gia, tránh chỉ đối chiếu theo tên hiển thị.
+
+Khi đóng đăng ký, ban tổ chức chốt danh sách và cấu hình giải theo điều lệ. Trường hợp đến muộn, không tham dự, xin rút hoặc yêu cầu hoàn lệ phí được ghi nhận và xử lý theo chính sách đã công bố; không tự đưa người chưa đủ điều kiện vào danh sách thi đấu.
+
+#### 4.4.3. Điều hành các vòng Swiss
+
+Ban tổ chức sử dụng Challonge để tạo cặp đấu từng vòng và công bố cặp đấu, số bàn cùng thời gian bắt đầu. Người chơi báo kết quả; trọng tài xác nhận kết quả hoặc quyết định xử lý tranh chấp trước khi người được phân công cập nhật trên Challonge.
+
+Trước khi tạo vòng tiếp theo, ban tổ chức kiểm tra các trận đã hoàn tất, kết quả còn thiếu và trường hợp rút khỏi giải. Việc sửa kết quả phải được trọng tài hoặc quản lý giải đấu xác nhận, ghi rõ lý do và kiểm tra ảnh hưởng đến bảng xếp hạng, cặp đấu đã công bố. Trường hợp bỏ cuộc, vắng mặt, được miễn đấu hoặc vi phạm được xử lý theo điều lệ và quyết định của trọng tài.
+
+#### 4.4.4. Chốt bảng xếp hạng và cắt top
+
+Sau vòng Swiss cuối cùng, ban tổ chức kiểm tra kết quả, điểm số và các tiêu chí phân hạng đã công bố. Bảng xếp hạng tạm thời được công bố để tiếp nhận khiếu nại trong thời hạn quy định; trọng tài giải quyết các trường hợp còn tranh chấp trước khi quản lý giải đấu xác nhận danh sách chính thức.
+
+Ban tổ chức chọn số người đứng đầu theo mức cắt top đã công bố, chẳng hạn Top 4 hoặc Top 8 nếu phù hợp với điều lệ. Không tự chọn người vào top khi bằng điểm; phải áp dụng đúng thứ tự tiêu chí phân hạng. Trường hợp người đủ điều kiện không tiếp tục thi đấu, xử lý theo điều lệ và quyết định của trọng tài trước khi chốt nhánh đấu.
+
+Những người vào top được xếp hạt giống theo quy định đã công bố và thi đấu loại trực tiếp trên Challonge. Ban tổ chức có thể cấu hình giải hai giai đoạn hoặc tạo nhánh loại trực tiếp riêng được liên kết với giải Swiss. Kết quả vòng Swiss và kết quả vòng top được lưu riêng để phân biệt thứ hạng sau Swiss với thành tích chung cuộc. Hệ thống cửa hàng tiếp nhận kết quả do nhân viên cập nhật và xác nhận; đồng bộ tự động với Challonge là hướng mở rộng nếu được triển khai sau này.
+
+#### 4.4.5. Tiếp nhận tài trợ và bàn giao phần thưởng
+
+Nhân viên ghi nhận từng gói tài trợ với nhà tài trợ, nội dung cam kết, giá trị hoặc số lượng hiện vật, thời hạn bàn giao và quyền lợi truyền thông. Khi nhận tài trợ, nhân viên đối chiếu với cam kết, lưu chứng từ và cập nhật số thực nhận; hiện vật phải được kiểm nhận trước khi ghi nhận vào kho.
+
+Trước giải, quản lý kiểm tra khả năng đáp ứng cơ cấu giải thưởng từ tài trợ thực nhận và nguồn hàng của cửa hàng. Nếu nhà tài trợ giao thiếu, giao chậm hoặc hiện vật không đạt yêu cầu, nhân viên ghi nhận chênh lệch và chuyển quản lý xử lý phương án bổ sung, thay thế hoặc thông báo điều chỉnh theo điều lệ.
+
+Sau khi xác nhận kết quả chung cuộc, nhân viên lập danh sách người nhận thưởng, tạo phiếu xuất kho cho hiện vật và ghi nhận chi trả đối với giải thưởng bằng tiền. Mỗi lần bàn giao cần có xác nhận người nhận; phần thưởng chưa nhận được theo dõi riêng, tránh ghi nhận đã bàn giao khi mới lập danh sách trao thưởng.
+
+#### 4.4.6. Tổng kết và lưu hồ sơ sự kiện
+
+Khi kết thúc sự kiện, quản lý đối chiếu số người đăng ký và thực tế tham gia, lệ phí đã thu và hoàn, tài trợ đã nhận, chi phí tổ chức, phần thưởng đã giao và số còn lại. Hồ sơ lưu kèm đường dẫn Challonge, kết quả Swiss, danh sách cắt top, kết quả chung cuộc, quyết định xử lý khiếu nại và chứng từ liên quan.
+
+Báo cáo tổng kết phục vụ đánh giá hiệu quả sự kiện, thực hiện quyền lợi đã cam kết với nhà tài trợ và cải tiến các giải tiếp theo. Các bước bổ sung cần được đối chiếu và cập nhật vào DFD tương ứng khi chốt đặc tả chi tiết.
+
+Nguồn tham khảo cho đề xuất:
+
+- [Challonge — Các thể thức thi đấu, Swiss và giải hai giai đoạn](https://kb.challonge.com/en/article/learn-about-challonge-competition-formats-1f8j1cf/).
+- [Konami — Cập nhật chính sách giải đấu Yu-Gi-Oh! TCG phiên bản 2.5](https://www.yugioh-card.com/eu/tournament-policy-ver-2-5-updates-and-changes/). Tài liệu này dùng để tham khảo; điều lệ thực tế cần chọn đúng bộ quy định cho khu vực và loại giải của cửa hàng.
