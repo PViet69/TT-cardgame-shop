@@ -15,6 +15,7 @@ Dự án hướng đến việc quản lý tập trung thông tin hàng hóa, đ
 4. Chức năng Quản lý Nhân Viên và Cộng Tác Viên
 5. Chức năng Quản lý Giải Đấu và Tài Trợ Sự Kiện
 6. Chức năng quản lý nội dung Fanpage
+7. Chức năng Áp dụng giảm giá
 
 
 
@@ -109,6 +110,11 @@ Dự án hướng đến việc quản lý tập trung thông tin hàng hóa, đ
       - Nếu bài viết đạt yêu cầu, Quản lý tiến hành phê duyệt và hệ thống sẽ tự động đăng tải theo lịch hẹn (hoặc đăng ngay lập tức).
       - Nếu bài viết chưa đạt, hệ thống trả về trạng thái yêu cầu chỉnh sửa kèm theo nhận xét của quản lý để nhân viên cập nhật lại.
    Sau khi bài viết được phát hành, hệ thống ghi nhận các chỉ số tương tác ban đầu (lượt thích, bình luận, chia sẻ) để phục vụ công tác đánh giá hiệu quả chiến dịch truyền thông. Trường hợp phát sinh thông tin sai lệch hoặc cần gỡ bỏ, quản lý hoặc nhân viên có quyền thực hiện thao tác cập nhật hoặc ẩn/gỡ bài viết trên hệ thống.
+
+#### Chức năng: Áp dụng giảm giá
+
+Quy trình áp dụng giảm giá nhằm xác định ưu đãi phù hợp với giao dịch mua hàng và tính tổng tiền khách phải thanh toán, do Nhân viên bán hàng tại quầy hoặc Nhân viên xử lý đơn trực tuyến tiếp nhận thông tin từ Khách hàng. Khi khách cung cấp mã giảm giá, hệ thống kiểm tra mỗi đơn chỉ áp dụng tối đa một mã rồi tra cứu chương trình tương ứng tại Mã giảm giá và khuyến mãi; nếu khách nhập nhiều mã thì yêu cầu chọn lại một mã, nếu mã không tồn tại thì ghi nhận kết quả từ chối. Mã giảm giá có hai loại: mã dùng một lần và mã dùng nhiều lần. Mã dùng một lần chỉ được sử dụng cho một giao dịch hoàn tất và không được áp dụng lại sau khi đã sử dụng; mã dùng nhiều lần được áp dụng cho nhiều giao dịch trong thời hạn hiệu lực, theo giới hạn lượt của chương trình nếu có. Hệ thống kiểm tra loại mã và lịch sử sử dụng trước khi chấp nhận áp dụng; mỗi đơn vẫn chỉ được dùng tối đa một mã. Khi khách không cung cấp mã, hệ thống tra cứu các chương trình giảm giá tự động (nếu có chương trình dịp lễ, Tết hoặc các đợt khuyến mãi khác) theo sản phẩm, số lượng hoặc giá trị mua hàng. Sau khi tìm được chương trình, hệ thống kiểm tra thông tin đơn, trạng thái phê duyệt, thời hạn, kênh mua và phạm vi sản phẩm được xét giảm; đồng thời đọc thông tin sản phẩm và giá bán tại Danh mục sản phẩm và giá bán để xác định giá trị hàng liên quan, đối chiếu mức mua tối thiểu cùng giới hạn lượt sử dụng. Hệ thống không cộng dồn khuyến mãi với ưu đãi sử dụng điểm tích lũy trong cùng giao dịch. Nếu đáp ứng điều kiện, hệ thống tính tiền giảm theo tỷ lệ phần trăm hoặc số tiền cố định của chương trình, bảo đảm không vượt mức trần nếu có và giá trị hàng được giảm; nếu không đáp ứng điều kiện thì tiền giảm bằng 0 và ghi rõ lý do từ chối. Hệ thống tính tổng tiền thanh toán từ tiền hàng trước giảm, tiền giảm và phí vận chuyển đã xác định (bằng 0 nếu không phát sinh), sau đó thông báo kết quả áp dụng cùng tiền giảm và tổng tiền thanh toán để khách xác nhận. Kết quả được tiếp tục xử lý trong quy trình Bán hàng, nơi kiểm tra lại điều kiện trước khi chốt thanh toán và ghi nhận ưu đãi thực tế.
+
 ---
 
 ## 2. Mô tả các kho dữ liệu (Data Store)
@@ -119,8 +125,8 @@ Dự án hướng đến việc quản lý tập trung thông tin hàng hóa, đ
 | D2 | Danh sách đăng ký giải đấu | Lưu đăng ký và điểm danh người tham gia. |
 | D3 | Thông tin tài trợ | Lưu các khoản tài trợ cho sự kiện. |
 | D4 | Hàng hóa và tồn kho | Lưu thông tin hàng hóa và số lượng tồn. |
-| D5 | Danh mục sản phẩm và giá bán | Lưu danh mục sản phẩm và giá bán. |
-| D6 | Mã giảm giá và khuyến mãi | Lưu các ưu đãi bán hàng. |
+| D5 | Danh mục sản phẩm và giá bán | Lưu danh mục sản phẩm và giá bán; cung cấp thông tin sản phẩm và giá bán để xác định hàng được xét giảm, giá trị mua hàng và căn cứ tính tiền. |
+| D6 | Mã giảm giá và khuyến mãi | Lưu chương trình theo mã hoặc tự động, phạm vi sản phẩm, hiệu lực, điều kiện áp dụng, công thức giảm, mức trần, loại mã dùng một lần hoặc nhiều lần, lịch sử sử dụng và giới hạn lượt nếu có. |
 | D7 | Đơn hàng và hóa đơn | Lưu đơn bán hàng và hóa đơn. |
 | D8 | Giao dịch thanh toán | Lưu các giao dịch thu, chi và hoàn tiền. |
 | D9 | Hồ sơ giao hàng | Lưu thông tin và trạng thái giao hàng. |
@@ -180,7 +186,7 @@ Dự án hướng đến việc quản lý tập trung thông tin hàng hóa, đ
 5. **Nếu chưa nhận được xác nhận thanh toán thì có giảm công nợ không?**
    Chưa giảm công nợ; cần giữ trạng thái chờ xác nhận. Nhánh chờ hoặc thanh toán thất bại chưa được thể hiện riêng trên sơ đồ.
 6. **Các luồng giữa mức 0 và mức 1 đã cân bằng chưa?**
-   Mức 0 hiện chưa nêu thông tin thanh toán, xác nhận thanh toán và kết quả xử lý đổi trả có ở mức 1; cần bổ sung vào nội dung hai luồng tổng hợp để giữ cách vẽ hai mũi tên.
+   Sơ đồ Visual Paradigm bậc 0 đã bổ sung thông tin thanh toán, xác nhận thanh toán và kết quả xử lý đổi trả vào hai luồng tổng hợp với Nhà cung cấp, cân bằng với bậc 1. Ảnh bậc 0 cũ được giữ làm tham khảo.
 
 ##### **c. Danh sách câu hỏi và trả lời liên quan đến các kho dữ liệu (Data Store)**
 
@@ -210,7 +216,7 @@ Dự án hướng đến việc quản lý tập trung thông tin hàng hóa, đ
 
 #### Mô hình mức ngữ cảnh (Context Level)
 
-![DFD Mức 0 - Nhập hàng](./images/nhaphang/DFD_muc0.png)
+[DFD bậc 0 — Nhập hàng ](./diagram/nhaphang/DFD_muc0.vpp)
 
 
 #### Mô hình mức đỉnh (Level 1)
@@ -335,7 +341,11 @@ Trả lời: Hệ thống tự động tổng kết bảng xếp hạng chung cu
 
 #### Mô hình mức ngữ cảnh (Context Level)
 
-![DFD Mức ngữ cảnh - Giải đấu và Tài trợ](./images/giaidau/DFD_muc0.png)
+[DFD bậc 0 — Quản lý Giải đấu và Tài trợ sự kiện (Visual Paradigm, cân bằng với bậc 1)](./diagram/giaidau/DFD_muc0.vpp)
+
+[Bảng đối chiếu luồng dữ liệu bậc 0 và bậc 1](./diagram/giaidau/DFD_muc0.md)
+
+[Ảnh bậc 0 trước khi tạo lại](./images/giaidau/DFD_muc0.png)
 
 #### Mô hình mức đỉnh (Level 1)
 
@@ -357,7 +367,11 @@ Trả lời: Hệ thống tự động tổng kết bảng xếp hạng chung cu
 
 #### Mô hình mức ngữ cảnh (Context Level)
 
-![DFD mức ngữ cảnh — Quản lý Kho nội bộ](./images/quanlykho/DFD_muc0.png)
+[DFD bậc 0 — Quản lý Kho (Visual Paradigm, cân bằng với bậc 1)](./diagram/quanlykho/DFD_muc0.vpp)
+
+[Bảng đối chiếu luồng dữ liệu bậc 0 và bậc 1](./diagram/quanlykho/DFD_muc0.md)
+
+[Ảnh bậc 0 trước khi tạo lại](./images/quanlykho/DFD_muc0.png)
 
 #### Mô hình mức đỉnh (Level 1)
 
@@ -537,9 +551,11 @@ Trả lời: Hệ thống tự động tổng kết bảng xếp hạng chung cu
 
 #### Mô hình mức ngữ cảnh (Context Level)
 
-![DFD mức ngữ cảnh — Nhân viên và CTV](./images/nhansu/DFD_muc0.png)
+[DFD bậc 0 — Quản lý Nhân viên và Cộng tác viên ](./diagram/nhansu/DFD_muc0.vpp)
 
-Ảnh mức ngữ cảnh được thay bằng ảnh cập nhật do người dùng cung cấp.
+
+
+
 
 
 
@@ -649,6 +665,97 @@ Mỗi thực thể ngoài và mỗi kho dữ liệu chỉ xuất hiện một l�
 ![DFD Mức 2 - 1.3 Đăng tải và phân phối nội dung](./images/quanlyfanpage/DFD_muc2_3_DangTaiPhanPhoi.png)
 
 ![DFD Mức 2 - 1.4 Theo dõi tương tác và đo lường hiệu suất](./images/quanlyfanpage/DFD_muc2_4_TheoDoiTuongTac.png)
+---
+
+### Chức năng: Áp dụng giảm giá
+
+#### Bảng danh sách câu hỏi và trả lời
+
+##### **a. Danh sách câu hỏi và trả lời liên quan đến các ô xử lý (Process)**
+
+1. **Mức 1 được phân rã thành bao nhiêu tiến trình?**
+   Có 3 tiến trình: 7.1 Xác định chương trình giảm giá; 7.2 Xét điều kiện áp dụng; 7.3 Xử lý kết quả giảm giá.
+2. **Tiến trình 7.1 được phân rã thành những tiến trình nào?**
+   Có 3 tiến trình: 7.1.1 Tiếp nhận yêu cầu; 7.1.2 Kiểm tra số mã; 7.1.3 Tra cứu chương trình giảm giá. Có mã thì đi qua 7.1.2 trước khi tra cứu; không có mã thì thông tin xét giảm tự động đi trực tiếp từ 7.1.1 đến 7.1.3.
+3. **Tiến trình 7.2 được phân rã thành những tiến trình nào?**
+   Có 6 tiến trình: 7.2.1 Kiểm tra thông tin đơn; 7.2.2 Kiểm tra hiệu lực chương trình; 7.2.3 Xác định hàng được xét giảm giá; 7.2.4 Kiểm tra ngưỡng áp dụng; 7.2.5 Kiểm tra giới hạn sử dụng; 7.2.6 Lập kết quả xét giảm giá.
+4. **Tiến trình 7.3 được phân rã thành những tiến trình nào?**
+   Có 5 tiến trình: 7.3.1 Phân loại kết quả xét; 7.3.2 Tính tiền giảm theo chương trình; 7.3.3 Ghi nhận không áp dụng giảm; 7.3.4 Xác định tổng tiền thanh toán; 7.3.5 Lập thông báo kết quả.
+5. **Khách hàng không cung cấp mã thì có được xét giảm không?**
+   Có. 7.1.3 tìm chương trình có cách kích hoạt tự động tại D6 dựa trên thông tin mua hàng. 7.2 kiểm tra điều kiện thực tế; không có chương trình đủ điều kiện thì 7.3 ghi tiền giảm bằng 0 và thông báo không có ưu đãi phù hợp.
+6. **Mã không tồn tại hoặc khách nhập nhiều mã được xử lý ở đâu?**
+   7.1.2 từ chối yêu cầu chứa nhiều mã; 7.1.3 từ chối mã không tồn tại. Cả hai chuyển Kết quả từ chối sang 7.3; không tự chọn mã hoặc chương trình thay thế.
+7. **Chương trình hết hạn hoặc đơn không đạt mức mua tối thiểu được xử lý thế nào?**
+   Các bước kiểm tra tại 7.2 ghi nhận lý do từ chối và chuyển tới 7.2.6 để tổng hợp, sau đó gửi Kết quả từ chối sang 7.3. Các bước đủ điều kiện chuyển Thông tin xét giảm giá cho bước kiểm tra tiếp theo.
+8. **7.2.3 đã kết luận khách được giảm giá hay chưa?**
+   Chưa. Tiến trình này chỉ xác định sản phẩm thuộc phạm vi được xét giảm, tra giá và tính giá trị hàng liên quan. Mức mua tối thiểu, lượt sử dụng và cộng dồn còn phải được đối chiếu trước khi kết luận.
+9. **Quy trình này có ghi nhận hóa đơn hoặc trừ lượt sử dụng không?**
+   Không. Đây là bước tính trước thanh toán. Quy trình Bán hàng kiểm tra lại điều kiện và giới hạn tại thời điểm chốt giao dịch, ghi nhận ưu đãi thực tế và ngăn tính lượt trùng.
+
+10. **Mã dùng một lần và mã dùng nhiều lần được kiểm tra thế nào?**
+   7.2.5 kiểm tra loại mã và lịch sử sử dụng. Mã dùng một lần phải chưa được sử dụng cho giao dịch hoàn tất nào; mã dùng nhiều lần phải còn hiệu lực và còn lượt nếu chương trình giới hạn. Việc tính thử chưa ghi nhận mã đã sử dụng.
+11. **Tiền giảm được xác định theo công thức nào?**
+   7.3.2 tính theo tỷ lệ phần trăm hoặc số tiền cố định của chương trình. Tiền giảm không vượt giá trị hàng được giảm và mức giảm tối đa nếu có; 7.3.4 dùng kết quả để tính tổng tiền thanh toán.
+12. **Nếu nhiều chương trình tự động cùng đủ điều kiện thì xử lý thế nào?**
+   Việc chọn hoặc kết hợp phải căn cứ quy tắc của chương trình. Khi chưa có quy tắc được xác nhận, giữ trạng thái chưa chốt và thông báo cần chọn phương án; không tự chọn chương trình thay khách.
+
+##### **b. Danh sách câu hỏi và trả lời liên quan đến các dòng dữ liệu (Data Flow)**
+
+1. **Khách hàng gửi những dữ liệu gì vào hệ thống?**
+   Có hai luồng: Thông tin mua hàng và Mã giảm giá. Mã là tùy chọn; các dữ liệu mua hàng gồm sản phẩm, số lượng, kênh mua và mã đơn nếu có.
+2. **Hệ thống trả những dữ liệu gì cho khách hàng?**
+   Có hai luồng: Kết quả áp dụng và Tiền giảm + Tổng tiền thanh toán. Luồng kết quả cho biết chương trình được hưởng hoặc lý do không áp dụng; luồng còn lại chứa hai giá trị tiền trong cùng một mũi tên.
+3. **7.1 chuyển dữ liệu gì sang 7.2?**
+   Hai luồng riêng: Thông tin đơn và Chương trình giảm giá tìm được. Hồ sơ chương trình chứa điều kiện và công thức lấy từ D6 để 7.2 xét áp dụng.
+4. **Thông tin xét giảm giá khác Kết quả xét giảm giá thế nào?**
+   Thông tin xét giảm giá được chuyển giữa các bước đang kiểm tra trong 7.2. Kết quả xét giảm giá là kết luận đủ điều kiện, kèm chương trình, phạm vi hàng được giảm và căn cứ tính; chuyển sang 7.3 để tính tiền.
+5. **Những trường hợp bị từ chối dùng tên luồng nào?**
+   Thống nhất tên Kết quả từ chối. Dữ liệu kèm mã yêu cầu hoặc đơn và lý do cụ thể, giúp 7.3 trả đúng kết quả mà không phải tạo nhiều tên luồng lỗi.
+6. **Luồng với Khách hàng có cân bằng giữa các bậc không?**
+   Có hai luồng vào và hai luồng ra ở mức 0, mức 1. Tại mức 2, hai luồng vào nằm ở phân rã 7.1, hai luồng ra nằm ở phân rã 7.3; 7.2 không có luồng trực tiếp với Khách hàng.
+
+##### **c. Danh sách câu hỏi và trả lời liên quan đến các kho dữ liệu (Data Store)**
+
+1. **Quy trình giảm giá sử dụng những kho dữ liệu nào?**
+   D5 Danh mục sản phẩm và giá bán; D6 Mã giảm giá và khuyến mãi.
+2. **D5 cung cấp dữ liệu cho tiến trình nào?**
+   D5 cung cấp Thông tin sản phẩm và Giá bán cho 7.2; ở mức 2, dữ liệu đi vào 7.2.3. Không có luồng Nhóm sản phẩm.
+3. **D6 cung cấp dữ liệu cho tiến trình nào?**
+   D6 cung cấp Chương trình giảm giá và Quy tắc giảm giá cho 7.1; ở mức 2, dữ liệu đi vào 7.1.3. Chương trình có thể được kích hoạt theo mã hoặc tự động.
+4. **Vì sao không cần D7?**
+   Quy trình Giảm giá nhận thông tin đơn đã được chuẩn bị trong Bán hàng. Bản đặc tả này không đọc lại đơn đã lưu và không ghi hóa đơn; các dữ liệu cần xác nhận phải được Bán hàng kiểm tra trước khi cung cấp.
+
+##### **d. Danh sách câu hỏi và trả lời liên quan đến các thực thể ngoài (External Entity)**
+
+1. **Thực thể ngoài của DFD giảm giá là ai?**
+   Chỉ có Khách hàng.
+2. **Khách hàng được thông báo gì khi không thể áp dụng mã?**
+   Kết quả áp dụng nêu lý do từ chối; tiền giảm bằng 0. Tổng tiền thanh toán được xác định theo thông tin đơn đã có; nếu chưa đủ dữ liệu thì thông báo cần bổ sung, không tự gán tổng bằng 0.
+3. **Khách hàng có phải nhập mã để được giảm tự động không?**
+   Không. Chỉ cần thông tin mua hàng để hệ thống tra cứu và đối chiếu điều kiện của chương trình tự động.
+
+#### Mô hình mức ngữ cảnh (Context Level)
+
+![DFD mức ngữ cảnh — Quy trình giảm giá](./images/giamgia/DFD_muc0.png)
+
+#### Mô hình mức đỉnh (Level 1)
+
+![DFD mức 1 — Áp dụng giảm giá](./images/giamgia/DFD_muc1.png)
+
+#### Mô hình mức dưới đỉnh (Level 2)
+
+**7.1 — Xác định chương trình giảm giá**
+
+![DFD mức 2 — 7.1 Xác định chương trình giảm giá](./images/giamgia/DFD_muc2_7_1_XacDinhChuongTrinh.png)
+
+**7.2 — Xét điều kiện áp dụng**
+
+![DFD mức 2 — 7.2 Xét điều kiện áp dụng](./images/giamgia/DFD_muc2_7_2_XetDieuKien.png)
+
+**7.3 — Xử lý kết quả giảm giá**
+
+![DFD mức 2 — 7.3 Xử lý kết quả giảm giá](./images/giamgia/DFD_muc2_7_3_XuLyKetQua.png)
+
 ---
 
 ## 4. Phân tích những hạn chế đang tồn tại trong hệ thống và đề xuất các giải pháp cải tiến
