@@ -736,3 +736,14 @@ Nguồn tham khảo cho đề xuất:
 
 - [Challonge — Các thể thức thi đấu, Swiss và giải hai giai đoạn](https://kb.challonge.com/en/article/learn-about-challonge-competition-formats-1f8j1cf/).
 - [Konami — Cập nhật chính sách giải đấu Yu-Gi-Oh! TCG phiên bản 2.5](https://www.yugioh-card.com/eu/tournament-policy-ver-2-5-updates-and-changes/). Tài liệu này dùng để tham khảo; điều lệ thực tế cần chọn đúng bộ quy định cho khu vực và loại giải của cửa hàng.
+
+
+
+
+# CHỨC NĂNG QUẢN LÝ GIẢI ĐẤU VÀ TÀI TRỢ SỰ KIỆN:
+![ERD quản lý giải đấu & tài trợ sự kiện](./images/giaidau/ERD.png)
+![PDM quản lý giải đấu & tài trợ sự kiện](./images/giaidau/PDM.png)
+
+# CHỨC NĂNG QUẢN LÝ NỘI DUNG FANPAGE:
+![ERD quản lý noi dung Fanpage](./images/quanlyfanpage/ERD.png)
+![ERD quản lý noi dung Fanpage](./images/quanlyfanpage/PDM.png)
