@@ -773,6 +773,12 @@ Tách KIEM_DUYET thành bảng riêng để lưu đầy đủ lịch sử duyệ
 
 ![PDM quản lý noi dung Fanpage](./images/quanlyfanpage/PDM.png)
 
+### 4.3. Nhập hàng
+
+![ERD Nhập hàng](./images/nhaphang/ERDNhapHang.png)
+
+![ERD Nhập hàng – tổ chức dữ liệu](./images/nhaphang/ERDNhapHangg.png)
+
 ---
 
 ## 5. Phân tích những hạn chế đang tồn tại trong hệ thống và đề xuất các giải pháp cải tiến
