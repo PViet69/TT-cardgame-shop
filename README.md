@@ -736,3 +736,15 @@ Nguồn tham khảo cho đề xuất:
 
 - [Challonge — Các thể thức thi đấu, Swiss và giải hai giai đoạn](https://kb.challonge.com/en/article/learn-about-challonge-competition-formats-1f8j1cf/).
 - [Konami — Cập nhật chính sách giải đấu Yu-Gi-Oh! TCG phiên bản 2.5](https://www.yugioh-card.com/eu/tournament-policy-ver-2-5-updates-and-changes/). Tài liệu này dùng để tham khảo; điều lệ thực tế cần chọn đúng bộ quy định cho khu vực và loại giải của cửa hàng.
+
+
+
+sơ đồ erd bán hàng:
+<img width="2154" height="1409" alt="159ada84-08d4-47d4-abf9-a0bafdc68c3c" src="https://github.com/user-attachments/assets/e3df21d6-3721-4f1f-b339-519a0b67737e" />
+<img width="1904" height="1559" alt="d564c043-1037-477f-a081-885cf1330840" src="https://github.com/user-attachments/assets/6cb4885e-fcd1-4e14-8e5b-06d2e0fbea26" />
+<img width="2078" height="1092" alt="203f76f4-cc01-4d88-bc88-60a4ee6498e8" src="https://github.com/user-attachments/assets/22b18a9d-752f-4b6f-ab37-68c4ecd81c07" />
+
+sơ đồ erd nhân viên và cộng tác viên:
+
+<img width="1771" height="2140" alt="ba98e2b5-d8aa-4997-983f-57df5e250f9b" src="https://github.com/user-attachments/assets/1f8479ef-dff9-4f59-bc73-9a1136c2a337" />
+
