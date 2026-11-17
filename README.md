@@ -779,6 +779,26 @@ Tách KIEM_DUYET thành bảng riêng để lưu đầy đủ lịch sử duyệ
 
 ![ERD Nhập hàng – tổ chức dữ liệu](./images/nhaphang/ERDNhapHangg.png)
 
+#### Cơ sở hình thành các thực thể
+
+- Vì ERD được xây dựng bám sát quy trình nhập hàng: kiểm tra tồn kho, lập đơn đặt hàng, nhận và kiểm hàng, lập phiếu nhập hoặc biên bản sự cố, ghi nhận công nợ rồi thanh toán. Mỗi bước trong quy trình tạo ra một loại dữ liệu cần lưu trữ, vì vậy mỗi loại dữ liệu đó trở thành một thực thể. Các thực thể được nối với nhau theo đúng thứ tự phát sinh của nghiệp vụ. Có 7 thực thể là vì
+- Nhà cung cấp là đối tác nhận đơn và giao hàng, cần lưu thông tin để liên hệ và đối soát công nợ. Hàng hóa là đối tượng trung tâm, có số lượng tồn và mức tồn tối thiểu để biết khi nào cần đặt hàng, đơn đặt hàng là chứng từ ghi lại dự định mua, được lập khi tồn kho xuống dưới mức tối thiểu, phiếu nhập kho là chứng từ ghi lại lượng hàng thực sự nhập vào kho sau khi kiểm đạt chuẩn, biên bản sự cố ghi nhận trường hợp hàng lỗi hoặc thiếu để từ chối nhận hoặc yêu cầu đổi trả, công nợ NCC là khoản tiền phải trả phát sinh khi nhập kho. Giao dịch thanh toán là từng lần trả tiền cho một khoản công nợ.
+
+- Cũng có ba chỗ cần tách riêng : 1/ đơn đặt hàng và phiếu nhập kho tách nhau vì một bên là kế hoạch, một bên là thực tế; số lượng đặt và số lượng nhận có thể khác nhau, và một đơn có thể được giao nhiều đợt. 2/ biên bản sự cố là thực thể riêng vì quy trình có hai nhánh: lô đạt chuẩn thì lập phiếu nhập, lô lỗi hoặc thiếu thì lập biên bản. 3/ công nợ và giao dịch thanh toán tách nhau vì công nợ là tổng số tiền phải trả, còn giao dịch là từng lần trả, và một khoản nợ có thể được trả nhiều lần.
+
+#### Các mối quan hệ
+
+- Vì mỗi mối kết hợp thể hiện một hành động có thật trong quy trình.
+
+Gửi đơn: nhà cung cấp (0,n) – đơn đặt hàng (1,1). Mỗi đơn chỉ gửi cho đúng một nhà cung cấp, còn một nhà cung cấp có thể nhận nhiều đơn hoặc chưa nhận đơn nào.
+Đặt: đơn đặt hàng (1,n) – hàng hóa (0,n). Một đơn phải có ít nhất một mặt hàng, và một mặt hàng có thể chưa từng được đặt hoặc được đặt trong nhiều đơn. Đây là quan hệ nhiều–nhiều nên có thuộc tính riêng là số lượng đặt và đơn giá đặt.
+Nhận theo đơn: đơn đặt hàng (0,n) – phiếu nhập kho (1,1). Mỗi phiếu nhập phải căn cứ vào đúng một đơn đặt hàng. Một đơn có thể chưa nhận hàng hoặc nhận nhiều đợt nên có thể có nhiều phiếu.
+Nhập: phiếu nhập kho (1,n) – hàng hóa (0,n). Một phiếu nhập ít nhất một mặt hàng, và một mặt hàng có thể được nhập qua nhiều phiếu. Đây cũng là quan hệ nhiều–nhiều nên có số lượng nhập và đơn giá nhập.
+Phát sinh: phiếu nhập kho (1,1) – công nợ NCC (1,1). Theo quy trình, tạo phiếu nhập là để ghi nhận công nợ, nên mỗi phiếu sinh đúng một khoản nợ và mỗi khoản nợ thuộc đúng một phiếu.
+Thanh toán: công nợ NCC (0,n) – giao dịch thanh toán (1,1). Khoản nợ chưa trả thì chưa có giao dịch, trả dần thì có nhiều giao dịch. Mỗi giao dịch chỉ trả cho một khoản nợ.
+Lập biên bản: đơn đặt hàng (0,n) – biên bản sự cố (1,1). Phần lớn đơn giao đúng nên không có biên bản, nhưng một đơn có thể phát sinh nhiều biên bản. Mỗi biên bản thuộc đúng một đơn. Biên bản gắn với đơn chứ không gắn với phiếu nhập vì hàng bị từ chối thì không có phiếu nhập.
+Ghi nhận lỗi: biên bản sự cố (1,n) – hàng hóa (0,n). Một biên bản phải ghi ít nhất một mặt hàng lỗi hoặc thiếu, và một mặt hàng có thể chưa từng lỗi hoặc lỗi ở nhiều biên bản. Đây là quan hệ nhiều–nhiều nên có số lượng lỗi/thiếu và mô tả lỗi.
+
 ---
 
 ## 5. Phân tích những hạn chế đang tồn tại trong hệ thống và đề xuất các giải pháp cải tiến
