@@ -733,93 +733,16 @@ Mỗi thực thể ngoài và mỗi kho dữ liệu chỉ xuất hiện một l�
 
 ---
 
-## 4. Phân tích những hạn chế đang tồn tại trong hệ thống và đề xuất các giải pháp cải tiến
+## 4. Mô hình dữ liệu ERD và PDM
 
-### 4.1. Hạn chế trong quản lý cộng tác viên
+### 4.1. Quản lý giải đấu và tài trợ sự kiện
 
-Phạm vi đặc tả bao gồm quản lý hồ sơ, mã định danh, doanh số, đối soát và hoa hồng CTV do Quản lý cửa hàng cập nhật. Việc trao đổi báo cáo và thông tin nộp tiền với CTV diễn ra qua Facebook. Mô tả này xác định phạm vi nghiệp vụ, không khẳng định các chức năng đã được triển khai thành phần mềm.
-
-CTV được quản lý thông qua hồ sơ và mã định danh. Thông tin hàng đã bán, hàng còn tồn và số tiền nộp về phụ thuộc vào báo cáo của CTV và việc cập nhật của quản lý. Cách làm này có các hạn chế:
-
-- **Dữ liệu cập nhật chậm:** Cửa hàng khó nắm bắt kịp thời lượng hàng thực tế tại từng CTV khi chưa nhận được báo cáo.
-- **Đối soát phụ thuộc vào thao tác thủ công:** Việc tổng hợp hàng đã cấp, hàng đã bán, hàng hoàn trả và tiền đã nộp dễ xảy ra sai sót hoặc bỏ sót chứng từ.
-- **Khó kiểm soát công nợ và thất thoát:** Báo cáo chậm hoặc thiếu thông tin khiến việc xác định khoản còn phải nộp, hàng hư hỏng và trách nhiệm xử lý chênh lệch gặp khó khăn.
-- **Còn quy tắc ngoại lệ cần cụ thể hóa:** Đã quy định báo cáo và nộp tiền ngày 15, nộp thiếu có thể bị cảnh cáo hoặc chấm dứt hợp tác. Tuy nhiên, chưa chốt cách xử lý báo cáo quá hạn, tiêu chí lựa chọn hình thức xử lý và căn cứ doanh số dùng tính hoa hồng khi có hàng trả.
-
-### 4.2. Đề xuất giải pháp cải tiến
-
-Trong phạm vi hiện tại, cửa hàng có thể chuẩn hóa biểu mẫu báo cáo và quy trình đối soát bên ngoài hệ thống. Mỗi báo cáo cần ghi mã CTV, kỳ đối soát, số lượng hàng nhận, hàng bán, hàng hoàn trả, hàng còn tồn, hàng hư hỏng và chứng từ nộp tiền. Quản lý quy định thời hạn gửi báo cáo, người kiểm tra và cách xử lý chênh lệch để giảm sai sót khi tổng hợp.
-
-Để hoàn thiện các chức năng quản lý CTV trong phạm vi đã mô tả, đề xuất các nội dung:
-
-1. **Quản lý hồ sơ và hàng ký gửi theo mã CTV:** Liên kết hồ sơ CTV với phiếu cấp hàng, phiếu nhập hoàn và số lượng tồn tại từng CTV để theo dõi xuyên suốt quá trình giao nhận.
-2. **Chuẩn hóa đối soát hàng và tiền:** Tổng hợp dữ liệu theo kỳ, đối chiếu hàng đã cấp với hàng bán, hàng hoàn và hàng còn tồn; xác định số tiền phải nộp sau khi trừ hoa hồng theo chính sách đã thống nhất, so sánh với số tiền thực nộp và ghi nhận chênh lệch.
-3. **Bổ sung nhắc hạn và xử lý ngoại lệ:** Theo dõi báo cáo quá hạn, tiền chưa nộp, hàng hư hỏng hoặc thiếu hụt; ghi nhận người xác nhận, hướng xử lý và trạng thái giải quyết.
-4. **Lập báo cáo và lưu lịch sử thay đổi:** Cung cấp báo cáo doanh số, hoa hồng, công nợ và hàng tồn theo CTV; lưu lịch sử cập nhật để phục vụ kiểm tra và giải quyết sai lệch.
-
-
-### 4.3. Hạn chế trong quy trình tổ chức giải đấu và quản lý tài trợ
-
-Cửa hàng sử dụng Challonge để tạo và điều hành các giải đấu, trong đó Yu-Gi-Oh! là bộ môn được tổ chức thường xuyên nhất. Giải đấu áp dụng vòng Swiss, sau đó cắt top theo bảng xếp hạng và điều lệ giải để tổ chức vòng loại trực tiếp. Việc chia cặp và cập nhật kết quả được thực hiện trên Challonge; hệ thống cửa hàng quản lý thông tin sự kiện, đăng ký, lệ phí, tài trợ và trao thưởng.
-
-Phần đặc tả trước đây chưa làm rõ cách phối hợp giữa hai hệ thống và các quy tắc vận hành, dẫn đến những hạn chế cần giải quyết:
-
-- **Chưa quy định đầy đủ cấu hình giải:** Chưa xác định cách chốt số vòng Swiss, số người vào top, cách tính điểm và tiêu chí phân hạng khi bằng điểm. Swiss là thể thức thi đấu; số người được cắt top phải được xác định theo điều lệ áp dụng cho từng giải.
-- **Dễ lệch thông tin người tham gia:** Danh sách đăng ký, thanh toán và điểm danh tại cửa hàng cần được đối chiếu với danh sách thi đấu trên Challonge, đặc biệt khi có người bỏ cuộc hoặc đăng ký muộn.
-- **Chưa làm rõ trách nhiệm xác nhận kết quả:** Cần phân biệt người báo kết quả, trọng tài xác nhận và người cập nhật trên Challonge; kết quả nhập sai có thể ảnh hưởng đến cặp đấu vòng sau và danh sách cắt top.
-- **Chưa có bước chốt bảng xếp hạng trước khi cắt top:** Cần quy định thời hạn tiếp nhận khiếu nại và thẩm quyền sửa kết quả trước khi chuyển sang vòng loại trực tiếp.
-- **Chưa theo dõi đầy đủ tài trợ và trao thưởng:** Cần phân biệt khoản tài trợ đã cam kết với tiền hoặc hiện vật thực nhận, đồng thời đối chiếu phần thưởng đã công bố với số lượng thực tế có thể bàn giao.
-
-### 4.4. Đề xuất cải tiến quy trình tổ chức giải đấu và quản lý tài trợ
-
-#### 4.4.1. Chuẩn hóa điều lệ và khởi tạo giải đấu
-
-Quản lý giải đấu lập thông tin sự kiện trên hệ thống cửa hàng, gồm tên giải, bộ môn, thời gian, địa điểm, số người tối đa, hạn đăng ký, lệ phí và cơ cấu giải thưởng. Với Yu-Gi-Oh!, điều lệ phải ghi rõ định dạng thi đấu và bộ quy định áp dụng, gồm quy định về bộ bài, danh sách bài cấm/giới hạn, thời gian trận đấu và cách xử lý khi hết giờ.
-
-Ban tổ chức tạo giải Swiss trên Challonge, lưu mã hoặc đường dẫn giải vào hồ sơ sự kiện và kiểm tra cấu hình trước khi bắt đầu. Số vòng Swiss, điểm thắng/hòa/thua, cách xử lý lượt miễn đấu (bye), thứ tự tiêu chí phân hạng khi bằng điểm và số người vào top phải phù hợp với điều lệ đã công bố. Không mặc định cơ chế xếp hạng sẵn có của Challonge đáp ứng toàn bộ quy định Yu-Gi-Oh!; ban tổ chức phải đối chiếu và xác nhận cách tính được sử dụng.
-
-Số vòng và mức cắt top được xác định theo số người tham gia cùng quy định áp dụng cho loại giải. Điều lệ cần công bố rõ cách xử lý đăng ký muộn và ảnh hưởng đến số vòng hoặc mức cắt top; mọi thay đổi chỉ được thực hiện nếu quy định áp dụng cho phép. Với giải chính thức, sử dụng hướng dẫn của đơn vị tổ chức có thẩm quyền cho đúng khu vực và loại sự kiện.
-
-#### 4.4.2. Đăng ký, thu lệ phí và điểm danh
-
-Nhân viên tiếp nhận thông tin đăng ký, kiểm tra trùng người tham gia và ghi nhận trạng thái lệ phí. Trước giờ khai mạc, nhân viên điểm danh và đối chiếu danh sách đủ điều kiện thi đấu với danh sách trên Challonge bằng mã người tham gia, tránh chỉ đối chiếu theo tên hiển thị.
-
-Khi đóng đăng ký, ban tổ chức chốt danh sách và cấu hình giải theo điều lệ. Trường hợp đến muộn, không tham dự, xin rút hoặc yêu cầu hoàn lệ phí được ghi nhận và xử lý theo chính sách đã công bố; không tự đưa người chưa đủ điều kiện vào danh sách thi đấu.
-
-#### 4.4.3. Điều hành các vòng Swiss
-
-Ban tổ chức sử dụng Challonge để tạo cặp đấu từng vòng và công bố cặp đấu, số bàn cùng thời gian bắt đầu. Người chơi báo kết quả; trọng tài xác nhận kết quả hoặc quyết định xử lý tranh chấp trước khi người được phân công cập nhật trên Challonge.
-
-Trước khi tạo vòng tiếp theo, ban tổ chức kiểm tra các trận đã hoàn tất, kết quả còn thiếu và trường hợp rút khỏi giải. Việc sửa kết quả phải được trọng tài hoặc quản lý giải đấu xác nhận, ghi rõ lý do và kiểm tra ảnh hưởng đến bảng xếp hạng, cặp đấu đã công bố. Trường hợp bỏ cuộc, vắng mặt, được miễn đấu hoặc vi phạm được xử lý theo điều lệ và quyết định của trọng tài.
-
-#### 4.4.4. Chốt bảng xếp hạng và cắt top
-
-Sau vòng Swiss cuối cùng, ban tổ chức kiểm tra kết quả, điểm số và các tiêu chí phân hạng đã công bố. Bảng xếp hạng tạm thời được công bố để tiếp nhận khiếu nại trong thời hạn quy định; trọng tài giải quyết các trường hợp còn tranh chấp trước khi quản lý giải đấu xác nhận danh sách chính thức.
-
-Ban tổ chức chọn số người đứng đầu theo mức cắt top đã công bố, chẳng hạn Top 4 hoặc Top 8 nếu phù hợp với điều lệ. Không tự chọn người vào top khi bằng điểm; phải áp dụng đúng thứ tự tiêu chí phân hạng. Trường hợp người đủ điều kiện không tiếp tục thi đấu, xử lý theo điều lệ và quyết định của trọng tài trước khi chốt nhánh đấu.
-
-Những người vào top được xếp hạt giống theo quy định đã công bố và thi đấu loại trực tiếp trên Challonge. Ban tổ chức có thể cấu hình giải hai giai đoạn hoặc tạo nhánh loại trực tiếp riêng được liên kết với giải Swiss. Kết quả vòng Swiss và kết quả vòng top được lưu riêng để phân biệt thứ hạng sau Swiss với thành tích chung cuộc. Hệ thống cửa hàng tiếp nhận kết quả do nhân viên cập nhật và xác nhận; đồng bộ tự động với Challonge là hướng mở rộng nếu được triển khai sau này.
-
-#### 4.4.5. Tiếp nhận tài trợ và bàn giao phần thưởng
-
-Nhân viên ghi nhận từng gói tài trợ với nhà tài trợ, nội dung cam kết, giá trị hoặc số lượng hiện vật, thời hạn bàn giao và quyền lợi truyền thông. Khi nhận tài trợ, nhân viên đối chiếu với cam kết, lưu chứng từ và cập nhật số thực nhận; hiện vật phải được kiểm nhận trước khi ghi nhận vào kho.
-
-Trước giải, quản lý kiểm tra khả năng đáp ứng cơ cấu giải thưởng từ tài trợ thực nhận và nguồn hàng của cửa hàng. Nếu nhà tài trợ giao thiếu, giao chậm hoặc hiện vật không đạt yêu cầu, nhân viên ghi nhận chênh lệch và chuyển quản lý xử lý phương án bổ sung, thay thế hoặc thông báo điều chỉnh theo điều lệ.
-
-Sau khi xác nhận kết quả chung cuộc, nhân viên lập danh sách người nhận thưởng, tạo phiếu xuất kho cho hiện vật và ghi nhận chi trả đối với giải thưởng bằng tiền. Mỗi lần bàn giao cần có xác nhận người nhận; phần thưởng chưa nhận được theo dõi riêng, tránh ghi nhận đã bàn giao khi mới lập danh sách trao thưởng.
-
-#### 4.4.6. Tổng kết và lưu hồ sơ sự kiện
-
-Khi kết thúc sự kiện, quản lý đối chiếu số người đăng ký và thực tế tham gia, lệ phí đã thu và hoàn, tài trợ đã nhận, chi phí tổ chức, phần thưởng đã giao và số còn lại. Hồ sơ lưu kèm đường dẫn Challonge, kết quả Swiss, danh sách cắt top, kết quả chung cuộc, quyết định xử lý khiếu nại và chứng từ liên quan.
-
-Báo cáo tổng kết phục vụ đánh giá hiệu quả sự kiện, thực hiện quyền lợi đã cam kết với nhà tài trợ và cải tiến các giải tiếp theo. 
-
-
-
-# CHỨC NĂNG QUẢN LÝ GIẢI ĐẤU VÀ TÀI TRỢ SỰ KIỆN:
 ![ERD quản lý giải đấu & tài trợ sự kiện](./images/giaidau/ERD.png)
-# Giải thích:
+
+#### Giải thích
+
 ERD gồm ba cụm xoay quanh thực thể GIAI_DAU
+
 1. Cụm thi đấu. Một người có thể đăng ký nhiều giải, và một giải có nhiều người đăng ký. Vì vậy cần thực thể DANG_KY (kho D2) ở giữa, để lưu lệ phí, điểm danh và hạng chung cuộc. Giải chia thành VONG_DAU, mỗi vòng gồm nhiều TRAN_DAU do TRONG_TAI điều hành. Mỗi trận có hai đấu thủ, và mỗi đấu thủ đấu nhiều trận, nên có CHI_TIET_TRAN_DAU để lưu tỉ số, kết quả và làm cơ sở xếp hạng.
 
 2. Cụm tài trợ. Một nhà tài trợ có thể tài trợ nhiều giải, và một giải có nhiều nhà tài trợ, nên có TAI_TRO ở giữa (loại tài trợ, kinh phí, quyền lợi). Mỗi khoản tài trợ có thể gồm nhiều hiện vật nên tách thêm HIEN_VAT_TAI_TRO.
@@ -828,10 +751,14 @@ ERD gồm ba cụm xoay quanh thực thể GIAI_DAU
 
 ![PDM quản lý giải đấu & tài trợ sự kiện](./images/giaidau/PDM.png)
 
-# CHỨC NĂNG QUẢN LÝ NỘI DUNG FANPAGE:
+### 4.2. Quản lý nội dung Fanpage
+
 ![ERD quản lý noi dung Fanpage](./images/quanlyfanpage/ERD.png)
-# Giải thích:
+
+#### Giải thích
+
 ERD đi theo vòng đời của một bài đăng
+
 1. Lập kế hoạch: Nhân viên Marketing lập KE_HOACH theo tuần hoặc tháng, gồm mục tiêu, chủ đề, đối tượng. Mỗi kế hoạch có nhiều mục trong CHI_TIET_KE_HOACH, ghi ngày đăng dự kiến và người phụ trách.
 
 2. Soạn bài và kiểm duyệt: Nhân viên soạn BAI_VIET kèm TAI_NGUYEN như ảnh, video, banner. Quản lý cửa hàng duyệt bài. Một bài có thể bị trả về nhiều lần, nên mỗi lần duyệt và nhận xét được lưu trong KIEM_DUYET.
@@ -845,3 +772,29 @@ Tách BAI_VIET (nội dung soạn) khỏi BAI_DANG (bản đã đăng), để m�
 Tách KIEM_DUYET thành bảng riêng để lưu đầy đủ lịch sử duyệt.
 
 ![PDM quản lý noi dung Fanpage](./images/quanlyfanpage/PDM.png)
+
+---
+
+## 5. Phân tích những hạn chế đang tồn tại trong hệ thống và đề xuất các giải pháp cải tiến
+
+### 5.1. Hạn chế trong quản lý cộng tác viên
+
+Phạm vi đặc tả bao gồm quản lý hồ sơ, mã định danh, doanh số, đối soát và hoa hồng CTV do Quản lý cửa hàng cập nhật. Việc trao đổi báo cáo và thông tin nộp tiền với CTV diễn ra qua Facebook. Mô tả này xác định phạm vi nghiệp vụ, không khẳng định các chức năng đã được triển khai thành phần mềm.
+
+CTV được quản lý thông qua hồ sơ và mã định danh. Thông tin hàng đã bán, hàng còn tồn và số tiền nộp về phụ thuộc vào báo cáo của CTV và việc cập nhật của quản lý. Cách làm này có các hạn chế:
+
+- **Dữ liệu cập nhật chậm:** Cửa hàng khó nắm bắt kịp thời lượng hàng thực tế tại từng CTV khi chưa nhận được báo cáo.
+- **Đối soát phụ thuộc vào thao tác thủ công:** Việc tổng hợp hàng đã cấp, hàng đã bán, hàng hoàn trả và tiền đã nộp dễ xảy ra sai sót hoặc bỏ sót chứng từ.
+- **Khó kiểm soát công nợ và thất thoát:** Báo cáo chậm hoặc thiếu thông tin khiến việc xác định khoản còn phải nộp, hàng hư hỏng và trách nhiệm xử lý chênh lệch gặp khó khăn.
+- **Còn quy tắc ngoại lệ cần cụ thể hóa:** Đã quy định báo cáo và nộp tiền ngày 15, nộp thiếu có thể bị cảnh cáo hoặc chấm dứt hợp tác. Tuy nhiên, chưa chốt cách xử lý báo cáo quá hạn, tiêu chí lựa chọn hình thức xử lý và căn cứ doanh số dùng tính hoa hồng khi có hàng trả.
+
+### 5.2. Đề xuất giải pháp cải tiến
+
+Trong phạm vi hiện tại, cửa hàng có thể chuẩn hóa biểu mẫu báo cáo và quy trình đối soát bên ngoài hệ thống. Mỗi báo cáo cần ghi mã CTV, kỳ đối soát, số lượng hàng nhận, hàng bán, hàng hoàn trả, hàng còn tồn, hàng hư hỏng và chứng từ nộp tiền. Quản lý quy định thời hạn gửi báo cáo, người kiểm tra và cách xử lý chênh lệch để giảm sai sót khi tổng hợp.
+
+Để hoàn thiện các chức năng quản lý CTV trong phạm vi đã mô tả, đề xuất các nội dung:
+
+1. **Quản lý hồ sơ và hàng ký gửi theo mã CTV:** Liên kết hồ sơ CTV với phiếu cấp hàng, phiếu nhập hoàn và số lượng tồn tại từng CTV để theo dõi xuyên suốt quá trình giao nhận.
+2. **Chuẩn hóa đối soát hàng và tiền:** Tổng hợp dữ liệu theo kỳ, đối chiếu hàng đã cấp với hàng bán, hàng hoàn và hàng còn tồn; xác định số tiền phải nộp sau khi trừ hoa hồng theo chính sách đã thống nhất, so sánh với số tiền thực nộp và ghi nhận chênh lệch.
+3. **Bổ sung nhắc hạn và xử lý ngoại lệ:** Theo dõi báo cáo quá hạn, tiền chưa nộp, hàng hư hỏng hoặc thiếu hụt; ghi nhận người xác nhận, hướng xử lý và trạng thái giải quyết.
+4. **Lập báo cáo và lưu lịch sử thay đổi:** Cung cấp báo cáo doanh số, hoa hồng, công nợ và hàng tồn theo CTV; lưu lịch sử cập nhật để phục vụ kiểm tra và giải quyết sai lệch.
