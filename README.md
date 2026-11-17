@@ -843,3 +843,36 @@ Nguồn tham khảo cho đề xuất:
 
 - [Challonge — Các thể thức thi đấu, Swiss và giải hai giai đoạn](https://kb.challonge.com/en/article/learn-about-challonge-competition-formats-1f8j1cf/).
 - [Konami — Cập nhật chính sách giải đấu Yu-Gi-Oh! TCG phiên bản 2.5](https://www.yugioh-card.com/eu/tournament-policy-ver-2-5-updates-and-changes/). Tài liệu này dùng để tham khảo; điều lệ thực tế cần chọn đúng bộ quy định cho khu vực và loại giải của cửa hàng.
+
+
+
+
+# CHỨC NĂNG QUẢN LÝ GIẢI ĐẤU VÀ TÀI TRỢ SỰ KIỆN:
+![ERD quản lý giải đấu & tài trợ sự kiện](./images/giaidau/ERD.png)
+# Giải thích:
+ERD gồm ba cụm xoay quanh thực thể GIAI_DAU
+1. Cụm thi đấu. Một người có thể đăng ký nhiều giải, và một giải có nhiều người đăng ký. Vì vậy cần thực thể DANG_KY (kho D2) ở giữa, để lưu lệ phí, điểm danh và hạng chung cuộc. Giải chia thành VONG_DAU, mỗi vòng gồm nhiều TRAN_DAU do TRONG_TAI điều hành. Mỗi trận có hai đấu thủ, và mỗi đấu thủ đấu nhiều trận, nên có CHI_TIET_TRAN_DAU để lưu tỉ số, kết quả và làm cơ sở xếp hạng.
+
+2. Cụm tài trợ. Một nhà tài trợ có thể tài trợ nhiều giải, và một giải có nhiều nhà tài trợ, nên có TAI_TRO ở giữa (loại tài trợ, kinh phí, quyền lợi). Mỗi khoản tài trợ có thể gồm nhiều hiện vật nên tách thêm HIEN_VAT_TAI_TRO.
+
+3. Cụm trao thưởng. GIAI_THUONG là cơ cấu giải, còn TRAO_THUONG là lần trao thực tế cho người thắng. Quà lấy từ hiện vật tài trợ hoặc hàng hóa của cửa hàng. Nếu lấy từ kho thì có PHIEU_XUAT_KHO để trừ tồn.
+
+![PDM quản lý giải đấu & tài trợ sự kiện](./images/giaidau/PDM.png)
+
+# CHỨC NĂNG QUẢN LÝ NỘI DUNG FANPAGE:
+![ERD quản lý noi dung Fanpage](./images/quanlyfanpage/ERD.png)
+# Giải thích:
+ERD đi theo vòng đời của một bài đăng
+1. Lập kế hoạch: Nhân viên Marketing lập KE_HOACH theo tuần hoặc tháng, gồm mục tiêu, chủ đề, đối tượng. Mỗi kế hoạch có nhiều mục trong CHI_TIET_KE_HOACH, ghi ngày đăng dự kiến và người phụ trách.
+
+2. Soạn bài và kiểm duyệt: Nhân viên soạn BAI_VIET kèm TAI_NGUYEN như ảnh, video, banner. Quản lý cửa hàng duyệt bài. Một bài có thể bị trả về nhiều lần, nên mỗi lần duyệt và nhận xét được lưu trong KIEM_DUYET.
+
+3. Đăng bài: Bài được duyệt sẽ đăng lên FANPAGE và tạo ra BAI_DANG. Thực thể này lưu mã do nền tảng trả về, thời gian đăng, trạng thái và việc ẩn hoặc gỡ bài.
+
+4. Đo hiệu quả: CHI_SO_TUONG_TAC ghi nhận lượt tiếp cận, thích, bình luận, chia sẻ theo từng thời điểm. BAO_CAO_HIEU_QUA tổng hợp các chỉ số đó và so với mục tiêu của kế hoạch.
+
+Liên kết với chức năng khác. Bài viết có thể quảng bá một GIAI_DAU và giới thiệu các HANG_HOA, nên Fanpage gắn với hoạt động thực tế của cửa hàng.
+Tách BAI_VIET (nội dung soạn) khỏi BAI_DANG (bản đã đăng), để một bài có thể đăng lại hoặc đăng nhiều trang, và việc gỡ bài gắn đúng với bản đã đăng.
+Tách KIEM_DUYET thành bảng riêng để lưu đầy đủ lịch sử duyệt.
+
+![PDM quản lý noi dung Fanpage](./images/quanlyfanpage/PDM.png)
