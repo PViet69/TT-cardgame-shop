@@ -857,6 +857,22 @@ Mô hình tổ chức dữ liệu có 10 bảng. Ngoài 7 bảng tương ứng v
 
 ![Mô hình tổ chức dữ liệu Nhập hàng](./images/nhaphang/ERDNhapHang.png)
 
+### 4.4. Quản lý kho
+
+![ERD Quản lý kho](./images/quanlykho/ERD_QuanLyKho.png)
+
+![Mô hình tổ chức dữ liệu Quản lý kho](./images/quanlykho/PDM_QuanLyKho.png)
+
+[Ràng buộc nghiệp vụ Quản lý kho](./temp.md#12-ràng-buộc-nghiệp-vụ)
+
+### 4.5. Áp dụng giảm giá
+
+![ERD Áp dụng giảm giá](./images/giamgia/ERD_ApDungGiamGia.png)
+
+![Mô hình tổ chức dữ liệu Áp dụng giảm giá](./images/giamgia/PDM_ApDungGiamGia.png)
+
+[Ràng buộc nghiệp vụ Áp dụng giảm giá](./temp.md#22-ràng-buộc-nghiệp-vụ)
+
 ---
 
 ## 5. Phân tích những hạn chế đang tồn tại trong hệ thống và đề xuất các giải pháp cải tiến
