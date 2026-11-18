@@ -800,11 +800,16 @@ Gửi đơn: nhà cung cấp (0,n) – đơn đặt hàng (1,1). Mỗi đơn ch�
 Nhận theo đơn: đơn đặt hàng (0,n) – phiếu nhập kho (1,1). Mỗi phiếu nhập phải căn cứ vào đúng một đơn đặt hàng. Một đơn có thể chưa nhận hàng hoặc nhận nhiều đợt nên có thể có nhiều phiếu.
 Nhập: phiếu nhập kho (1,n) – hàng hóa (0,n). Một phiếu nhập ít nhất một mặt hàng, và một mặt hàng có thể được nhập qua nhiều phiếu. Đây cũng là quan hệ nhiều–nhiều nên có số lượng nhập và đơn giá nhập.
 Phát sinh: phiếu nhập kho (1,1) – công nợ NCC (1,1). Theo quy trình, tạo phiếu nhập là để ghi nhận công nợ, nên mỗi phiếu sinh đúng một khoản nợ và mỗi khoản nợ thuộc đúng một phiếu.
-Thanh toán: công nợ NCC (0,n) – giao dịch thanh toán (1,1). Khoản nợ chưa trả thì chưa có giao dịch, trả dần thì có nhiều giao dịch. Mỗi giao dịch chỉ trả cho một khoản nợ.
+Thanh toán: công nợ NCC (0,n) – giao dịch thanh toán (1,1). Một khoản nợ có thể chưa có giao dịch hoặc có nhiều giao dịch khi trả dần. Mỗi giao dịch gắn với đúng một khoản nợ.
 Lập biên bản: đơn đặt hàng (0,n) – biên bản sự cố (1,1). Phần lớn đơn giao đúng nên không có biên bản, nhưng một đơn có thể phát sinh nhiều biên bản. Mỗi biên bản thuộc đúng một đơn. Biên bản gắn với đơn chứ không gắn với phiếu nhập vì hàng bị từ chối thì không có phiếu nhập.
 Ghi nhận lỗi: biên bản sự cố (1,n) – hàng hóa (0,n). Một biên bản phải ghi ít nhất một mặt hàng lỗi hoặc thiếu, và một mặt hàng có thể chưa từng lỗi hoặc lỗi ở nhiều biên bản. Đây là quan hệ nhiều–nhiều nên có số lượng lỗi/thiếu và mô tả lỗi.
 
 Mô hình tổ chức dữ liệu có 10 bảng. Ngoài 7 bảng tương ứng với các thực thể chính, ba quan hệ nhiều–nhiều được triển khai bằng các bảng chi tiết `CT_DONDATHANG`, `CT_PHIEUNHAP` và `CT_BIENBAN`.
+
+- `CT_BIENBAN.SoLuongLoiThieu` ghi số lượng hàng lỗi hoặc thiếu của từng mặt hàng trong biên bản.
+- `CONGNO_NCC.MaPNK` là khóa ngoại bắt buộc và duy nhất. Khi ghi nhận phiếu nhập, tiến trình 1.3 tạo khoản công nợ tương ứng.
+- `CT_PHIEUNHAP` dùng hai khóa ngoại ghép bắt buộc. Cặp `(MaPNK, MaDDH)` tham chiếu `PHIEUNHAPKHO(MaPNK, MaDDH)` để mã đơn trên dòng chi tiết trùng với mã đơn của phiếu nhập. Cặp `(MaDDH, MaHH)` tham chiếu `CT_DONDATHANG(MaDDH, MaHH)` để mặt hàng nhập thuộc chính đơn đó.
+- `GIAODICH_THANHTOAN.TrangThai` nhận một trong ba giá trị **Chờ xác nhận**, **Đã xác nhận** hoặc **Thất bại**. Số công nợ còn lại bằng số tiền phát sinh trừ tổng tiền của các giao dịch đã xác nhận.
 
 ![Mô hình tổ chức dữ liệu Nhập hàng](./images/nhaphang/ERDNhapHang.png)
 
