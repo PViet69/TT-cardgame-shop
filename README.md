@@ -815,11 +815,9 @@ Mô hình tổ chức dữ liệu có 10 bảng. Ngoài 7 bảng tương ứng v
 
 ### 4.4. Bán hàng
 
+![ERD Bán hàng](./images/banhang/ERD_BanHang.png)
+
 #### 4.4.1. Tiếp nhận đơn, thanh toán và hóa đơn
-
-![ERD Tiếp nhận đơn, thanh toán và hóa đơn](./images/banhang/ERD_DonHang.png)
-
-##### Giải thích
 
 Trung tâm của sơ đồ là DON_HANG. Mỗi đơn, tại quầy hoặc trực tuyến, do một nhân viên lập hoặc duyệt, có thể thuộc một khách hàng thành viên và áp dụng tối đa một khuyến mãi. Đơn của khách vãng lai không cần lưu khách hàng nên bản số phía đơn hàng là (0,1). Với đơn trực tuyến mới đặt, nhân viên xử lý chỉ xuất hiện sau khi xác nhận đơn.
 
@@ -863,19 +861,13 @@ Sản phẩm trong đơn lưu ở CHI_TIET_DON_HANG. Đây là thực thể kế
 
 Thanh toán được tách thành GIAO_DICH_THANH_TOAN để một đơn có thể có nhiều giao dịch: thử lại khi thất bại, trạng thái đang chờ, thanh toán nhiều lần, hoặc hoàn tiền. Thuộc tính TrangThai ghi trạng thái của giao dịch, còn LoaiGD phân biệt thu tiền và hoàn tiền. HOA_DON chỉ được lập khi thanh toán thành công, vì vậy một đơn có 0 hoặc 1 hóa đơn.
 
-![Mô hình tổ chức dữ liệu Tiếp nhận đơn, thanh toán và hóa đơn](./images/banhang/PDM_DonHang.png)
-
 #### 4.4.2. Giao hàng, đổi trả và hoàn tiền
-
-![ERD Giao hàng, đổi trả và hoàn tiền](./images/banhang/ERD_GiaoHangDoiTra.png)
-
-##### Giải thích
 
 Chỉ đơn trực tuyến mới có GIAO_HANG, nên liên kết với DON_HANG có bản số (0,1). Thông tin đơn vị giao hàng tách ra DON_VI_VAN_CHUYEN. GIAO_HANG giữ mã vận đơn, trạng thái gần nhất, thời điểm cập nhật và lý do giao thất bại để phục vụ các tình huống giao thất bại, hoàn hàng mà DFD đã nêu.
 
 ###### Cơ sở hình thành các thực thể
 
-- **DON_HANG:** Được sử dụng lại từ ERD Bán hàng 1 để xác định đơn hàng gốc phát sinh giao hàng hoặc đổi trả; đây là thực thể dùng chung giữa các sơ đồ.
+- **DON_HANG:** Xác định đơn hàng gốc phát sinh giao hàng hoặc đổi trả.
 
 - **GIAO_HANG:** Được tạo để lưu hồ sơ giao hàng của đơn trực tuyến, gồm mã vận đơn, trạng thái, thời điểm cập nhật và lý do giao thất bại. Những thông tin này cần được theo dõi riêng với thông tin chung của đơn.
 
@@ -885,7 +877,7 @@ Chỉ đơn trực tuyến mới có GIAO_HANG, nên liên kết với DON_HANG 
 
 - **CHI_TIET_DOI_TRA:** Là thực thể kết hợp giữa PHIEU_DOI_TRA và SAN_PHAM, dùng để ghi rõ sản phẩm, số lượng và tình trạng hàng hóa trong từng phiếu đổi trả.
 
-- **GIAO_DICH_THANH_TOAN:** Dùng chung với ERD Bán hàng 1 để ghi nhận giao dịch hoàn tiền, giúp tập trung thông tin các dòng tiền thu và hoàn trong cùng một thực thể.
+- **GIAO_DICH_THANH_TOAN:** Dùng chung cho thu tiền và hoàn tiền để theo dõi đầy đủ các giao dịch của đơn hàng.
 
 ###### Cơ sở xác định các mối quan hệ và bản số
 
@@ -903,13 +895,7 @@ Chỉ đơn trực tuyến mới có GIAO_HANG, nên liên kết với DON_HANG 
 
 Đổi trả được ghi bằng PHIEU_DOI_TRA gắn với một đơn gốc. Một đơn có thể có nhiều phiếu vì khách có thể đổi trả từng phần. CHI_TIET_DOI_TRA là thực thể kết hợp giữa phiếu và sản phẩm, cho biết sản phẩm nào, số lượng bao nhiêu, tình trạng ra sao. Kết quả kiểm tra điều kiện (KetQua, LyDoTuChoi) và tình trạng hoàn tiền (SoTienHoan, TrangThaiHoanTien) lưu ngay trong phiếu. Khi hoàn tiền, hệ thống tạo một GIAO_DICH_THANH_TOAN loại Hoàn tiền gắn với phiếu, nhờ vậy mọi dòng tiền của khách vẫn nằm trong một nơi duy nhất.
 
-![Mô hình tổ chức dữ liệu Giao hàng, đổi trả và hoàn tiền](./images/banhang/PDM_GiaoHangDoiTra.png)
-
 #### 4.4.3. Cấp hàng và đối soát cộng tác viên
-
-![ERD Cấp hàng và đối soát cộng tác viên](./images/banhang/ERD_CapHangDoiSoat.png)
-
-##### Giải thích
 
 Cộng tác viên không có tài khoản nên không tham gia đơn hàng của hệ thống. Họ nhập hàng từ kho về bán và được theo dõi qua hai nghiệp vụ. Thứ nhất là cấp hàng: PHIEU_CAP_HANG ghi lần cấp cho một CTV do một nhân viên lập, CHI_TIET_CAP_HANG ghi sản phẩm, số lượng yêu cầu, số lượng thực cấp (sau kiểm tra tồn) và giá cấp. Thứ hai là đối soát theo kỳ: DOI_SOAT_CTV ghi doanh số báo cáo, số tiền phải nộp, số tiền thực nhận và chênh lệch; CHI_TIET_DOI_SOAT ghi từng sản phẩm đã bán, trả lại hoặc hư hỏng, giúp kiểm soát hàng còn tồn đọng ở từng khu vực.
 
@@ -953,7 +939,7 @@ Cộng tác viên không có tài khoản nên không tham gia đơn hàng của
 
 Liên kết HOA_HONG_CTV — DOI_SOAT_CTV nối với chức năng quản lý nhân viên và cộng tác viên. Hoa hồng được tính ở tiến trình 4.3, sau đó CTV tự trừ hoa hồng khi chuyển tiền về, nên số phải nộp của kỳ đối soát được xác định từ hoa hồng này. Bản số phía đối soát là (0,1) vì có thể đối soát khi hoa hồng chưa được tính, và phía hoa hồng là (0,n) vì một kỳ có thể đối soát bổ sung khi còn chênh lệch.
 
-![Mô hình tổ chức dữ liệu Cấp hàng và đối soát cộng tác viên](./images/banhang/PDM_CapHangDoiSoat.png)
+![Mô hình tổ chức dữ liệu Bán hàng](./images/banhang/PDM_BanHang.png)
 
 ### 4.5. Quản lý nhân viên và cộng tác viên
 
