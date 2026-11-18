@@ -733,7 +733,7 @@ Mỗi thực thể ngoài và mỗi kho dữ liệu chỉ xuất hiện một l�
 
 ---
 
-## 4. Mô hình dữ liệu ERD và PDM
+## 4. Xây dựng mô hình tổ chức dữ liệu cho các mô hình ERD trong hệ thống
 
 ### 4.1. Quản lý giải đấu và tài trợ sự kiện
 
@@ -749,7 +749,7 @@ ERD gồm ba cụm xoay quanh thực thể GIAI_DAU
 
 3. Cụm trao thưởng. GIAI_THUONG là cơ cấu giải, còn TRAO_THUONG là lần trao thực tế cho người thắng. Quà lấy từ hiện vật tài trợ hoặc hàng hóa của cửa hàng. Nếu lấy từ kho thì có PHIEU_XUAT_KHO để trừ tồn.
 
-![PDM quản lý giải đấu & tài trợ sự kiện](./images/giaidau/PDM.png)
+![Mô hình tổ chức dữ liệu quản lý giải đấu và tài trợ sự kiện](./images/giaidau/PDM.png)
 
 ### 4.2. Quản lý nội dung Fanpage
 
@@ -771,22 +771,27 @@ Liên kết với chức năng khác. Bài viết có thể quảng bá một GI
 Tách BAI_VIET (nội dung soạn) khỏi BAI_DANG (bản đã đăng), để một bài có thể đăng lại hoặc đăng nhiều trang, và việc gỡ bài gắn đúng với bản đã đăng.
 Tách KIEM_DUYET thành bảng riêng để lưu đầy đủ lịch sử duyệt.
 
-![PDM quản lý noi dung Fanpage](./images/quanlyfanpage/PDM.png)
+![Mô hình tổ chức dữ liệu quản lý nội dung Fanpage](./images/quanlyfanpage/PDM.png)
 
 ### 4.3. Nhập hàng
 
-![ERD Nhập hàng](./images/nhaphang/ERDNhapHang.png)
+![ERD Nhập hàng](./images/nhaphang/ERDNhapHangg.png)
 
-![ERD Nhập hàng – tổ chức dữ liệu](./images/nhaphang/ERDNhapHangg.png)
+#### Giải thích
 
-#### Cơ sở hình thành các thực thể
+##### Cơ sở hình thành các thực thể
 
-- Vì ERD được xây dựng bám sát quy trình nhập hàng: kiểm tra tồn kho, lập đơn đặt hàng, nhận và kiểm hàng, lập phiếu nhập hoặc biên bản sự cố, ghi nhận công nợ rồi thanh toán. Mỗi bước trong quy trình tạo ra một loại dữ liệu cần lưu trữ, vì vậy mỗi loại dữ liệu đó trở thành một thực thể. Các thực thể được nối với nhau theo đúng thứ tự phát sinh của nghiệp vụ. Có 7 thực thể là vì
-- Nhà cung cấp là đối tác nhận đơn và giao hàng, cần lưu thông tin để liên hệ và đối soát công nợ. Hàng hóa là đối tượng trung tâm, có số lượng tồn và mức tồn tối thiểu để biết khi nào cần đặt hàng, đơn đặt hàng là chứng từ ghi lại dự định mua, được lập khi tồn kho xuống dưới mức tối thiểu, phiếu nhập kho là chứng từ ghi lại lượng hàng thực sự nhập vào kho sau khi kiểm đạt chuẩn, biên bản sự cố ghi nhận trường hợp hàng lỗi hoặc thiếu để từ chối nhận hoặc yêu cầu đổi trả, công nợ NCC là khoản tiền phải trả phát sinh khi nhập kho. Giao dịch thanh toán là từng lần trả tiền cho một khoản công nợ.
+ERD Nhập hàng có 7 thực thể chính, tương ứng với bảy nhóm dữ liệu cần lưu trong quy trình.
 
-- Cũng có ba chỗ cần tách riêng : 1/ đơn đặt hàng và phiếu nhập kho tách nhau vì một bên là kế hoạch, một bên là thực tế; số lượng đặt và số lượng nhận có thể khác nhau, và một đơn có thể được giao nhiều đợt. 2/ biên bản sự cố là thực thể riêng vì quy trình có hai nhánh: lô đạt chuẩn thì lập phiếu nhập, lô lỗi hoặc thiếu thì lập biên bản. 3/ công nợ và giao dịch thanh toán tách nhau vì công nợ là tổng số tiền phải trả, còn giao dịch là từng lần trả, và một khoản nợ có thể được trả nhiều lần.
+1. **Nhà cung cấp** lưu thông tin đối tác để gửi đơn, liên hệ và đối soát công nợ.
+2. **Hàng hóa** xác định mặt hàng được đặt, nhận hoặc ghi nhận lỗi. Số lượng tồn và mức tồn tối thiểu là căn cứ xác định nhu cầu nhập.
+3. **Đơn đặt hàng** ghi các mặt hàng dự kiến mua cùng số lượng và đơn giá đặt.
+4. **Phiếu nhập kho** ghi số lượng hàng thực nhận đạt yêu cầu. Một đơn có thể được giao nhiều đợt nên có thể có nhiều phiếu nhập.
+5. **Biên bản sự cố** ghi hàng lỗi hoặc thiếu để xử lý đổi trả, kể cả khi hàng bị từ chối và chưa có phiếu nhập.
+6. **Công nợ nhà cung cấp** ghi số tiền phải trả phát sinh từ phiếu nhập.
+7. **Giao dịch thanh toán** ghi từng lần trả tiền. Một khoản nợ có thể được thanh toán nhiều lần.
 
-#### Các mối quan hệ
+##### Các mối quan hệ
 
 - Vì mỗi mối kết hợp thể hiện một hành động có thật trong quy trình.
 
@@ -798,6 +803,10 @@ Phát sinh: phiếu nhập kho (1,1) – công nợ NCC (1,1). Theo quy trình, 
 Thanh toán: công nợ NCC (0,n) – giao dịch thanh toán (1,1). Khoản nợ chưa trả thì chưa có giao dịch, trả dần thì có nhiều giao dịch. Mỗi giao dịch chỉ trả cho một khoản nợ.
 Lập biên bản: đơn đặt hàng (0,n) – biên bản sự cố (1,1). Phần lớn đơn giao đúng nên không có biên bản, nhưng một đơn có thể phát sinh nhiều biên bản. Mỗi biên bản thuộc đúng một đơn. Biên bản gắn với đơn chứ không gắn với phiếu nhập vì hàng bị từ chối thì không có phiếu nhập.
 Ghi nhận lỗi: biên bản sự cố (1,n) – hàng hóa (0,n). Một biên bản phải ghi ít nhất một mặt hàng lỗi hoặc thiếu, và một mặt hàng có thể chưa từng lỗi hoặc lỗi ở nhiều biên bản. Đây là quan hệ nhiều–nhiều nên có số lượng lỗi/thiếu và mô tả lỗi.
+
+Mô hình tổ chức dữ liệu có 10 bảng. Ngoài 7 bảng tương ứng với các thực thể chính, ba quan hệ nhiều–nhiều được triển khai bằng các bảng chi tiết `CT_DONDATHANG`, `CT_PHIEUNHAP` và `CT_BIENBAN`.
+
+![Mô hình tổ chức dữ liệu Nhập hàng](./images/nhaphang/ERDNhapHang.png)
 
 ---
 
