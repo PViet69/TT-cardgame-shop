@@ -6,6 +6,30 @@ TTshop là dự án phân tích và đặc tả hệ thống quản lý cửa h�
 
 Dự án hướng đến việc quản lý tập trung thông tin hàng hóa, đơn hàng, thanh toán và sự kiện, giúp cửa hàng theo dõi tồn kho, kiểm soát công nợ và phối hợp các hoạt động kinh doanh. Tài liệu này trình bày các quy trình nghiệp vụ, kho dữ liệu và sơ đồ luồng dữ liệu (DFD), làm cơ sở cho việc thiết kế và phát triển hệ thống.
 
+### Card game là gì?
+
+Card game là tên gọi chung của các trò chơi sử dụng thẻ bài. Trong phạm vi TTshop, thuật ngữ này chỉ các trò chơi thẻ bài vật lý, trong đó người chơi xây dựng bộ bài và sử dụng các lá bài theo luật của từng trò chơi để thi đấu với nhau. Yu-Gi-Oh! là bộ môn được cửa hàng tổ chức giải thường xuyên nhất theo phạm vi khảo sát của dự án.
+
+Người chơi cần bảo quản, sắp xếp và mang bộ bài đến các buổi giao lưu hoặc giải đấu. Nhu cầu này tạo ra thị trường cho các phụ kiện như bọc bài, hộp đựng bài và thảm chơi. Vì vậy, hoạt động kinh doanh của TTshop gắn với cả việc bán sản phẩm lẫn duy trì cộng đồng người chơi.
+
+### Các mặt hàng kinh doanh
+
+TTshop kinh doanh các nhóm phụ kiện phục vụ chơi, bảo quản thẻ bài và các sản phẩm sưu tầm được nêu trong phạm vi khảo sát:
+
+| Nhóm mặt hàng | Công dụng |
+|---|---|
+| Bọc bài (sleeve) | Bao bảo vệ từng lá bài, hạn chế trầy xước và hao mòn khi sử dụng. |
+| Hộp đựng bài (deckbox) | Cất giữ, sắp xếp và mang bộ bài khi đi chơi hoặc thi đấu. |
+| Thảm chơi (playmat) | Tạo bề mặt đặt và thao tác với thẻ bài khi chơi. |
+| Móc khóa | Phụ kiện trang trí, quà tặng hoặc sưu tầm. |
+| Mô hình nhân vật (figure) | Sản phẩm trưng bày và sưu tầm. |
+
+Các mặt hàng được quản lý theo mã sản phẩm, nhóm hàng, giá bán và số lượng tồn tại từng vị trí. Danh mục trên tập trung vào các phụ kiện và sản phẩm đã được mô tả trong dự án; .
+
+### Mối liên hệ giữa bán hàng, cộng tác viên và hoạt động cộng đồng
+
+TTshop bán hàng tại quầy, trực tuyến và thông qua cộng tác viên ở các khu vực xa. Giải đấu tạo dịp để người chơi giao lưu, thi đấu và tiếp cận sản phẩm của cửa hàng. Tài trợ cung cấp thêm kinh phí hoặc hiện vật để tổ chức sự kiện và trao thưởng. Fanpage đưa thông tin sản phẩm, chương trình bán hàng và lịch giải đấu đến khách hàng. Các hoạt động này cùng phục vụ việc tiếp cận khách hàng và duy trì nhu cầu mua sắm, nên cần được quản lý thống nhất với hàng hóa, doanh thu và chi phí.
+
 ## 1. Liệt kê các chức năng và đặc tả quy trình hoạt động, xử lý của hệ thống
 
 ### 1.1. Danh sách các chức năng
@@ -77,6 +101,14 @@ Dự án hướng đến việc quản lý tập trung thông tin hàng hóa, đ
 - **Khuyến mãi và điểm tích lũy:** Không áp dụng cộng dồn ưu đãi khuyến mãi với ưu đãi sử dụng điểm tích lũy trong cùng giao dịch; nhân viên thông báo phương án áp dụng để khách xác nhận trước khi thanh toán. Khi hủy đơn hoặc trả toàn bộ đơn, hoàn nguyên tác động của giao dịch đến điểm: hoàn lại điểm đã sử dụng và thu hồi điểm được cộng từ giao dịch đó, đưa số điểm về mức trước khi mua. Việc hoàn nguyên chỉ tác động đến giao dịch bị hủy/trả, không ghi đè các biến động điểm từ giao dịch khác.
 
 #### Chức năng: Quản Lý Nhân Viên và Cộng Tác Viên
+
+- **Mô tả và lý do cần cộng tác viên:**
+  TTshop sử dụng cộng tác viên (CTV) để mở rộng việc bán phụ kiện đến các cộng đồng người chơi ở xa cửa hàng. CTV là người hợp tác nhận hàng của TTshop để giới thiệu và bán tại khu vực mình phụ trách, hưởng hoa hồng theo doanh số được đối soát. Nhờ có người phụ trách tại địa phương, cửa hàng có thêm đầu mối tiếp cận người chơi, giới thiệu sản phẩm và cung cấp các mặt hàng đã được giao cho CTV ngay tại khu vực đó.
+
+  Việc mở chi nhánh ở từng khu vực cần mặt bằng, nhân sự và chi phí vận hành thường xuyên. Kênh CTV cho phép TTshop mở rộng phạm vi phân phối mà chưa phải đầu tư một cửa hàng riêng tại mỗi nơi; hoa hồng gắn với doanh số bán được xác nhận. Vì vậy, trong mô hình kinh doanh của TTshop, CTV bổ sung cho bán hàng tại quầy và trực tuyến, giúp tiếp cận khách hàng địa phương và mở rộng thị trường với mức đầu tư ban đầu thấp hơn việc mở thêm chi nhánh.
+
+  Khi giao hàng cho CTV, cửa hàng cần biết đã giao bao nhiêu, bán được bao nhiêu, còn bao nhiêu và phải thu về bao nhiêu tiền. Vì vậy, chức năng quản lý nhân viên và CTV vừa phục vụ việc quản lý hồ sơ, ca làm và lương nhân viên, vừa theo dõi hàng giao cho từng CTV, công nợ và hoa hồng, giúp hạn chế thất thoát hàng hóa và sai lệch khi đối soát.
+
 - **Mục đích:** Quản lý hồ sơ, theo dõi ca làm việc và đánh giá hiệu suất bán hàng của nhân viên chính thức; đồng thời quản lý thông tin, cấp mã số định danh, theo dõi danh mục hàng hóa cấp phát, kiểm soát công nợ sản phẩm và thanh toán hoa hồng cho cộng tác viên tại các khu vực xa.
 - **Đối tượng thực hiện:** Quản lý cửa hàng, Nhân viên bán hàng (Cộng tác viên được quản lý qua hồ sơ và mã số định danh).
 - **Quy trình hoạt động & xử lý:**  
@@ -90,6 +122,12 @@ Dự án hướng đến việc quản lý tập trung thông tin hàng hóa, đ
 - **Báo cáo và nộp tiền CTV:** Kỳ báo cáo là **ngày 15 hằng tháng**, hạn nộp tiền **ngay trong ngày 15**. CTV gửi báo cáo doanh số, hàng còn lại, hàng hoàn trả và thông tin nộp tiền qua kênh liên lạc Facebook với cửa hàng. Quản lý cửa hàng tiếp nhận, đối chiếu và cập nhật dữ liệu lên hệ thống, xác nhận số phải nộp, số thực nhận và chênh lệch. Nếu CTV nộp thiếu, quản lý ghi nhận khoản thiếu và quyết định cảnh cáo hoặc chấm dứt hợp tác; nếu chấm dứt thì thực hiện xóa hồ sơ CTV theo quy tắc quản lý hồ sơ.
 
 #### Chức năng: Quản Lý Giải Đấu và Tài Trợ Sự Kiện
+
+- **Mô tả và lý do cần quản lý giải đấu, tài trợ:**
+  Khách hàng của TTshop là người chơi card game. Việc tổ chức giải đấu tạo nơi để họ giao lưu, thi đấu và quay lại cửa hàng. Hoạt động này giúp duy trì cộng đồng khách hàng, giới thiệu sản phẩm và tạo cơ hội bán các phụ kiện phục vụ thi đấu như bọc bài, hộp đựng bài và thảm chơi. Vì vậy, giải đấu có liên hệ trực tiếp với hoạt động kinh doanh của cửa hàng.
+
+  Mỗi giải có người đăng ký, lệ phí tham gia, kết quả thi đấu, chi phí tổ chức và phần thưởng nên cần được quản lý để tránh nhầm lẫn, trao thưởng đúng và đánh giá hiệu quả tổ chức. Tài trợ giúp bổ sung kinh phí hoặc hiện vật cho sự kiện; cửa hàng cần theo dõi nhà tài trợ đã cam kết gì, thực tế bàn giao gì, phần tài trợ được sử dụng ra sao và các quyền lợi phải thực hiện cho họ. Việc quản lý chung giải đấu và tài trợ giúp kiểm soát nguồn lực, chi phí và hàng hóa xuất làm giải thưởng, đồng thời giữ uy tín với người chơi và đối tác.
+
 - **Mục đích:** 
   - Tổ chức, vận hành và điều phối các sự kiện, giải đấu giao lưu, thi đấu tại cửa hàng từ khâu đăng ký, bốc thăm chia cặp đến tổng kết trao thưởng.
   - Quản lý và khai thác các nguồn lực tài trợ (hiện vật độc quyền, kinh phí tổ chức) từ các đối tác phân phối và nhà sản xuất phụ kiện nhằm giảm chi phí vận hành cho cửa hàng.
@@ -99,6 +137,12 @@ Dự án hướng đến việc quản lý tập trung thông tin hàng hóa, đ
   Quy trình quản lý giải đấu và tài trợ bắt đầu khi ban tổ chức khởi tạo thông tin sự kiện trên hệ thống, xác định thể thức thi đấu, lệ phí tham gia và cơ cấu giải thưởng. Đồng thời, hệ thống tiếp nhận thông tin từ các nhà tài trợ (nếu có), ghi nhận gói tài trợ bằng hiện vật độc quyền (thảm đấu vô địch, bọc bài quảng bá, phụ kiện chính hãng) và cập nhật hiển thị quyền lợi biểu trưng, áp phích quảng bá trên trang sự kiện. Người chơi đăng ký thi đấu, nộp lệ phí trực tiếp hoặc thanh toán từ xa để hệ thống ghi nhận doanh thu và thực hiện điểm danh trước giờ khai mạc. Bộ môn được tổ chức thường xuyên nhất là Yu-Gi-Oh!. Ban tổ chức sử dụng Challonge để tạo và điều hành giải đấu theo thể thức Swiss, thiết lập số vòng, cách tính điểm, tiêu chí xếp hạng phụ và số người được chọn vào vòng top theo điều lệ đã công bố. Trọng tài xác nhận kết quả từng trận để ban tổ chức cập nhật trên Challonge trước khi tạo cặp đấu cho vòng tiếp theo. Sau vòng Swiss cuối cùng, ban tổ chức kiểm tra bảng xếp hạng, giải quyết khiếu nại và chốt danh sách cắt top; những người đủ điều kiện tiếp tục thi đấu loại trực tiếp để xác định kết quả chung cuộc. Hệ thống cửa hàng lưu đường dẫn giải đấu trên Challonge và kết quả đã được ban tổ chức xác nhận; nhân viên lập phiếu xuất kho các phần quà tài trợ cùng vật phẩm của cửa hàng để trao thưởng, ghi nhận người nhận và hoàn tất báo cáo sự kiện.
 
 #### Chức năng: Quản lý nội dung Fanpage
+
+- **Mô tả và lý do cần quản lý nội dung Fanpage:**
+  TTshop cần đưa thông tin hàng mới, giá bán, khuyến mãi và lịch giải đấu đến người chơi để thu hút khách đến cửa hàng hoặc đặt hàng trực tuyến. Fanpage là kênh thực hiện việc đó và duy trì liên hệ với cộng đồng khách hàng. Nội dung trên Fanpage hỗ trợ cả hoạt động bán sản phẩm lẫn việc giới thiệu, kêu gọi đăng ký tham gia sự kiện.
+
+  Khi có nhiều nội dung và người phụ trách, cửa hàng cần quản lý việc soạn bài, duyệt bài và lịch đăng để tránh đăng sai giá, sai thời gian khuyến mãi, sai lịch giải hoặc bỏ sót thông báo. Chức năng này xác định người chịu trách nhiệm cho từng bài viết, hỗ trợ cập nhật hoặc gỡ nội dung khi cần và theo dõi tương tác để biết nội dung nào được khách hàng quan tâm, từ đó điều chỉnh hoạt động truyền thông.
+
 
 - **Mục đích:**
    Hoạch định chiến lược, lên lịch, biên soạn, kiểm duyệt và đăng tải các nội dung truyền thông, thông tin sản phẩm, sự kiện giải đấu, chương trình khuyến mãi lên trang mạng xã hội (Fanpage) nhằm thu hút khách hàng, tăng nhận diện thương hiệu và thúc đẩy doanh số bán hàng đa kênh.
@@ -812,6 +856,22 @@ Mô hình tổ chức dữ liệu có 10 bảng. Ngoài 7 bảng tương ứng v
 - `GIAODICH_THANHTOAN.TrangThai` nhận một trong ba giá trị **Chờ xác nhận**, **Đã xác nhận** hoặc **Thất bại**. Số công nợ còn lại bằng số tiền phát sinh trừ tổng tiền của các giao dịch đã xác nhận.
 
 ![Mô hình tổ chức dữ liệu Nhập hàng](./images/nhaphang/ERDNhapHang.png)
+
+### 4.4. Quản lý kho
+
+![ERD Quản lý kho](./images/quanlykho/ERD_QuanLyKho.png)
+
+![Mô hình tổ chức dữ liệu Quản lý kho](./images/quanlykho/PDM_QuanLyKho.png)
+
+[Ràng buộc nghiệp vụ Quản lý kho](./temp.md#12-ràng-buộc-nghiệp-vụ)
+
+### 4.5. Áp dụng giảm giá
+
+![ERD Áp dụng giảm giá](./images/giamgia/ERD_ApDungGiamGia.png)
+
+![Mô hình tổ chức dữ liệu Áp dụng giảm giá](./images/giamgia/PDM_ApDungGiamGia.png)
+
+[Ràng buộc nghiệp vụ Áp dụng giảm giá](./temp.md#22-ràng-buộc-nghiệp-vụ)
 
 ---
 
