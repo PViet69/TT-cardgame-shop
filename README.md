@@ -873,6 +873,194 @@ Mô hình tổ chức dữ liệu có 10 bảng. Ngoài 7 bảng tương ứng v
 
 [Ràng buộc nghiệp vụ Áp dụng giảm giá](./temp.md#22-ràng-buộc-nghiệp-vụ)
 
+### 4.6. Bán hàng
+
+![ERD Bán hàng](./images/banhang/ERD_BanHang.png)
+
+#### 4.6.1. Tiếp nhận đơn, thanh toán và hóa đơn
+
+Trung tâm của sơ đồ là DON_HANG. Mỗi đơn, tại quầy hoặc trực tuyến, do một nhân viên lập hoặc duyệt, có thể thuộc một khách hàng thành viên và áp dụng tối đa một khuyến mãi. Đơn của khách vãng lai không cần lưu khách hàng nên bản số phía đơn hàng là (0,1). Với đơn trực tuyến mới đặt, nhân viên xử lý chỉ xuất hiện sau khi xác nhận đơn.
+
+###### Cơ sở hình thành các thực thể
+
+- **DON_HANG:** Được chọn làm thực thể trung tâm vì hệ thống cần lưu thông tin chung của từng đơn hàng tại quầy hoặc trực tuyến. Các nghiệp vụ khách hàng, nhân viên xử lý, khuyến mãi, sản phẩm, thanh toán và hóa đơn đều xoay quanh đơn hàng.
+
+- **KHACH_HANG:** Được bổ sung để quản lý khách hàng thành viên và phục vụ nghiệp vụ tích điểm. Không phải đơn hàng nào cũng cần thông tin khách hàng vì khách mua vãng lai tại quầy có thể không được lưu thành hồ sơ.
+
+- **NHAN_VIEN:** Dùng để xác định nhân viên lập đơn tại quầy hoặc xử lý, duyệt đơn trực tuyến; qua đó xác định người phụ trách từng đơn.
+
+- **SAN_PHAM và LOAI_SAN_PHAM:** SAN_PHAM lưu thông tin từng mặt hàng, còn LOAI_SAN_PHAM dùng để phân loại và tổ chức danh mục sản phẩm.
+
+- **KHUYEN_MAI:** Tách riêng để quản lý các chương trình, mã giảm giá và theo dõi việc áp dụng khuyến mãi cho đơn hàng.
+
+- **CHI_TIET_DON_HANG:** Là thực thể kết hợp để lưu từng sản phẩm trong đơn cùng SoLuong, DonGia và ThanhTien. Cần có thực thể này vì DON_HANG và SAN_PHAM có quan hệ nhiều–nhiều, đồng thời số lượng và giá bán thuộc về từng dòng sản phẩm trong đơn.
+
+- **GIAO_DICH_THANH_TOAN:** Tách riêng để ghi nhận từng lần thu tiền hoặc hoàn tiền, bao gồm trạng thái thành công, thất bại hoặc đang chờ. Một đơn có thể phát sinh nhiều lần giao dịch.
+
+- **HOA_DON:** Lưu thông tin hóa đơn được lập sau khi thanh toán thành công; tách riêng để quản lý chứng từ hóa đơn độc lập với thông tin đơn hàng.
+
+###### Cơ sở xác định các mối quan hệ và bản số
+
+- **KHACH_HANG – DON_HANG:** Một khách hàng có thể chưa đặt đơn nào hoặc đặt nhiều đơn nên phía KHACH_HANG là (0,n). Mỗi đơn thuộc tối đa một khách hàng; đơn vãng lai có thể không gắn khách hàng nên phía DON_HANG là (0,1).
+
+- **NHAN_VIEN – DON_HANG:** Một nhân viên có thể lập hoặc xử lý nhiều đơn nên phía NHAN_VIEN là (0,n). Đơn trực tuyến mới đặt có thể chưa có nhân viên xử lý, còn mỗi đơn chỉ gắn tối đa một nhân viên phụ trách theo mô hình nên phía DON_HANG là (0,1).
+
+- **KHUYEN_MAI – DON_HANG:** Một khuyến mãi có thể chưa được sử dụng hoặc áp dụng cho nhiều đơn nên phía KHUYEN_MAI là (0,n). Mỗi đơn có thể không dùng khuyến mãi hoặc dùng tối đa một mã nên phía DON_HANG là (0,1).
+
+- **LOAI_SAN_PHAM – SAN_PHAM:** Theo quy tắc mô hình, một loại có ít nhất một sản phẩm nên phía LOAI_SAN_PHAM là (1,n); mỗi sản phẩm thuộc đúng một loại nên phía SAN_PHAM là (1,1).
+
+- **DON_HANG – CHI_TIET_DON_HANG:** Một đơn phải có ít nhất một dòng chi tiết và có thể có nhiều dòng nên phía DON_HANG là (1,n). Mỗi dòng chi tiết thuộc đúng một đơn nên phía CHI_TIET_DON_HANG là (1,1).
+
+- **SAN_PHAM – CHI_TIET_DON_HANG:** Một sản phẩm có thể chưa được bán hoặc xuất hiện trong nhiều dòng chi tiết nên phía SAN_PHAM là (0,n). Mỗi dòng chi tiết chỉ mô tả một sản phẩm nên phía CHI_TIET_DON_HANG là (1,1).
+
+- **DON_HANG – HOA_DON:** Một đơn có thể chưa có hóa đơn nếu chưa thanh toán thành công hoặc có một hóa đơn nên phía DON_HANG là (0,1). Mỗi hóa đơn thuộc đúng một đơn nên phía HOA_DON là (1,1).
+
+- **DON_HANG – GIAO_DICH_THANH_TOAN:** Một đơn có thể chưa phát sinh giao dịch hoặc có nhiều giao dịch do thử lại, thanh toán nhiều lần hay hoàn tiền nên phía DON_HANG là (0,n). Mỗi giao dịch thuộc đúng một đơn nên phía GIAO_DICH_THANH_TOAN là (1,1).
+
+Sản phẩm trong đơn lưu ở CHI_TIET_DON_HANG. Đây là thực thể kết hợp vì DON_HANG và SAN_PHAM có liên kết nhiều–nhiều và liên kết ấy có thêm SoLuong, DonGia, ThanhTien. DonGia được chép lại tại thời điểm bán để việc đổi giá về sau không làm sai các đơn cũ. Số lượng tồn nằm ngay ở SAN_PHAM, nên tiến trình 2.1.3 (kiểm tra tồn) và 2.2 (trừ kho) làm việc trực tiếp trên thực thể này.
+
+Thanh toán được tách thành GIAO_DICH_THANH_TOAN để một đơn có thể có nhiều giao dịch: thử lại khi thất bại, trạng thái đang chờ, thanh toán nhiều lần, hoặc hoàn tiền. Thuộc tính TrangThai ghi trạng thái của giao dịch, còn LoaiGD phân biệt thu tiền và hoàn tiền. HOA_DON chỉ được lập khi thanh toán thành công, vì vậy một đơn có 0 hoặc 1 hóa đơn.
+
+#### 4.6.2. Giao hàng, đổi trả và hoàn tiền
+
+Chỉ đơn trực tuyến mới có GIAO_HANG, nên liên kết với DON_HANG có bản số (0,1). Thông tin đơn vị giao hàng tách ra DON_VI_VAN_CHUYEN. GIAO_HANG giữ mã vận đơn, trạng thái gần nhất, thời điểm cập nhật và lý do giao thất bại để phục vụ các tình huống giao thất bại, hoàn hàng mà DFD đã nêu.
+
+###### Cơ sở hình thành các thực thể
+
+- **DON_HANG:** Xác định đơn hàng gốc phát sinh giao hàng hoặc đổi trả.
+
+- **GIAO_HANG:** Được tạo để lưu hồ sơ giao hàng của đơn trực tuyến, gồm mã vận đơn, trạng thái, thời điểm cập nhật và lý do giao thất bại. Những thông tin này cần được theo dõi riêng với thông tin chung của đơn.
+
+- **DON_VI_VAN_CHUYEN:** Quản lý các đơn vị thực hiện vận chuyển. Tách riêng thực thể này để một đơn vị có thể được sử dụng trong nhiều lượt giao hàng.
+
+- **PHIEU_DOI_TRA:** Ghi nhận yêu cầu đổi trả và liên kết yêu cầu đó với đơn hàng gốc. Một đơn có thể có nhiều phiếu nếu khách đổi trả từng phần.
+
+- **CHI_TIET_DOI_TRA:** Là thực thể kết hợp giữa PHIEU_DOI_TRA và SAN_PHAM, dùng để ghi rõ sản phẩm, số lượng và tình trạng hàng hóa trong từng phiếu đổi trả.
+
+- **GIAO_DICH_THANH_TOAN:** Dùng chung cho thu tiền và hoàn tiền để theo dõi đầy đủ các giao dịch của đơn hàng.
+
+###### Cơ sở xác định các mối quan hệ và bản số
+
+- **DON_HANG – GIAO_HANG:** Đơn mua tại quầy không cần giao hàng, còn đơn trực tuyến có thể có một hồ sơ giao hàng nên phía DON_HANG là (0,1). Mỗi hồ sơ giao hàng thuộc đúng một đơn nên phía GIAO_HANG là (1,1).
+
+- **DON_VI_VAN_CHUYEN – GIAO_HANG:** Một đơn vị vận chuyển có thể chưa nhận lượt giao nào hoặc thực hiện nhiều lượt nên phía DON_VI_VAN_CHUYEN là (0,n). Mỗi lượt giao do đúng một đơn vị thực hiện nên phía GIAO_HANG là (1,1).
+
+- **DON_HANG – PHIEU_DOI_TRA:** Một đơn có thể không phát sinh đổi trả hoặc có nhiều phiếu do đổi trả từng phần nên phía DON_HANG là (0,n). Mỗi phiếu đổi trả thuộc đúng một đơn gốc nên phía PHIEU_DOI_TRA là (1,1).
+
+- **PHIEU_DOI_TRA – CHI_TIET_DOI_TRA:** Một phiếu phải có ít nhất một sản phẩm được ghi nhận và có thể có nhiều sản phẩm nên phía PHIEU_DOI_TRA là (1,n). Mỗi dòng chi tiết thuộc đúng một phiếu nên phía CHI_TIET_DOI_TRA là (1,1).
+
+- **SAN_PHAM – CHI_TIET_DOI_TRA:** Một sản phẩm có thể chưa bị đổi trả hoặc xuất hiện trong nhiều phiếu nên phía SAN_PHAM là (0,n). Mỗi dòng chi tiết xác định đúng một sản phẩm nên phía CHI_TIET_DOI_TRA là (1,1).
+
+- **PHIEU_DOI_TRA – GIAO_DICH_THANH_TOAN:** Một phiếu có thể chưa phát sinh hoàn tiền hoặc có nhiều giao dịch hoàn tiền nên phía PHIEU_DOI_TRA là (0,n). Một giao dịch thanh toán có thể không gắn phiếu nếu là giao dịch thu tiền, hoặc gắn tối đa một phiếu nếu là hoàn tiền nên phía GIAO_DICH_THANH_TOAN là (0,1).
+
+Đổi trả được ghi bằng PHIEU_DOI_TRA gắn với một đơn gốc. Một đơn có thể có nhiều phiếu vì khách có thể đổi trả từng phần. CHI_TIET_DOI_TRA là thực thể kết hợp giữa phiếu và sản phẩm, cho biết sản phẩm nào, số lượng bao nhiêu, tình trạng ra sao. Kết quả kiểm tra điều kiện (KetQua, LyDoTuChoi) và tình trạng hoàn tiền (SoTienHoan, TrangThaiHoanTien) lưu ngay trong phiếu. Khi hoàn tiền, hệ thống tạo một GIAO_DICH_THANH_TOAN loại Hoàn tiền gắn với phiếu, nhờ vậy mọi dòng tiền của khách vẫn nằm trong một nơi duy nhất.
+
+#### 4.6.3. Cấp hàng và đối soát cộng tác viên
+
+Cộng tác viên không có tài khoản nên không tham gia đơn hàng của hệ thống. Họ nhập hàng từ kho về bán và được theo dõi qua hai nghiệp vụ. Thứ nhất là cấp hàng: PHIEU_CAP_HANG ghi lần cấp cho một CTV do một nhân viên lập, CHI_TIET_CAP_HANG ghi sản phẩm, số lượng yêu cầu, số lượng thực cấp (sau kiểm tra tồn) và giá cấp. Thứ hai là đối soát theo kỳ: DOI_SOAT_CTV ghi doanh số báo cáo, số tiền phải nộp, số tiền thực nhận và chênh lệch; CHI_TIET_DOI_SOAT ghi từng sản phẩm đã bán, trả lại hoặc hư hỏng, giúp kiểm soát hàng còn tồn đọng ở từng khu vực.
+
+###### Cơ sở hình thành các thực thể
+
+- **CONG_TAC_VIEN:** Xác định cộng tác viên nhận hàng từ kho và bán hàng. Theo nghiệp vụ trong tài liệu, cộng tác viên không có tài khoản và không tham gia trực tiếp vào đơn hàng của hệ thống.
+
+- **PHIEU_CAP_HANG:** Ghi nhận mỗi lần cộng tác viên yêu cầu nhận hàng từ kho, gồm ngày yêu cầu, ngày cấp thực tế và trạng thái cấp hàng.
+
+- **CHI_TIET_CAP_HANG:** Là thực thể kết hợp giữa PHIEU_CAP_HANG và SAN_PHAM, lưu sản phẩm, số lượng yêu cầu, số lượng thực cấp và giá cấp trong từng phiếu.
+
+- **DOI_SOAT_CTV:** Lưu kết quả đối soát hàng hóa và tiền theo từng kỳ, gồm doanh số báo cáo, số tiền phải nộp, số tiền thực nhận và chênh lệch.
+
+- **CHI_TIET_DOI_SOAT:** Là thực thể kết hợp giữa DOI_SOAT_CTV và SAN_PHAM, dùng để theo dõi số lượng từng sản phẩm đã bán, trả lại hoặc hư hỏng trong kỳ.
+
+- **NHAN_VIEN:** Dùng chung với chức năng quản lý nhân viên để xác định người lập phiếu cấp hàng và người thực hiện đối soát.
+
+- **SAN_PHAM:** Dùng chung để xác định mặt hàng được cấp cho cộng tác viên và mặt hàng được thống kê trong từng kỳ đối soát.
+
+- **HOA_HONG_CTV:** Dùng chung với ERD Quản lý nhân viên và CTV, làm căn cứ tính số tiền cộng tác viên phải nộp sau khi trừ hoa hồng.
+
+###### Cơ sở xác định các mối quan hệ và bản số
+
+- **CONG_TAC_VIEN – PHIEU_CAP_HANG:** Một cộng tác viên có thể chưa yêu cầu cấp hàng hoặc yêu cầu nhiều lần nên phía CONG_TAC_VIEN là (0,n). Mỗi phiếu cấp dành cho đúng một cộng tác viên nên phía PHIEU_CAP_HANG là (1,1).
+
+- **NHAN_VIEN – PHIEU_CAP_HANG:** Một nhân viên có thể lập nhiều phiếu hoặc chưa lập phiếu nào nên phía NHAN_VIEN là (0,n). Mỗi phiếu do đúng một nhân viên lập nên phía PHIEU_CAP_HANG là (1,1).
+
+- **PHIEU_CAP_HANG – CHI_TIET_CAP_HANG:** Một phiếu phải có ít nhất một dòng sản phẩm và có thể có nhiều dòng nên phía PHIEU_CAP_HANG là (1,n). Mỗi dòng chi tiết thuộc đúng một phiếu nên phía CHI_TIET_CAP_HANG là (1,1).
+
+- **SAN_PHAM – CHI_TIET_CAP_HANG:** Một sản phẩm có thể chưa được cấp hoặc xuất hiện trong nhiều phiếu cấp nên phía SAN_PHAM là (0,n). Mỗi dòng chi tiết cấp hàng chỉ ghi nhận một sản phẩm nên phía CHI_TIET_CAP_HANG là (1,1).
+
+- **CONG_TAC_VIEN – DOI_SOAT_CTV:** Một cộng tác viên có thể chưa có kỳ đối soát hoặc có nhiều kỳ nên phía CONG_TAC_VIEN là (0,n). Mỗi kỳ đối soát thuộc đúng một cộng tác viên nên phía DOI_SOAT_CTV là (1,1).
+
+- **NHAN_VIEN – DOI_SOAT_CTV:** Một nhân viên có thể thực hiện nhiều kỳ đối soát hoặc chưa thực hiện kỳ nào nên phía NHAN_VIEN là (0,n). Mỗi kỳ đối soát do đúng một nhân viên thực hiện theo mô hình nên phía DOI_SOAT_CTV là (1,1).
+
+- **HOA_HONG_CTV – DOI_SOAT_CTV:** Một bản ghi hoa hồng có thể làm căn cứ cho nhiều lần đối soát bổ sung khi còn chênh lệch nên phía HOA_HONG_CTV là (0,n). Một kỳ đối soát có thể chưa có bản ghi hoa hồng nếu hoa hồng chưa được tính, hoặc gắn với một bản ghi hoa hồng nên phía DOI_SOAT_CTV là (0,1).
+
+- **DOI_SOAT_CTV – CHI_TIET_DOI_SOAT:** Một kỳ đối soát phải có ít nhất một dòng chi tiết và có thể có nhiều dòng nên phía DOI_SOAT_CTV là (1,n). Mỗi dòng chi tiết thuộc đúng một kỳ đối soát nên phía CHI_TIET_DOI_SOAT là (1,1).
+
+- **SAN_PHAM – CHI_TIET_DOI_SOAT:** Một sản phẩm có thể chưa xuất hiện trong kỳ đối soát hoặc xuất hiện ở nhiều kỳ nên phía SAN_PHAM là (0,n). Mỗi dòng chi tiết chỉ ghi nhận một sản phẩm nên phía CHI_TIET_DOI_SOAT là (1,1).
+
+Liên kết HOA_HONG_CTV — DOI_SOAT_CTV nối với chức năng quản lý nhân viên và cộng tác viên. Hoa hồng được tính ở tiến trình 4.3, sau đó CTV tự trừ hoa hồng khi chuyển tiền về, nên số phải nộp của kỳ đối soát được xác định từ hoa hồng này. Bản số phía đối soát là (0,1) vì có thể đối soát khi hoa hồng chưa được tính, và phía hoa hồng là (0,n) vì một kỳ có thể đối soát bổ sung khi còn chênh lệch.
+
+![Mô hình tổ chức dữ liệu Bán hàng](./images/banhang/PDM_BanHang.png)
+
+### 4.7. Quản lý nhân viên và cộng tác viên
+
+![ERD quản lý nhân viên và cộng tác viên](./images/nhansu/ERD_NhanVienCTV.png)
+
+#### Giải thích
+
+Sơ đồ chia thành ba cụm tương ứng ba tiến trình đầu của DFD.
+
+##### Cơ sở hình thành các thực thể
+
+- **NHAN_VIEN:** Lưu hồ sơ nhân viên và làm cơ sở liên kết với quản lý tài khoản, lịch làm việc, chấm công và tính lương.
+
+- **TAI_KHOAN:** Quản lý thông tin đăng nhập của nhân viên. Tách riêng tài khoản khỏi hồ sơ giúp quản lý thông tin truy cập và cho phép nhân viên chưa được cấp tài khoản.
+
+- **VAI_TRO:** Quản lý vai trò, quyền hạn được gán cho tài khoản; một vai trò có thể dùng chung cho nhiều tài khoản.
+
+- **CA_LAM_VIEC:** Quản lý danh mục các ca làm việc mà nhân viên có thể đăng ký.
+
+- **LICH_LAM_VIEC:** Ghi nhận lịch cụ thể của từng nhân viên theo từng ca, phục vụ theo dõi đăng ký và phê duyệt lịch.
+
+- **YEU_CAU_NGHI:** Lưu yêu cầu xin nghỉ của nhân viên đối với ca đã đăng ký, giúp theo dõi trạng thái và kết quả duyệt.
+
+- **CHAM_CONG:** Lưu dữ liệu chấm công thực tế theo ca đã được duyệt, làm căn cứ đối chiếu giờ làm thực tế với lịch dự kiến.
+
+- **BANG_LUONG:** Lưu kết quả tính lương theo tháng của từng nhân viên, gồm tổng giờ công, lương giờ, thưởng, khấu trừ và tổng lương.
+
+- **CONG_TAC_VIEN:** Quản lý cộng tác viên riêng với nhân viên chính thức vì hai nhóm có nghiệp vụ quản lý và tính thu nhập khác nhau.
+
+- **HOA_HONG_CTV:** Lưu kết quả tính hoa hồng theo kỳ của cộng tác viên dựa trên doanh số báo cáo và tỷ lệ hoa hồng.
+
+##### Cơ sở xác định các mối quan hệ và bản số
+
+- **NHAN_VIEN – TAI_KHOAN:** Một nhân viên có thể chưa được cấp tài khoản hoặc sở hữu một tài khoản nên phía NHAN_VIEN là (0,1). Mỗi tài khoản thuộc đúng một nhân viên nên phía TAI_KHOAN là (1,1).
+
+- **VAI_TRO – TAI_KHOAN:** Một vai trò có thể chưa được sử dụng hoặc được gán cho nhiều tài khoản nên phía VAI_TRO là (0,n). Mỗi tài khoản được gán đúng một vai trò nên phía TAI_KHOAN là (1,1).
+
+- **NHAN_VIEN – LICH_LAM_VIEC (đăng ký ca):** Một nhân viên có thể đăng ký nhiều ca hoặc chưa đăng ký ca nào nên phía NHAN_VIEN là (0,n). Mỗi dòng lịch thuộc đúng một nhân viên nên phía LICH_LAM_VIEC là (1,1).
+
+- **NHAN_VIEN – LICH_LAM_VIEC (duyệt ca):** Một nhân viên quản lý có thể duyệt nhiều lịch hoặc chưa duyệt lịch nào nên phía NHAN_VIEN là (0,n). Một lịch có thể chưa được duyệt hoặc được duyệt bởi một nhân viên nên phía LICH_LAM_VIEC là (0,1).
+
+- **CA_LAM_VIEC – LICH_LAM_VIEC:** Một ca có thể chưa có lịch đăng ký hoặc xuất hiện trong nhiều lịch nên phía CA_LAM_VIEC là (0,n). Mỗi dòng lịch thuộc đúng một ca trong danh mục nên phía LICH_LAM_VIEC là (1,1).
+
+- **LICH_LAM_VIEC – YEU_CAU_NGHI:** Một lịch có thể không có yêu cầu nghỉ hoặc có nhiều yêu cầu nếu nhân viên gửi lại sau khi bị từ chối nên phía LICH_LAM_VIEC là (0,n). Mỗi yêu cầu nghỉ gắn với đúng một lịch nên phía YEU_CAU_NGHI là (1,1).
+
+- **NHAN_VIEN – YEU_CAU_NGHI:** Một nhân viên quản lý có thể duyệt nhiều yêu cầu nghỉ hoặc chưa duyệt yêu cầu nào nên phía NHAN_VIEN là (0,n). Một yêu cầu có thể chưa được duyệt hoặc được duyệt bởi một nhân viên nên phía YEU_CAU_NGHI là (0,1).
+
+- **LICH_LAM_VIEC – CHAM_CONG:** Một lịch có thể chưa có bản ghi chấm công hoặc có một bản ghi tương ứng nên phía LICH_LAM_VIEC là (0,1). Mỗi bản ghi chấm công thuộc đúng một lịch đã được duyệt nên phía CHAM_CONG là (1,1).
+
+- **NHAN_VIEN – BANG_LUONG:** Một nhân viên có thể chưa có bảng lương hoặc có nhiều bảng lương theo các tháng nên phía NHAN_VIEN là (0,n). Mỗi bảng lương thuộc đúng một nhân viên nên phía BANG_LUONG là (1,1).
+
+- **CONG_TAC_VIEN – HOA_HONG_CTV:** Một cộng tác viên có thể chưa phát sinh hoa hồng hoặc có nhiều bản ghi theo kỳ nên phía CONG_TAC_VIEN là (0,n). Mỗi bản ghi hoa hồng thuộc đúng một cộng tác viên nên phía HOA_HONG_CTV là (1,1).
+
+Hồ sơ và tài khoản (4.1). NHAN_VIEN lưu hồ sơ và mức lương theo giờ của nhân viên chính thức, kể cả quản lý. Quản lý chỉ là một nhân viên có ChucVu là Quản lý, nên việc duyệt ca và duyệt nghỉ được thể hiện bằng liên kết từ NHAN_VIEN tới LICH_LAM_VIEC và YEU_CAU_NGHI. Tài khoản đăng nhập tách thành TAI_KHOAN và phân quyền qua VAI_TRO. Liên kết NHAN_VIEN — TAI_KHOAN có bản số (0,1) và không có liên kết nào từ CONG_TAC_VIEN tới TAI_KHOAN, đúng với đặc tả là cộng tác viên không có tài khoản.
+
+Xếp ca và chấm công (4.2). CA_LAM_VIEC là danh mục ca cố định. LICH_LAM_VIEC ghi một ca của một nhân viên trong một ngày, từ lúc đăng ký (Chờ duyệt) đến kết quả duyệt (Đã duyệt hoặc Từ chối) do quản lý quyết định. YEU_CAU_NGHI gắn với ca đã đăng ký nên không cần lưu lại mã nhân viên; một ca có thể có nhiều yêu cầu nếu bị từ chối rồi gửi lại. CHAM_CONG gắn với đúng một ca đã duyệt. Cách gắn này cho phép so sánh giờ vào, giờ ra thực tế với giờ của ca để nhận biết đi muộn, về sớm hoặc vắng.
+
+Lương và hoa hồng (4.3). BANG_LUONG có một dòng cho mỗi nhân viên mỗi tháng, tổng hợp từ giờ công thực tế trong CHAM_CONG và mức lương theo giờ. HOA_HONG_CTV có một dòng cho mỗi cộng tác viên mỗi kỳ, tính từ doanh số báo cáo và tỷ lệ hoa hồng. Tỷ lệ hoa hồng và mức lương giờ được sao lại vào bảng kết quả tại thời điểm tính, để thay đổi mức lương hay hoa hồng sau này không làm đổi các kỳ đã tính. Hai thực thể dùng chung DON_HANG và DOI_SOAT_CTV là chỗ chức năng này nối sang bán hàng: doanh số của nhân viên lấy từ các đơn đã lập, và hoa hồng là căn cứ để đối soát tiền với cộng tác viên.
+
+![Mô hình tổ chức dữ liệu quản lý nhân viên và cộng tác viên](./images/nhansu/PDM_NhanVienCTV.png)
+
 ---
 
 ## 5. Phân tích những hạn chế đang tồn tại trong hệ thống và đề xuất các giải pháp cải tiến
